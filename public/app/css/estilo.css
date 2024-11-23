@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.grid-body-container {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto;
+}
+
+.nav-principal {
+    background-color: #000;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.3);
+}
+
+.nav-principal > ul > li {
+    display: inline-block;
+    position: relative;
+    margin-right: 18px;
+}
+
+.nav-principal > ul > li:last-child {
+    margin-right: 0;
+}
+
+.nav-principal > ul > li > a {
+    display: block;
+    color: #fff;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-principal > ul > li > a:hover {
+    background-color: #555;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.section {
+    padding: 1.875rem 5.625rem; /*30px/90px*/
+}
+
+.header-section {
+    margin-bottom: 1.875rem; /*30px*/
+    text-align: center;
+}
+
+.header-section h2 {
+    font-size: 2.8125rem; /*45px*/
+    font-weight: 700;
+    letter-spacing: 0.0625rem; /*1px*/
+}
+
+.section-filter {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 1.25rem;
+}
+
+.section-filter > aside {
+    flex: 1 1 calc(25% - 1.25rem);
+}
+
+.section-filter > section {
+    flex: 1 1 calc(75% - 1.25rem);
+}
+
+.aside-filter h2 {
+    font-size: 1.875rem; /*30px*/
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.9375rem; /*15px*/
+}
+
+.aside-filter li {
+    margin-bottom: 0.5625rem; /*9px*/
+    position: relative;
+}
+
+.aside-filter li:last-child {
+    margin-bottom: 0;
+}
+
+.filter-button {
+    border: none;
+    border-radius: 0.5625rem; /*9px*/
+    color: #333333;
+    background-color: transparent;
+    font-size: 1rem; /*16px*/
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    padding: 0.375rem; /*6px*/
+    transition: background-color 0.3s ease;
+    will-change: background-color;
+}
+
+.aside-filter .filter-button.active {
+    background-color: black;
+    color: #F5F5DC;
+}
+
+.aside-filter,
+.bebidas-tabla {
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 0.75rem; /*12px*/
+    padding: 1.25rem; /*20px*/
+}
+
+
+
+
+
+
+
+.grid-menu {
+    display: grid;
+    gap: 0.9375rem; /*15px*/
+    grid-template-columns: auto auto auto;
+}
+
+.pizza-card {
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, .3);
+    text-align: center;
+    padding: 0.9375rem; /*15px*/
+    border-radius: 0.75rem; /*12px*/
+}
+
+.pizza-card h3 {
+    font-size: 1.5rem; /*24px*/
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #111111;
+    margin-bottom: 0.1875rem; /*3px*/
+}
+
+.pizza-card p {
+    font-size: 0.9375rem; /*15px*/
+    font-weight: 400;
+    color: #222222;
+    margin-bottom: 0.375rem; /*6px*/
+}
+
+.pizza-card p:last-of-type {
+    color: black;
+    font-weight: 500;
+}
+
+.text-muted {
+    font-size: 1.125rem; /*18px*/
+    color: #666666;
+    text-align: center;
+    font-weight: 500;
+}

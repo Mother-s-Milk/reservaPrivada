@@ -1,0 +1,18 @@
+{
+    "name": "laboratorio/vinoteca",
+    "description": "Sistema para la gestion de stock, ventas y mesas de un bar de vinos",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "app\\": "",
+            "app\\core\\": "core/",
+            "app\\libs\\": "libs/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Franco Vera"
+        }
+    ],
+    "require": {}
+}
