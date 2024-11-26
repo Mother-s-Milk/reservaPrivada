@@ -9,9 +9,19 @@ let categoriaController = {
 
         categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
 
-        console.log(categoriaController.data);
-
         categoriaService.save(categoriaController.data)
+    },
+    delete: (id) => {
+        if (confirm(`¿Estás seguro de eliminar la categoria con ID`, id)) {
+            categoriaService.delete(id)
+            .then(data => {
+                alert(data.message);
+                categoriaController.list();
+            })
+            .catch(error => {
+                alert("Ocurrió un error al eliminar la categoria.");
+            });
+        }
     },
     list: () => {
         categoriaService.list()
@@ -29,7 +39,7 @@ let categoriaController = {
         if (categoriaController.categorias.length === 0) {
             let fila = `
                 <tr>
-                    <td colspan 2>
+                    <td colspan="2">
                         No hay categorias registradas
                     </td>
                 </tr>
@@ -47,7 +57,7 @@ let categoriaController = {
                         <td>${categoria.nombre}</td>
                         <td>
                             <button type="button" class="btn-editar" data-id="${categoria.id}">Editar</button>
-                            <button type="button" class="btn-eliminar" data-id="${categoria.id}">Eliminar</button>
+                            <button type="button" class="btn-eliminar" data-id="${categoria.id}" onclick=categoriaController.delete(${categoria.id})>Eliminar</button>
                         </td>
                     </tr>
                 `;
@@ -59,7 +69,10 @@ let categoriaController = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    categoriaController.list();
+    const path = window.location.pathname;
+    if (path === "/reservaPrivada/public/categoria") {
+        categoriaController.list();
+    }
 
     let btnCategoriaAlta = document.getElementById("btn-categoria-alta");
     if (btnCategoriaAlta != null) {

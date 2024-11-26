@@ -33,7 +33,14 @@
                 "id" => $id
             ]);
 
-            return new BebidaDTO($stmt->fetch(\PDO::FETCH_ASSOC));
+            //prueba de id inexistente
+            $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if (!$data) {
+                throw new \Exception("Bebida con ID {$id} no encontrada.");
+            }
+            return new BebidaDTO($data);
+
+            //return new BebidaDTO($stmt->fetch(\PDO::FETCH_ASSOC));
         }
 
         public function update (InterfaceDTO $object): void {
@@ -45,9 +52,11 @@
         public function delete ($id): void {
             $sql = "DELETE FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "id" => $id
-            ]);
+            $stmt->execute(["id" => $id]);
+
+            if ($stmt->rowCount() === 0) {
+                echo "No se encontró el registro con ID {$id}.";
+            }
         }
 
         public function list (): array {
@@ -56,7 +65,8 @@
             $stmt->execute();
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);*/
             $sql = "
-                SELECT 
+                SELECT
+                    b.id,
                     b.nombre,
                     b.descripcion,
                     c.nombre AS categoriaId,

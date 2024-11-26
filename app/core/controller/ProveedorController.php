@@ -36,16 +36,42 @@
             $response->send();
         }
 
-        public function load ($id): void {
-            echo 'CONTROLADOR => LOAD <br>';
+        public function editar (): void {
+            $this->view = "proveedor/editar.php";
+            require_once APP_TEMPLATE . "template.php";
         }
 
-        public function update (): void {
-            echo 'CONTROLADOR => UPDATE <br>';
+        public function load (Request $request, Response $response): void {
+            $service = new ProveedorService();
+            $info = $service->load($request->getId());
+
+            $response->setResult($info->toArray());
+            $response->setMessage("El proveedor se cargó correctamente");
+            $response->send();
         }
 
-        public function delete ($id): void {
-            echo 'CONTROLADOR => DELETE <br>';
+        public function update (Request $request, Response $response): void {
+            try {
+                $data = $request->getData();
+
+                $service = new ProveedorService();
+                $service->update($data);
+
+                $response->setMessage("El proveedor se actualizo correctamente.");
+                $response->send();
+            }
+            catch (\Exception $ex) {
+                //$response->setError(true);
+                $response->setMessage($ex->getMessage());
+                $response->send();
+            }
+        }
+
+        public function delete (Request $request, Response $response): void {
+            $service = new ProveedorService();
+            $service->delete($request->getId());
+            $response->setMessage('Proveedor eliminado correctamente.');
+            $response->send();
         }
 
         public function list(Request $request, Response $response): void {

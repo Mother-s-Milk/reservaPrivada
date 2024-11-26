@@ -1,6 +1,8 @@
+const API_BASE_URL = "proveedor/";
+
 let proveedorService = {
     save: (data) => {
-        return fetch ("proveedor/save", {
+        return fetch (`${API_BASE_URL}save`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -22,8 +24,61 @@ let proveedorService = {
             console.error("Error:", error);
         })
     },
+    edit: () => {
+        return fetch(`${API_BASE_URL}alta`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+          })
+    },
+    load: (id) => {
+        return fetch(`${API_BASE_URL}load/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(response.status);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            return data;
+          })
+          .catch((error) => {
+            console.error("Error en la petición: ", error);
+            throw error;
+          });
+    },
+    delete: (id) => {
+        return fetch(`${API_BASE_URL}delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error al eliminar el proveedor: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Respuesta de la eliminación:", data);
+            return data;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    },
     list: () => {
-        return fetch("proveedor/list", {
+        return fetch(`${API_BASE_URL}list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -37,7 +92,6 @@ let proveedorService = {
                 return response.json();  // Parseas la respuesta JSON
             })
             .then(data => {
-                console.log("Lista de proveedores:", data);
                 return data;  // Los datos están bajo la propiedad 'data'
             })
             .catch(error => {

@@ -1,7 +1,7 @@
 <h1>Categoria->Index</h1>
 
 <div>
-    <button type="button" onclick="window.location.href='categoria/create'">Agregar Nueva</button>
+    <button type="button" onclick="window.location.href='categoria/create'">Agregar categoria</button>
 </div>
 
 <section class="container section animation-section">
@@ -9,17 +9,7 @@
         <h2>Categorias</h2>
     </header>
     <div class="section-filter">
-        <aside class="aside-filter">
-            <h2>Filtros</h2>
-            <ul>
-                <!-- <li class="active"><button type="button" class="filter-button" data-filter="todas">Todas</button></li> -->
-                <li><button type="button" class="filter-button active" data-filter="todas">Todas</button></li>
-                <li><button type="button" class="filter-button" data-filter="1">Vinos</button></li>
-                <li><button type="button" class="filter-button" data-filter="2">Cervezas</button></li>
-                <li><button type="button" class="filter-button" data-filter="3">Sin alcohol</button></li>
-            </ul>
-        </aside>
-        <section class="bebidas-tabla" id="bebidas-index">
+        <section class="bebidas-tabla" id="categoria-index">
             <table>
                 <thead>
                     <tr>

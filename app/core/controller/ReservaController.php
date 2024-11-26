@@ -5,52 +5,61 @@
     use app\core\controller\base\Controller;
     use app\core\controller\base\InterfaceController;
 
-    use app\core\service\CategoriaService;
+    use app\core\service\ReservaService;
 
     use app\libs\request\Request;
     use app\libs\response\Response;
 
-    final class CategoriaController extends Controller implements InterfaceController {
+    final class ReservaController extends Controller implements InterfaceController {
 
         public function __construct () {
             parent::__construct ([
-                "app/js/categoria/categoriaController.js",
-                "app/js/categoria/categoriaService.js"
+                "app/js/reserva/reservaController.js",
+                "app/js/reserva/reservaService.js"
             ]);
         }
 
         public function index (): void {
-            $this->view = "categoria/index.php";
+            $this->view = "reserva/index.php";
             require_once APP_TEMPLATE . "template.php";
         }
 
         public function create (): void {
-            $this->view = "categoria/alta.php";
+            $this->view = "reserva/alta.php";
             require_once APP_TEMPLATE . "template.php";
         }
 
         public function save (Request $request, Response $response): void {
-            $service = new CategoriaService();
-            $service->save($request->getData());
-            $response->setMessage("La categoria se registro correctamente.");
-            $response->send();
+            try {
+                $data = $request->getData();
+
+                print_r($data);
+
+                $service = new ReservaService();
+                $service->save($data);
+
+                $response->setMessage("La reserva se registro correctamente.");
+                $response->send();
+            }
+            catch (\Exception $ex) {
+                $response->setMessage($ex->getMessage());
+                $response->send();
+            }
         }
 
         public function load ($id, Response $response): void {
             try {
-                $service = new CategoriaService();
-                $categoria = $service->load($id);
+                $service = new ReservaService();
+                $reserva = $service->load($id);
 
-                if (!$categoria) {
-                    throw new \Exception("La categoria con ID $id no existe.");
+                if (!$reserva) {
+                    throw new \Exception("La reserva con ID $id no existe.");
                 }
 
-                //Enviar los datos al front
-                $response->setResult($categoria->toArray());
+                $response->setResult($reserva->toArray());
                 $response->send();
             }
             catch (\Exception $ex) {
-                //$response->setError(true);
                 $response->setMessage($ex->getMessage());
                 $response->send();
             }
@@ -60,37 +69,33 @@
             try {
                 $data = $request->getData();
 
-                $service = new CategoriaService();
+                $service = new ReservaService();
                 $service->update($data);
 
-                $response->setMessage("La categoria se actualizo correctamente.");
+                $response->setMessage("La reserva se actualizo correctamente.");
                 $response->send();
             }
             catch (\Exception $ex) {
-                //$response->setError(true);
                 $response->setMessage($ex->getMessage());
                 $response->send();
             }
         }
 
         public function delete (Request $request, Response $response): void {
-            $service = new CategoriaService();
+            $service = new ReservaService();
             $service->delete($request->getId());
-            $response->setMessage('Categoria eliminada correctamente.');
+            $response->setMessage('Reserva eliminada correctamente.');
             $response->send();
         }
 
         public function list(Request $request, Response $response): void {
-            // Usamos el servicio para obtener los datos
-            $service = new CategoriaService();
-            $data = $service->list();  // Obtienes las bebidas desde el servicio
+            $service = new ReservaService();
+            $data = $service->list();
         
-            // Estableces la respuesta en formato JSON
             $response->setResult($data);
-            $response->send();  // Envías la respuesta con los datos
+            $response->send();
         }
-
-
+        
     }
 
 ?>

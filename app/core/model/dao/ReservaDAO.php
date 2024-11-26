@@ -1,21 +1,21 @@
 <?php
-    //Aca interactuo con la base de datos directamente.
+
     namespace app\core\model\dao;
 
     use app\core\model\base\DAO;
     use app\core\model\base\InterfaceDAO;
     use app\core\model\base\InterfaceDTO;
 
-    use app\core\model\dto\ProveedorDTO;
+    use app\core\model\dto\ReservaDTO;
 
-    final class ProveedorDAO extends DAO implements InterfaceDAO {
+    final class ReservaDAO extends DAO implements InterfaceDAO {
 
         public function __construct ($conn) {
-            parent::__construct ($conn, "proveedores");
+            parent::__construct ($conn, 'reservas');
         }
 
         public function save (InterfaceDTO $object): void {
-            $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, :nombre, :telefono, :email, :direccion)";
+            $sql= "INSERT INTO {$this->table} VALUES (DEFAULT, :apellido, :nombres, :telefono, :fecha, :hora, :detalles, :estado)";
             $stmt = $this->conn->prepare($sql);
             $data = $object->toArray();
 
@@ -25,25 +25,20 @@
             $object->setId((int)$this->conn->lastInsertId());
         }
 
-        //Devuelvo el objeto en formato DTO para se utilizado por el service. Se devuelve mas especificamente al service o al controller del back y se transforma a JSON.
         public function load ($id): InterfaceDTO {
-            $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+            $sql = "SELECT id, apellido, nombres, telefono, fecha, hora, detalles, estado FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "id" => $id
-            ]);
+            $stmt->execute(["id" => $id]);
 
             $data = $stmt->fetch(\PDO::FETCH_ASSOC);
             if (!$data) {
-                throw new \Exception("Proveedor con ID {$id} no encontrado.");
+                throw new \Exception("Reserva con ID {$id} no encontrada.");
             }
-            return new ProveedorDTO($data);
-
-            //return new ProveedorDTO($stmt->fetch(\PDO::FETCH_ASSOC));
+            return new ReservaDTO($data);
         }
 
         public function update (InterfaceDTO $object): void {
-            $sql = "UPDATE {$this->table} SET nombre = :nombre, telefono = :telefono, email = :email, direccion = :direccion WHERE id = :id";
+            $sql = "UPDATE {$this->table} SET apellido = :apellido, nombres = :nombres, telefono = :telefono, fecha = :fecha, hora = :hora, detalles = :detalles, estado = :estado WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($object->toArray());
         }
@@ -51,17 +46,15 @@
         public function delete ($id): void {
             $sql = "DELETE FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "id" => $id
-            ]);
-            
+            $stmt->execute(["id" => $id]);
+
             if ($stmt->rowCount() === 0) {
                 echo "No se encontró el registro con ID {$id}.";
             }
         }
 
         public function list (): array {
-            $sql = "SELECT id, nombre, telefono, email, direccion FROM {$this->table}";
+            $sql = "SELECT apellido, nombres, telefono, fecha, hora, detalles, estado FROM {$this->table}";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);

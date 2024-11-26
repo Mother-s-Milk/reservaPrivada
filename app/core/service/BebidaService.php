@@ -23,13 +23,21 @@
         }
 
         public function load ($id): BebidaDTO {
-            return new BebidaDTO();
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            return $dao->load($id);
         }
 
         public function update (array $object): void {
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            $dao->update(new BebidaDTO($object));
         }
 
         public function delete ($id): void {
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            $dao->delete($id);
         }
 
         public function list (): array {

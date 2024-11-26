@@ -30,22 +30,81 @@
         }
 
         public function save (Request $request, Response $response): void {
+            try {
+                $data = $request->getData();
+
+                $service = new BebidaService();
+                $service->save($data);
+
+                $response->setMessage("La bebida se registro correctamente.");
+                $response->send();
+            }
+            catch (\Exception $ex) {
+                $response->setMessage($ex->getMessage());
+                $response->send();
+            }
+        }
+
+        public function load ($id, Response $response): void {
+            try {
+                //Cargar bebida por id
+                $service = new BebidaService();
+                $bebida = $service->load($id);
+
+                if (!$bebida) {
+                    throw new \Exception("La bebida con ID $id no existe.");
+                }
+
+                //Enviar los datos al front
+                $response->setResult($bebida->toArray());
+                $response->send();
+            }
+            catch (\Exception $ex) {
+                //$response->setError(true);
+                $response->setMessage($ex->getMessage());
+                $response->send();
+            }
+        }
+
+        public function update (Request $request, Response $response): void {
+            try {
+                $data = $request->getData();
+
+                $service = new BebidaService();
+                $service->update($data);
+
+                $response->setMessage("La bebida se actualizo correctamente.");
+                $response->send();
+            }
+            catch (\Exception $ex) {
+                //$response->setError(true);
+                $response->setMessage($ex->getMessage());
+                $response->send();
+            }
+        }
+
+        /*public function delete (Request $request, Response $response): void {
             $service = new BebidaService();
-            $service->save($request->getData());
-            $response->setMessage("La bebida se registro correctamente.");
+            $data = $request->getData();
+            $service->delete($data);
+
+            $response->setMessage("La bebida fue eliminada correctamente.");
             $response->send();
-        }
+        }*/
 
-        public function load ($id): void {
-            echo 'CONTROLADOR => LOAD <br>';
-        }
+        // public function delete ($id, Response $response): void {
+        //     $service = new BebidaService();
+        //     $service->delete($id);
 
-        public function update (): void {
-            echo 'CONTROLADOR => UPDATE <br>';
-        }
+        //     $response->setMessage("La bebida fue eliminada correctamente.");
+        //     $response->send();
+        // }
 
-        public function delete ($id): void {
-            echo 'CONTROLADOR => DELETE <br>';
+        public function delete (Request $request, Response $response): void {
+            $service = new BebidaService();
+            $service->delete($request->getId());
+            $response->setMessage('Bebida eliminada correctamente.');
+            $response->send();
         }
 
         public function list(Request $request, Response $response): void {

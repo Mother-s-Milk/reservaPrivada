@@ -1,5 +1,4 @@
 <?php
-    //Aca interactuo con las tablas de la base de datos haciendo consultas o creandolas.
     namespace app\core\model\dao;
 
     use app\core\model\base\DAO;
@@ -33,11 +32,15 @@
                 "id" => $id
             ]);
 
-            return new CategoriaDTO($stmt->fetch(\PDO::FETCH_ASSOC));
+            $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if (!$data) {
+                throw new \Exception("Categoria con ID {$id} no encontrada.");
+            }
+            return new CateogiraDTO($data);
         }
 
         public function update (InterfaceDTO $object): void {
-            $sql = "UPDATE {$this->table} SET nombre = :nombre WHERE id = $object->$id";
+            $sql = "UPDATE {$this->table} SET nombre = :nombre WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($object->toArray());
         }
@@ -45,9 +48,11 @@
         public function delete ($id): void {
             $sql = "DELETE FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "id" => $id
-            ]);
+            $stmt->execute(["id" => $id]);
+
+            if ($stmt->rowCount() === 0) {
+                echo "No se encontró el registro con ID {$id}.";
+            }
         }
 
         public function list (): array {

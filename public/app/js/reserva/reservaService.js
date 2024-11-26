@@ -1,6 +1,6 @@
-const API_BASE_URL = "categoria/";
+const API_BASE_URL = "reserva/";
 
-let categoriaService = {
+let reservaService = {
     save: (data) => {
         return fetch (`${API_BASE_URL}save`, {
             method: "POST",
@@ -34,7 +34,7 @@ let categoriaService = {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Error al eliminar la categoria: ${response.statusText}`);
+                throw new Error(`Error al eliminar la reserva: ${response.statusText}`);
             }
             return response.json();
         })
@@ -47,7 +47,7 @@ let categoriaService = {
         });
     },
     list: () => {
-        return fetch("categoria/list", {
+        return fetch(`${API_BASE_URL}list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -56,12 +56,11 @@ let categoriaService = {
         })  // Esta es la URL de tu controlador
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Error al obtener las categorias");
+                    throw new Error("Error al obtener las reservas");
                 }
                 return response.json();  // Parseas la respuesta JSON
             })
             .then(data => {
-                //console.log("Lista de categorias:", data);
                 return data;  // Los datos están bajo la propiedad 'data'
             })
             .catch(error => {

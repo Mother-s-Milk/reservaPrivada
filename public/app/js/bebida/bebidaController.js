@@ -13,29 +13,28 @@ let bebidaController = {
     save: () => {
         let bebidaForm = document.forms["bebida-form"];
 
+        //Recupero los valores del formulario
         bebidaController.data.nombre = bebidaForm.bebidaNombre.value;
-
         bebidaController.data.descripcion = bebidaForm.bebidaDescripcion.value;
-
         bebidaController.data.categoriaId = parseInt(bebidaForm.bebidaCategoriaId.value);
-
         bebidaController.data.precioUnitario = parseFloat(bebidaForm.bebidaPrecioUnitario.value);
-
         bebidaController.data.stock = parseInt(bebidaForm.bebidaStock.value);
-
         bebidaController.data.marca = bebidaForm.bebidaMarca.value;
-
         bebidaController.data.proveedorId = parseInt(bebidaForm.bebidaProveedorId.value);
 
-        console.log(bebidaController.data);
-
         bebidaService.save(bebidaController.data)
-        /*.then(response => {
-            console.log("RESPUESTA DEL SERVIDOR ", response);
-        })
-        .catch (error => {
-            console.error("ERROR AL GUARDAR LA BEBIDA", error);
-        })*/
+    },
+    delete: (id) => {
+        if (confirm(`¿Estás seguro de eliminar la bebida con ID`, id)) {
+            bebidaService.delete(id) // Llamar al método delete del servicio
+            .then(data => {
+                alert(data.message); // Mostrar mensaje del servidor
+                bebidaController.list(); // Actualizar lista después de eliminar
+            })
+            .catch(error => {
+                alert("Ocurrió un error al eliminar la bebida.");
+            });
+        }
     },
     // Función que obtiene los productos y los despliega en el DOM
     list: () => {
@@ -45,7 +44,7 @@ let bebidaController = {
                 bebidaController.render();  // Llamas a la función de renderizado
             })
             .catch(error => {
-                console.error("Error al cargar los productos", error);
+                console.error("Error al cargar las bebidas (controller)", error);
             });
     },
 
@@ -56,7 +55,7 @@ let bebidaController = {
         if (bebidaController.bebidas.length === 0) {
             let fila = `
                 <tr>
-                    <td colspan 9>
+                    <td colspan="9">
                         No hay bebidas registradas
                     </td>
                 </tr>
@@ -80,7 +79,7 @@ let bebidaController = {
                         <td>${bebida.proveedorId}</td>
                         <td>
                             <button type="button" class="btn-editar" data-id="${bebida.id}">Editar</button>
-                            <button type="button" class="btn-eliminar" data-id="${bebida.id}">Eliminar</button>
+                            <button type="button" class="btn-eliminar" data-id="${bebida.id}" onclick=bebidaController.delete(${bebida.id})>Eliminar</button>
                         </td>
                     </tr>
                 `;
@@ -92,7 +91,15 @@ let bebidaController = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    bebidaController.list();
+    const path = window.location.pathname;
+    if (path === "/reservaPrivada/public/bebida") {
+        bebidaController.list();
+    }
+
+    // Para eliminar una bebida
+    /*const bebidaIdToDelete = 1;
+
+    bebidaService.delete(bebidaIdToDelete)*/
 
     let btnBebidaAlta = document.getElementById("btn-bebida-alta");
     if (btnBebidaAlta != null) {

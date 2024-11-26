@@ -23,13 +23,21 @@
         }
 
         public function load ($id): CategoriaDTO {
-            return new CategoriaDTO();
+            $conn = Connection::get();
+            $dao = new CategoriaDAO($conn);
+            return $dao->load($id);
         }
 
         public function update (array $object): void {
+            $conn = Connection::get();
+            $dao = new CategoriaDAO($conn);
+            $dao->update(new CategoriaDTO($object));
         }
 
         public function delete ($id): void {
+            $conn = Connection::get();
+            $dao = new categoriaDAO($conn);
+            $dao->delete($id);
         }
 
         public function list (): array {
