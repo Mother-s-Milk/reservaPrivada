@@ -45,11 +45,16 @@
             }
         }
 
-        public function load ($id, Response $response): void {
+        public function editar (): void {
+            $this->view = "bebida/editar.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
+        public function load (Request $request, Response $response): void {
             try {
                 //Cargar bebida por id
                 $service = new BebidaService();
-                $bebida = $service->load($id);
+                $bebida = $service->load($request->getId());
 
                 if (!$bebida) {
                     throw new \Exception("La bebida con ID $id no existe.");
@@ -57,6 +62,7 @@
 
                 //Enviar los datos al front
                 $response->setResult($bebida->toArray());
+                $response->setMessage("La bebida se cargó correctamente");
                 $response->send();
             }
             catch (\Exception $ex) {

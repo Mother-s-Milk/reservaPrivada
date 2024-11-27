@@ -24,6 +24,38 @@ let categoriaService = {
             console.error("Error:", error);
         })
     },
+    edit: () => {
+        return fetch(`${API_BASE_URL}editar`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+          })
+    },
+    update: (data) => {
+        return fetch (`${API_BASE_URL}update`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la peticion: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Respuesta del servidor:", data);
+            return data;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        })
+    },
     delete: (id) => {
         return fetch(`${API_BASE_URL}delete/${id}`, {
             method: "DELETE",

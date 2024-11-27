@@ -24,6 +24,28 @@ let bebidaController = {
 
         bebidaService.save(bebidaController.data)
     },
+    update: (id) => {
+        let bebidaForm = document.forms["bebida-form"];
+
+        bebidaController.data.id = parseInt(id);
+        bebidaController.data.nombre = bebidaForm.bebidaNombre.value;
+        bebidaController.data.descripcion = bebidaForm.bebidaDescripcion.value;
+        bebidaController.data.categoriaId = parseInt(bebidaForm.bebidaCategoriaId.value);
+        bebidaController.data.precioUnitario = parseFloat(bebidaForm.bebidaPrecioUnitario.value);
+        bebidaController.data.stock = parseInt(bebidaForm.bebidaStock.value);
+        bebidaController.data.marca = bebidaForm.bebidaMarca.value;
+        bebidaController.data.proveedorId = parseInt(bebidaForm.bebidaProveedorId.value);
+
+        bebidaService.update(bebidaController.data)
+        .then(response => {
+            alert("Bebida actualizado exitosamente.");
+            window.location.href = "bebida";
+        })
+        .catch(error => {
+            console.error("Error al actualizar el proveedor:", error);
+            alert("Ocurrió un error al actualizar el proveedor.");
+        });
+    },
     delete: (id) => {
         if (confirm(`¿Estás seguro de eliminar la bebida con ID`, id)) {
             bebidaService.delete(id) // Llamar al método delete del servicio
@@ -78,8 +100,8 @@ let bebidaController = {
                         <td>${bebida.marca}</td>
                         <td>${bebida.proveedorId}</td>
                         <td>
-                            <button type="button" class="btn-editar" data-id="${bebida.id}">Editar</button>
-                            <button type="button" class="btn-eliminar" data-id="${bebida.id}" onclick=bebidaController.delete(${bebida.id})>Eliminar</button>
+                            <button type="button" class="btn-editar" data-id="${bebida.id}" onclick="window.location.href='bebida/editar/${bebida.id}'"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" class="btn-eliminar" data-id="${bebida.id}" onclick=bebidaController.delete(${bebida.id})><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
@@ -105,6 +127,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnBebidaAlta != null) {
         btnBebidaAlta.onclick = () => {
             bebidaController.save();
+        }
+    }
+
+    let btnBebidaActualizar = document.getElementById('btn-bebida-actualizar');
+    if (btnBebidaActualizar != null) {
+        btnBebidaActualizar.onclick = () => {
+            let id = document.getElementById("btn-bebida-actualizar").dataset.id;
+            bebidaController.update(id);
         }
     }
 });

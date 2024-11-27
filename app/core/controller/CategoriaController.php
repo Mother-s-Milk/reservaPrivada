@@ -36,10 +36,15 @@
             $response->send();
         }
 
-        public function load ($id, Response $response): void {
+        public function editar (): void {
+            $this->view = "categoria/editar.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
+        public function load (Request $request, Response $response): void {
             try {
                 $service = new CategoriaService();
-                $categoria = $service->load($id);
+                $categoria = $service->load($request->getId());
 
                 if (!$categoria) {
                     throw new \Exception("La categoria con ID $id no existe.");
@@ -47,6 +52,7 @@
 
                 //Enviar los datos al front
                 $response->setResult($categoria->toArray());
+                $response->setMessage("La categoria se cargó correctamente");
                 $response->send();
             }
             catch (\Exception $ex) {

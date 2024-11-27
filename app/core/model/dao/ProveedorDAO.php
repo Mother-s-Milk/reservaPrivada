@@ -29,9 +29,7 @@
         public function load ($id): InterfaceDTO {
             $sql = "SELECT * FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "id" => $id
-            ]);
+            $stmt->execute(["id" => $id]);
 
             $data = $stmt->fetch(\PDO::FETCH_ASSOC);
             if (!$data) {

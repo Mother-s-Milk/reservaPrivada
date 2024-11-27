@@ -1,1 +1,1 @@
-<h1>Inicio->Index</h1>
+<h1 class="breadcrum">Inicio->Index</h1>

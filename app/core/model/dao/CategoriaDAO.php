@@ -26,17 +26,15 @@
 
         //Devuelvo el objeto en formato DTO para se utilizado por la logica de negocio. Se devuelve mas especificamente al service o al controller del back y se transforma a JSON.
         public function load ($id): InterfaceDTO {
-            $sql = "SELECT id, nombre FROM {$this->table} WHERE id = :id";
+            $sql = "SELECT * FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([
-                "id" => $id
-            ]);
+            $stmt->execute(["id" => $id]);
 
             $data = $stmt->fetch(\PDO::FETCH_ASSOC);
             if (!$data) {
                 throw new \Exception("Categoria con ID {$id} no encontrada.");
             }
-            return new CateogiraDTO($data);
+            return new CategoriaDTO($data);
         }
 
         public function update (InterfaceDTO $object): void {

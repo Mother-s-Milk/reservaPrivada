@@ -1,26 +1,19 @@
-<h1>Categoria->Index</h1>
+<h1 class="breadcrum">Categoria->Index</h1>
 
-<div>
-    <button type="button" onclick="window.location.href='categoria/create'">Agregar categoria</button>
-</div>
-
-<section class="container section animation-section">
-    <header class="header-section">
-        <h2>Categorias</h2>
-    </header>
-    <div class="section-filter">
-        <section class="bebidas-tabla" id="categoria-index">
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nombre</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody id="categorias-body">
-                </tbody>
-            </table>
-        </section>
+<section class="container section">
+    <div class="header-actions">
+        <h2>Lista de Categorias</h2>
+        <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoria</button>
     </div>
+    <table class="tabla-lista">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody id="categorias-body">
+        </tbody>
+    </table>
 </section>

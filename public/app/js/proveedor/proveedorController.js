@@ -15,32 +15,11 @@ let proveedorController = {
         proveedorController.data.email = proveedorForm.proveedorEmail.value;
         proveedorController.data.direccion = proveedorForm.proveedorDireccion.value;
 
-        proveedorService.save(proveedorController.data)
+        proveedorService.save(proveedorController.data);
     },
-    edit: (id) => {
-        proveedorService.edit()
-        .then
-        proveedorService.load(id)
-            .then(data => {
-                if (!data || !data.result) {
-                    throw new Error("No se encontraron datos del proveedor.");
-                }
-                
-                let proveedorForm = document.forms["proveedor-form"];
-                proveedorForm.proveedorNombre.value = data.result.nombre || "";
-                proveedorForm.proveedorTelefono.value = data.result.telefono || "";
-                proveedorForm.proveedorEmail.value = data.result.email || "";
-                proveedorForm.proveedorDireccion.value = data.result.direccion || "";
-    
-                // Actualizamos el ID en el controlador
-                proveedorController.data.id = id;
-            })
-            .catch(error => {
-                console.error("Error al cargar los datos del proveedor:", error);
-                alert("No se pudo cargar la información del proveedor. Intente nuevamente.");
-            });
-    }
-    ,
+    /*edit: (id) => {
+        proveedorService.edit();
+    },*/
     delete: (id) => {
         if (confirm(`¿Estás seguro de eliminar el proveedor con ID ${id}?`)) {
             proveedorService.delete(id) // Llamar al método delete del servicio
@@ -52,6 +31,25 @@ let proveedorController = {
                 alert("Ocurrió un error al eliminar el proveedor.");
             });
         }
+    },
+    update: (id) => {
+        let proveedorForm = document.forms["proveedor-form"];
+
+        proveedorController.data.id = parseInt(id);
+        proveedorController.data.nombre = proveedorForm.proveedorNombre.value;
+        proveedorController.data.telefono = proveedorForm.proveedorTelefono.value;
+        proveedorController.data.email = proveedorForm.proveedorEmail.value;
+        proveedorController.data.direccion = proveedorForm.proveedorDireccion.value;
+
+        proveedorService.update(proveedorController.data)
+        .then(response => {
+            alert("Proveedor actualizado exitosamente.");
+            window.location.href = "proveedor";
+        })
+        .catch(error => {
+            console.error("Error al actualizar el proveedor:", error);
+            alert("Ocurrió un error al actualizar el proveedor.");
+        });
     },
     list: () => {
         proveedorService.list()
@@ -111,6 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnProveedorAlta != null) {
         btnProveedorAlta.onclick = () => {
             proveedorController.save();
+        }
+    }
+
+    let btnBotonActualizar = document.getElementById('btn-proveedor-actualizar');
+    if (btnBotonActualizar != null) {
+        btnBotonActualizar.onclick = () => {
+            let id = document.getElementById("btn-proveedor-actualizar").dataset.id;
+            proveedorController.update(id);
         }
     }
 });

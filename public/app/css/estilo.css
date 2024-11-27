@@ -6,6 +6,7 @@
 
 body {
     background-color: #f8f9fa;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
 
 ul {
@@ -57,18 +58,90 @@ a {
     padding: 1.875rem 5.625rem; /*30px/90px*/
 }
 
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-actions > h2 {
+    font-size: 30px;
+}
+
+
 .header-section {
     margin-bottom: 1.875rem; /*30px*/
     text-align: center;
 }
 
 .header-section h2 {
-    font-size: 2.8125rem; /*45px*/
+    font-size: 1.875rem; /*30px*/
     font-weight: 700;
     letter-spacing: 0.0625rem; /*1px*/
 }
 
-/*.section-filter {
+.principal-footer-content {
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    padding: 3px;
+}
+
+.principal-footer-content > h1 {
+    font-size: 27px;
+    font-weight: 500;
+}
+
+.breadcrum {
+    font-size: 15px;
+}
+
+
+
+/*Botones*/
+.btn-add {
+    background-color: #007bff;
+    color: #fff;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.btn-add:hover {
+    background-color: #0056b3;
+}
+
+/*Tablas*/
+.tabla-lista {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.tabla-lista,
+.tabla-lista th,
+.tabla-lista td {
+    border: 1px solid #ddd;
+}
+
+.tabla-lista th,
+.tabla-lista td {
+    padding: 10px;
+    text-align: center;
+}
+
+.tabla-lista th {
+    background-color: #007bff;
+    color: white;
+}
+
+.section-filter {
     display: flex;
     align-items: start;
     justify-content: center;
@@ -83,16 +156,34 @@ a {
     flex: 1 1 calc(75% - 1.25rem);
 }
 
+.btn-editar,
+.btn-eliminar {
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    padding: 6px;
+    color: #fff;
+    margin: 0 1px;
+}
+
+.btn-editar {
+    background-color: orange;
+}
+
+.btn-eliminar {
+    background-color: red;
+}
+
 .aside-filter h2 {
-    font-size: 1.875rem;*/ /*30px*/
-    /*font-weight: 600;
+    font-size: 1.875rem; /*30px*/
+    font-weight: 600;
     color: #000000;
-    margin-bottom: 0.9375rem;*/ /*15px*/
-/*}
+    margin-bottom: 0.9375rem; /*15px*/
+}
 
 .aside-filter li {
-    margin-bottom: 0.5625rem;*/ /*9px*/
-    /*position: relative;
+    margin-bottom: 0.5625rem; /*9px*/
+    position: relative;
 }
 
 .aside-filter li:last-child {
@@ -101,15 +192,15 @@ a {
 
 .filter-button {
     border: none;
-    border-radius: 0.5625rem;*/ /*9px*/
-    /*color: #333333;
+    border-radius: 0.5625rem; /*9px*/
+    color: #333333;
     background-color: transparent;
-    font-size: 1rem;*/ /*16px*/
-    /*font-weight: 500;
+    font-size: 1rem; /*16px*/
+    font-weight: 500;
     font-family: 'Montserrat', sans-serif;
     cursor: pointer;
-    padding: 0.375rem;*/ /*6px*/
-    /*transition: background-color 0.3s ease;
+    padding: 0.375rem; /*6px*/
+    transition: background-color 0.3s ease;
     will-change: background-color;
 }
 
@@ -121,70 +212,9 @@ a {
 .aside-filter,
 .bebidas-tabla {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 0.75rem;*/ /*12px*/
-    /*padding: 1.25rem;*/ /*20px*/
-/*}*/
-
-
-
-
-
-
-
-/*.grid-menu {
-    display: grid;
-    gap: 0.9375rem;
-    grid-template-columns: auto auto auto;
+    border-radius: 0.75rem; /*12px*/
+    padding: 1.25rem; /*20px*/
 }
-
-.pizza-card {
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, .3);
-    text-align: center;
-    padding: 0.9375rem;
-    border-radius: 0.75rem;
-}
-
-.pizza-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: #111111;
-    margin-bottom: 0.1875rem;
-}
-
-.pizza-card p {
-    font-size: 0.9375rem;
-    font-weight: 400;
-    color: #222222;
-    margin-bottom: 0.375rem;
-}
-
-.pizza-card p:last-of-type {
-    color: black;
-    font-weight: 500;
-}
-
-.text-muted {
-    font-size: 1.125rem;
-    color: #666666;
-    text-align: center;
-    font-weight: 500;
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .form-section, .list-section {
     background-color: #fff;
@@ -207,33 +237,4 @@ input[type="text"], input[type="tel"] {
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
-}
-button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #0056b3;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table, th, td {
-    border: 1px solid #ddd;
-}
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-th {
-    background-color: #007bff;
-    color: white;
-}
-.actions button {
-    margin-right: 5px;
 }
