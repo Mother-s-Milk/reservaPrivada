@@ -17,8 +17,6 @@
         }
 
         public function index (): void {
-            /*$service = new BebidaService();
-            $data = $service->list();*/
             $this->view = "inicio/index.php";
             require_once APP_TEMPLATE . "template.php";
         }

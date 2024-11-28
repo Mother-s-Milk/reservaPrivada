@@ -33,6 +33,7 @@
 ?>
 
 <h1 class="breadcrum">Inicio</h1>
+<h1 class="breadcrum">¡Hola, Franco!</h1>
 <section class="container section one">
     <aside class="double">
         <div class="gadget">
@@ -46,9 +47,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="3">No hay stock bajo</td>
-                    </tr>
+                    <?php
+                        $contador = 1;
+                        if (count($bajoStock) == 0) {
+                            echo '<tr><td colspan="3">No hay stock bajo</td></tr>';
+                        }
+                        else {
+                            foreach($bajoStock as $bebida) {
+                                echo '<tr>';
+                                echo '<td>' . $contador . '</td>';
+                                echo '<td>' . $bebida['nombre'] . '</td>';
+                                echo '<td>' . $bebida['stock'] . '</td>';
+                                echo '</tr>';
+                                $contador++;
+                            }
+                        }
+                    ?>
                 </tbody>
             </table>
         </div>

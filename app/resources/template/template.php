@@ -13,7 +13,6 @@
         <header>
             <?php
                 require_once "includes/nav.php";
-                //require_once "includes/bread_crum.php";
             ?>
         </header>
         <main>

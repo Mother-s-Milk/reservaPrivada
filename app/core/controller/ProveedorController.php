@@ -61,7 +61,6 @@
                 $response->send();
             }
             catch (\Exception $ex) {
-                //$response->setError(true);
                 $response->setMessage($ex->getMessage());
                 $response->send();
             }

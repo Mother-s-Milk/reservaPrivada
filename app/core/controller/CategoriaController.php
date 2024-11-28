@@ -50,13 +50,11 @@
                     throw new \Exception("La categoria con ID $id no existe.");
                 }
 
-                //Enviar los datos al front
                 $response->setResult($categoria->toArray());
                 $response->setMessage("La categoria se cargó correctamente");
                 $response->send();
             }
             catch (\Exception $ex) {
-                //$response->setError(true);
                 $response->setMessage($ex->getMessage());
                 $response->send();
             }
@@ -73,7 +71,6 @@
                 $response->send();
             }
             catch (\Exception $ex) {
-                //$response->setError(true);
                 $response->setMessage($ex->getMessage());
                 $response->send();
             }
@@ -87,13 +84,11 @@
         }
 
         public function list(Request $request, Response $response): void {
-            // Usamos el servicio para obtener los datos
             $service = new CategoriaService();
-            $data = $service->list();  // Obtienes las bebidas desde el servicio
+            $data = $service->list();
         
-            // Estableces la respuesta en formato JSON
             $response->setResult($data);
-            $response->send();  // Envías la respuesta con los datos
+            $response->send();
         }
 
 

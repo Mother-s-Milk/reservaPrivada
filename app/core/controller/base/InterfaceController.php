@@ -28,8 +28,6 @@
         /*Gestiona los servicios correspondientes para la eliminacion (fisica) de la entidad.*/
         public function delete (Request $request, Response $response): void;
 
-        //public function delete ($id, Response $response): void;
-
     }
 
 ?>

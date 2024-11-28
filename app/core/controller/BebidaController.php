@@ -83,28 +83,10 @@
                 $response->send();
             }
             catch (\Exception $ex) {
-                //$response->setError(true);
                 $response->setMessage($ex->getMessage());
                 $response->send();
             }
         }
-
-        /*public function delete (Request $request, Response $response): void {
-            $service = new BebidaService();
-            $data = $request->getData();
-            $service->delete($data);
-
-            $response->setMessage("La bebida fue eliminada correctamente.");
-            $response->send();
-        }*/
-
-        // public function delete ($id, Response $response): void {
-        //     $service = new BebidaService();
-        //     $service->delete($id);
-
-        //     $response->setMessage("La bebida fue eliminada correctamente.");
-        //     $response->send();
-        // }
 
         public function delete (Request $request, Response $response): void {
             $service = new BebidaService();
