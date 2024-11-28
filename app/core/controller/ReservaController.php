@@ -21,7 +21,7 @@
 
         public function index (): void {
             $this->view = "reserva/index.php";
-            $BC_actual="Reserva";
+            $BC_actual="Reservas";
             $BC_link_anterior=APP_FRONT."inicio/index";
             $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
@@ -29,6 +29,9 @@
 
         public function create (): void {
             $this->view = "reserva/alta.php";
+            $BC_actual="Crear Reserva";
+            $BC_link_anterior=APP_FRONT."reserva/index";
+            $BC_anterior="Reservas";
             require_once APP_TEMPLATE . "template.php";
         }
 
