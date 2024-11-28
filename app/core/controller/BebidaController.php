@@ -21,6 +21,9 @@
 
         public function index (): void {
             $this->view = "bebida/index.php";
+            $BC_actual="Bebida";
+            $BC_link_anterior=APP_FRONT."inicio/index";
+            $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
         }
 
