@@ -87,8 +87,8 @@ let proveedorController = {
                         <td>${proveedor.email}</td>
                         <td>${proveedor.direccion}</td>
                         <td>
-                            <button type="button" class="btn-editar" data-id="${proveedor.id}" onclick="window.location.href='proveedor/editar/${proveedor.id}'">Editar</button>
-                            <button type="button" class="btn-eliminar" data-id="${proveedor.id}" onclick=proveedorController.delete(${proveedor.id})>Eliminar</button>
+                            <button type="button" class="btn-editar" data-id="${proveedor.id}" onclick="window.location.href='proveedor/editar/${proveedor.id}'"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" class="btn-eliminar" data-id="${proveedor.id}" onclick=proveedorController.delete(${proveedor.id})><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;

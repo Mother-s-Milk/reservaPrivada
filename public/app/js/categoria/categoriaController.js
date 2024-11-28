@@ -72,8 +72,8 @@ let categoriaController = {
                         <td>${contador}</td>
                         <td>${categoria.nombre}</td>
                         <td>
-                            <button type="button" class="btn-editar" data-id="${categoria.id}" onclick="window.location.href='categoria/editar/${categoria.id}'">Editar</button>
-                            <button type="button" class="btn-eliminar" data-id="${categoria.id}" onclick=categoriaController.delete(${categoria.id})>Eliminar</button>
+                            <button type="button" class="btn-editar" data-id="${categoria.id}" onclick="window.location.href='categoria/editar/${categoria.id}'"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" class="btn-eliminar" data-id="${categoria.id}" onclick=categoriaController.delete(${categoria.id})><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;

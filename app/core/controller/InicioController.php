@@ -11,7 +11,9 @@
     final class InicioController extends Controller {
 
         public function __construct () {
-            parent::__construct ([]);
+            parent::__construct ([
+                "app/js/inicio/inicioController.js"
+            ]);
         }
 
         public function index (): void {

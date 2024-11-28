@@ -14,54 +14,53 @@
 
 ?>
 
-<h1>Bebida->Alta</h1>
+<h1 class="breadcrum">Bebida/Alta</h1>
+<section class="container section">
+    <div class="gadget">
+        <header class="titulo-formulario">
+            <h1>Formulario de bebida</h1>
+        </header>
+        <form id="bebida-form" class="form">
+            <div>
+                <input type="text" id="bebidaNombre" name="bebidaNombre" placeholder="Nombre del Producto" required>
+            </div>
+            <div>
+                <textarea id="bebidaDescripcion" name="bebidaDescripcion" rows="4" placeholder="Descripción"></textarea>
+            </div>
+            <div>
+                <select id="bebidaCategoriaId" name="bebidaCategoriaId" required>
+                    <option value="" disabled selected>Seleccionar Categoría</option>
+                    <?php
 
-<form id="bebida-form">
-    <div>
-        <label for="bebidaNombre">Nombre del Producto</label>
-        <input type="text" id="bebidaNombre" name="bebidaNombre" placeholder="" required>
-    </div>
-    <div>
-        <label for="bebidaDescripcion">Descripción</label>
-        <textarea id="bebidaDescripcion" name="bebidaDescripcion" rows="4"></textarea>
-    </div>
-    <div>
-        <label for="bebidaCategoriaId">Categoría</label>
-        <select id="bebidaCategoriaId" name="bebidaCategoriaId" required>
-            <option value="" disabled selected>Seleccionar Categoría</option>
-            <?php
+                        foreach ($categorias as $categoria) {
+                            echo '<option value="' . $categoria['id'] . '">' . $categoria['nombre'] . '</option>' . "\n";
+                        }
 
-                foreach ($categorias as $categoria) {
-                    echo '<option value="' . $categoria['id'] . '">' . $categoria['nombre'] . '</option>' . "\n";
-                }
+                    ?>
+                </select>
+            </div>
+            <div>
+                <input type="number" id="bebidaPrecioUnitario" name="bebidaPrecioUnitario" step="0.01" placeholder="Precio Unitario" required>
+            </div>
+            <div>
+                <input type="number" id="bebidaStock" name="bebidaStock" min="0" placeholder="Cantidad en Stock" required>
+            </div>
+            <div>
+                <input type="text" id="bebidaMarca" name="bebidaMarca" placeholder="Marca del Producto" required>
+            </div>
+            <div>
+                <select id="bebidaProveedorId" name="bebidaProveedorId" required>
+                    <option value="" disabled selected>Seleccionar Proveedor</option>
+                    <?php
 
-            ?>
-        </select>
-    </div>
-    <div>
-        <label for="bebidaPrecioUnitario">Precio Unitario</label>
-        <input type="number" id="bebidaPrecioUnitario" name="bebidaPrecioUnitario" step="0.01" placeholder="" required>
-    </div>
-    <div>
-        <label for="bebidaStock">Cantidad en Stock</label>
-        <input type="number" id="bebidaStock" name="bebidaStock" min="0" placeholder="" required>
-    </div>
-    <div>
-        <label for="bebidaMarca">Marca del Producto</label>
-        <input type="text" id="bebidaMarca" name="bebidaMarca" required>
-    </div>
-    <div>
-        <label for="bebidaProveedorId">Proveedor</label>
-        <select id="bebidaProveedorId" name="bebidaProveedorId" required>
-            <option value="" disabled selected>Seleccionar Proveedor</option>
-            <?php
+                        foreach ($proveedores as $proveedor) {
+                            echo '<option value="' . $proveedor['id'] . '">' . $proveedor['nombre'] . '</option>' . "\n";
+                        }
 
-                foreach ($proveedores as $proveedor) {
-                    echo '<option value="' . $proveedor['id'] . '">' . $proveedor['nombre'] . '</option>' . "\n";
-                }
-
-            ?>
-        </select>
+                    ?>
+                </select>
+            </div>
+            <button type="button" id="btn-bebida-alta">Guardar Bebida</button>
+        </form>
     </div>
-    <button type="button" id="btn-bebida-alta">Guardar Bebida</button>
-</form>
+</section>

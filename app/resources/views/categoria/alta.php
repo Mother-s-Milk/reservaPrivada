@@ -1,9 +1,15 @@
-<h1>Categoria->Alta</h1>
+<h1 class="breadcrum">Categoria/Alta</h1>
 
-<form id="categoria-form">
-    <div>
-        <label for="categoriaNombre">Nombre de la categoria</label>
-        <input type="text" id="categoriaNombre" name="categoriaNombre" placeholder="" required>
+<section class="container section">
+    <div class="gadget">
+        <header class="titulo-formulario">
+            <h1>Formulario de Categoria</h1>
+        </header>
+        <form id="categoria-form" class="form">
+            <div>
+                <input type="text" id="categoriaNombre" name="categoriaNombre" placeholder="Nombre de la categoria" required>
+            </div>
+            <button type="button" id="btn-categoria-alta">Guardar Categoria</button>
+        </form>
     </div>
-    <button type="button" id="btn-categoria-alta">Guardar Categoria</button>
-</form>
+</section>
