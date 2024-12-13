@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Bebida</h1>
+<h1 class="breadcrum">Bebidas</h1>
 
 <section class="container section">
     <div class="header-actions gadget">
@@ -27,7 +27,7 @@
                         <th>Stock</th>
                         <th>Marca</th>
                         <th>Proveedor</th>
-                    <th>Acciones</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="bebidas-body">

@@ -6,13 +6,14 @@
 
     final class ProveedorDTO implements InterfaceDTO {
 
-        private $id, $nombre, $telefono, $email, $direccion;
+        private $id, $nombre, $telefono, $email, $localidad, $direccion;
 
         public function __construct ($data = []) {
             $this->setId($data["id"] ?? 0);
             $this->setNombre($data["nombre"] ?? "");
             $this->setTelefono($data["telefono"] ?? "");
             $this->setEmail($data["email"] ?? "");
+            $this->setLocalidad($data["localidad"] ?? "");
             $this->setDireccion($data["direccion"] ?? "");
         }
 
@@ -35,6 +36,10 @@
             return $this->email;
         }
 
+        public function getLocalidad (): string {
+            return $this->localidad;
+        }
+
         public function getDireccion (): string {
             return $this->direccion;
         }
@@ -47,19 +52,23 @@
         }
 
         public function setNombre ($nombre): void {
-            $this->nombre = (preg_match('/^[\p{L}\s.]{1,45}$/u', $nombre)) ? $nombre : "";
+            $this->nombre = (is_string($nombre) && strlen(trim($nombre)) <= 45) ? trim($nombre) : "";
         }
 
         public function setTelefono ($telefono): void {
-            $this->telefono = (preg_match('/^[\+\d\(\)\-\s]{10,45}$/', $telefono)) ? $telefono : "";
+            $this->telefono = (is_string($telefono) && strlen(trim($telefono)) <= 45) ? trim($telefono) : "";
         }
 
         public function setEmail ($email): void {
             $this->email = filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : "";
         }
 
+        public function setLocalidad ($localidad): void {
+            $this->localidad = (is_string($localidad) && strlen(trim($localidad)) <= 90) ? trim($localidad) : "";
+        }
+
         public function setDireccion ($direccion): void {
-            $this->direccion = (preg_match('/^[\p{L}\p{N}\s,.]{1,150}$/u', $direccion)) ? $direccion : "";
+            $this->direccion = (is_string($direccion) && strlen(trim($direccion)) <= 90) ? trim($direccion) : "";
         }
 
         /*********/
@@ -71,6 +80,7 @@
                 "nombre" => $this->getNombre(),
                 "telefono" => $this->getTelefono(),
                 "email" => $this->getEmail(),
+                "localidad" => $this->getLocalidad(),
                 "direccion" => $this->getDireccion()
             ];
         }

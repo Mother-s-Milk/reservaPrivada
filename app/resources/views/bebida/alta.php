@@ -14,12 +14,12 @@
 
 ?>
 
-<h1 class="breadcrum">Bebida/Alta</h1>
+<h1 class="breadcrum">Bebidas/Alta</h1>
 
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
-            <h1>Formulario de bebida</h1>
+            <h1>Formulario de Bebidas</h1>
         </header>
         <form id="bebida-form" class="form">
             <div>
@@ -61,7 +61,7 @@
                     ?>
                 </select>
             </div>
-            <button type="button" id="btn-bebida-alta">Guardar Bebida</button>
+            <button type="button" id="btn-bebida-alta" class="btn-form">Guardar Bebida</button>
         </form>
     </div>
 </section>

@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Reserva/Alta</h1>
+<h1 class="breadcrum">Reservas/Alta</h1>
 
 <section class="container section">
     <div class="gadget">
@@ -24,7 +24,7 @@
             <div>
                 <textarea id="reservaDetalles" name="reservaDetalles" placeholder="Detalles de la reserva" required></textarea>
             </div>
-            <button type="button" id="btn-reserva-alta">Guardar Reserva</button>
+            <button type="button" id="btn-reserva-alta" class="btn-form">Guardar Reserva</button>
         </form>
     </div>
 </section>

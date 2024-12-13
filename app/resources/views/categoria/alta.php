@@ -1,15 +1,18 @@
-<h1 class="breadcrum">Categoria/Alta</h1>
+<h1 class="breadcrum">Categorias/Alta</h1>
 
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
-            <h1>Formulario de Categoria</h1>
+            <h1>Formulario de Categorias</h1>
         </header>
         <form id="categoria-form" class="form">
             <div>
                 <input type="text" id="categoriaNombre" name="categoriaNombre" placeholder="Nombre de la categoria" required>
             </div>
-            <button type="button" id="btn-categoria-alta">Guardar Categoria</button>
+            <div>
+                <textarea id="categoriaDescripcion" name="categoriaDescripcion" rows="4" placeholder="Descripción"></textarea>
+            </div>
+            <button type="button" id="btn-categoria-alta" class="btn-form">Guardar Categoria</button>
         </form>
     </div>
 </section>

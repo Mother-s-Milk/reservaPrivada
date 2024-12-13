@@ -3,11 +3,13 @@ let categoriaController = {
     data: {
         id: 0,
         nombre: "",
+        descripcion: ""
     },
     save: () => {
         let categoriaForm = document.forms["categoria-form"];
 
         categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
+        categoriaController.data.descripcion = categoriaForm.categoriaDescripcion.value;
 
         categoriaService.save(categoriaController.data)
     },
@@ -55,7 +57,7 @@ let categoriaController = {
         if (categoriaController.categorias.length === 0) {
             let fila = `
                 <tr>
-                    <td colspan="2">
+                    <td colspan="4">
                         No hay categorias registradas
                     </td>
                 </tr>
@@ -71,6 +73,7 @@ let categoriaController = {
                     <tr>
                         <td>${contador}</td>
                         <td>${categoria.nombre}</td>
+                        <td>${categoria.descripcion}</td>
                         <td>
                             <button type="button" class="btn-editar" data-id="${categoria.id}" onclick="window.location.href='categoria/editar/${categoria.id}'"><i class="fa-solid fa-pen-to-square"></i></button>
                             <button type="button" class="btn-eliminar" data-id="${categoria.id}" onclick=categoriaController.delete(${categoria.id})><i class="fa-solid fa-trash"></i></button>

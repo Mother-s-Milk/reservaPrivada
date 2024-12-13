@@ -52,7 +52,7 @@ let reservaController = {
         if (reservaController.reservas.length === 0) {
             let fila = `
                 <tr>
-                    <td colspan="9">
+                    <td colspan="10">
                         No hay reservas registradas
                     </td>
                 </tr>
@@ -72,6 +72,7 @@ let reservaController = {
                         <td>${reserva.telefono}</td>
                         <td>${reserva.fecha}</td>
                         <td>${reserva.hora}</td>
+                        <td>${reserva.personas}</td>
                         <td>${reserva.detalles}</td>
                         <td>${reserva.estado}</td>
                         <td>

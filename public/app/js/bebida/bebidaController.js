@@ -23,6 +23,13 @@ let bebidaController = {
         bebidaController.data.proveedorId = parseInt(bebidaForm.bebidaProveedorId.value);
 
         bebidaService.save(bebidaController.data)
+        .then(response => {
+            alert('Bebida almacenada exitosamente');
+            bebidaController.resetForm();
+        })
+        .catch(error => {
+            alert('Error al almacenar bebida');
+        })
     },
     update: (id) => {
         let bebidaForm = document.forms["bebida-form"];
@@ -47,44 +54,41 @@ let bebidaController = {
         });
     },
     delete: (id) => {
-        if (confirm(`¿Estás seguro de eliminar la bebida con ID`, id)) {
-            bebidaService.delete(id) // Llamar al método delete del servicio
+        if (confirm(`¿Estás seguro de eliminar la bebida con ID ${id}?`)) {
+            bebidaService.delete(id)
             .then(data => {
-                alert(data.message); // Mostrar mensaje del servidor
-                bebidaController.list(); // Actualizar lista después de eliminar
+                alert(data.message); //Mostrar mensaje del servidor
+                bebidaController.list();
             })
             .catch(error => {
                 alert("Ocurrió un error al eliminar la bebida.");
             });
         }
     },
-    // Función que obtiene los productos y los despliega en el DOM
+    //Función que obtiene los productos y los despliega en el DOM
     list: () => {
         bebidaService.list()
-            .then(data => {
-                bebidaController.bebidas = data.result;  // Almacenas los datos
-                bebidaController.render();  // Llamas a la función de renderizado
-            })
-            .catch(error => {
-                console.error("Error al cargar las bebidas (controller)", error);
-            });
+        .then(data => {
+            bebidaController.bebidas = data.result;
+            bebidaController.render();
+        })
+        .catch(error => {
+            console.error("Error al cargar las bebidas (controller)", error);
+        });
     },
-
-    // Función que recorre los productos y los agrega al DOM
+    //Función que recorre las bebidas y las agrega al DOM
     render: () => {
         let bebidasBody = document.getElementById('bebidas-body');
 
         if (bebidaController.bebidas.length === 0) {
             let fila = `
                 <tr>
-                    <td colspan="9">
-                        No hay bebidas registradas
-                    </td>
+                    <td colspan="9">No hay bebidas registradas</td>
                 </tr>
             `;
-
             bebidasBody.innerHTML = fila;
-        } else {
+        }
+        else {
             bebidasBody.innerHTML = '';
             let fila;
             let contador = 1;
@@ -109,6 +113,9 @@ let bebidaController = {
                 bebidasBody.insertAdjacentHTML('beforeend', fila);
             });
         }
+    },
+    resetForm: () => {
+        document.forms["bebida-form"].reset();
     }
 }
 
@@ -117,11 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (path === "/reservaPrivada/public/bebida") {
         bebidaController.list();
     }
-
-    // Para eliminar una bebida
-    /*const bebidaIdToDelete = 1;
-
-    bebidaService.delete(bebidaIdToDelete)*/
 
     let btnBebidaAlta = document.getElementById("btn-bebida-alta");
     if (btnBebidaAlta != null) {

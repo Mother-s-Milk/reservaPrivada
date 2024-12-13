@@ -10,7 +10,7 @@
 
 ?>
 
-<h1 class="breadcrum">Categoria/Editar</h1>
+<h1 class="breadcrum">Categorias/Editar</h1>
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
@@ -21,7 +21,11 @@
                 <label for="categoriaNombre">Nombre:</label>
                 <input type="text" id="categoriaNombre" name="categoriaNombre" value="<?php echo $categoria->getNombre()?>" required>
             </div>
-            <button type="button" id="btn-categoria-actualizar" data-id="<?php echo $categoria->getId(); ?>">Guardar Categoria</button>
+            <div class="form-edicion">
+                <label for="">Descripcion:</label>
+                <textarea id="categoriaDescripcion" name="categoriaDescripcion" rows="4"></textarea>
+            </div>
+            <button type="button" id="btn-categoria-actualizar" class="btn-form" data-id="<?php echo $categoria->getId(); ?>">Actualizar Categoria</button>
         </form>
     </div>
 </section>

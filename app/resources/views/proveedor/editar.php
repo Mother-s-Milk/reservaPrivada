@@ -10,11 +10,11 @@
 
 ?>
 
-<h1 class="breadcrum">Proveedor/Editar</h1>
+<h1 class="breadcrum">Proveedores/Editar</h1>
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
-            <h1>Formulario de Proveedor</h1>
+            <h1>Formulario de Proveedores</h1>
         </header>
         <form id="proveedor-form" class="form">
             <div class="form-edicion">
@@ -30,10 +30,14 @@
                 <input type="email" id="proveedorEmail" name="proveedorEmail" value="<?php echo $proveedor->getEmail()?>" required>
             </div>
             <div class="form-edicion">
+                <label for="proveedorLocalidad">Localidad:</label>
+                <input type="text" id="proveedorLocalidad" name="proveedorLocalidad" value="" required>
+            </div>
+            <div class="form-edicion">
                 <label for="proveedorDireccion">Direccion:</label>
                 <input type="text" id="proveedorDireccion" name="proveedorDireccion" value="<?php echo $proveedor->getDireccion()?>" required>
             </div>
-            <button type="button" id="btn-proveedor-actualizar" data-id="<?php echo $proveedor->getId(); ?>">Actualizar proveedor</button>
+            <button type="button" id="btn-proveedor-actualizar" class="btn-form" data-id="<?php echo $proveedor->getId(); ?>">Actualizar Proveedor</button>
         </form>
     </div>
 </section>

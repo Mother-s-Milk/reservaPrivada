@@ -5,6 +5,7 @@ let proveedorController = {
         nombre: "",
         telefono: "",
         email: "",
+        localidad: "",
         direccion: ""
     },
     save: () => {
@@ -13,6 +14,7 @@ let proveedorController = {
         proveedorController.data.nombre = proveedorForm.proveedorNombre.value;
         proveedorController.data.telefono = proveedorForm.proveedorTelefono.value;
         proveedorController.data.email = proveedorForm.proveedorEmail.value;
+        proveedorController.data.localidad = proveedorForm.proveedorLocalidad.value;
         proveedorController.data.direccion = proveedorForm.proveedorDireccion.value;
 
         proveedorService.save(proveedorController.data);
@@ -67,7 +69,7 @@ let proveedorController = {
         if (proveedorController.proveedores.length === 0) {
             let fila = `
                 <tr>
-                    <td colspan="5">
+                    <td colspan="7">
                         No hay proveedores registrados
                     </td>
                 </tr>
@@ -85,6 +87,7 @@ let proveedorController = {
                         <td>${proveedor.nombre}</td>
                         <td>${proveedor.telefono}</td>
                         <td>${proveedor.email}</td>
+                        <td>${proveedor.localidad}</td>
                         <td>${proveedor.direccion}</td>
                         <td>
                             <button type="button" class="btn-editar" data-id="${proveedor.id}" onclick="window.location.href='proveedor/editar/${proveedor.id}'"><i class="fa-solid fa-pen-to-square"></i></button>

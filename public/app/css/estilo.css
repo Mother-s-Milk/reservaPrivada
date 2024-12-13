@@ -22,18 +22,17 @@ a {
 
 button {
     cursor: pointer;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+    border: none;
 }
 
+/****************************************************************************/
+/*Contenedor del contenido del body para que el footer este siempre al final*/
+/****************************************************************************/
 #grid-body-container {
     display: grid;
     min-height: 100dvh;
     grid-template-rows: auto 1fr auto;
-}
-
-.gadget {
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 9px; /*12px*/
-    padding: 15px;
 }
 
 .container {
@@ -41,14 +40,19 @@ button {
     margin: 0 auto;
 }
 
+/****************************/
+/*Estilos para las secciones*/
+/****************************/
 .section {
-    padding: 15px 5.625rem; /*30px/90px*/
+    padding: 0.9375rem 2.8125rem; /*15px/45px*/
 }
 
 .one,
-.double {
+.double,
+.triple,
+.four {
     display: flex;
-    gap: 30px;
+    gap: 15px;
 }
 
 .one {
@@ -56,7 +60,9 @@ button {
     
 }
 
-.double {
+.double,
+.triple,
+.four {
     justify-content: space-between;
     align-items: start;
 }
@@ -66,61 +72,39 @@ button {
     max-width: calc(50%);
 }
 
-/*********/
-/*Botones*/
-/*********/
-.btn-add {
-    background-color: #007bff;
-    color: #fff;
-    padding: 9px 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 15px;
-    text-transform: uppercase;
-    font-weight: 500;
+.triple > div {
+    flex: 1 1 calc(33%);
+    max-width: calc(33%);
 }
 
-.btn-add:hover {
-    background-color: #0056b3;
+.four > div {
+    flex: 1 1 calc(25%);
+    max-width: calc(25%);
 }
 
-/*****/
-/*Nav*/
-/*****/
-.nav-principal {
-    background-color: #1e293b;
-    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.3);
-    padding: 0 5.625rem; /*30px/90px*/
-}
-
-.nav-principal > ul > li {
-    display: inline-block;
-    position: relative;
-    margin-right: 18px;
-}
-
-.nav-principal > ul > li:last-child {
-    margin-right: 0;
-}
-
-.nav-principal > ul > li > a {
-    display: block;
-    color: #fff;
+/******************************/
+/*Contenedor estilo componente*/
+/******************************/
+.gadget {
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 7.5px;
     padding: 15px;
-    transition: background-color 0.3s ease;
 }
 
-.nav-principal > ul > li > a:hover {
-    background-color: #334155;
+.gadget-titulo {
+    font-size: 24px;
+    margin-bottom: 9px;
 }
 
+/**************************************/
+/*Tablas del dashboard de inicio index*/
+/**************************************/
 .dashboard-table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.dashboard-table thead {
+.dashboard-table > thead {
     background-color: #f0f0f0;
 }
 
@@ -131,59 +115,120 @@ button {
     border: 1px solid #ddd;
 }
 
-/***************/
-/***************/
+/*****/
+/*Nav*/
+/*****/
+.nav-principal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1e293b;
+    box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.3);
+    padding: 6px 2.8125rem; /*45px*/
+}
+
+.logo {
+    font-family: 'Island Moments';
+    color: #fff;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.nav-principal > ul > li {
+    display: inline-block;
+    position: relative;
+    margin-right: 15px;
+}
+
+.nav-principal > ul > li:last-child {
+    margin-right: 0;
+}
+
+.nav-principal > ul > li > a {
+    display: block;
+    color: #fff;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-principal > ul > li > a:hover {
+    background-color: #334155;
+}
+
+/******************/
+/*Boton de usuario*/
+/******************/
+.btn-user {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+}
+
+/***********/
+/*Breadcrum*/
+/***********/
+.breadcrum {
+    font-size: 15px;
+    margin-left: 2.8125rem; /*45px*/
+    margin-top: 15px;
+}
+
+/****************************/
+/*Encabezados de componentes*/
+/****************************/
 .header-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .header-actions > h2 {
     font-size: 1.875rem; /*30px*/
-    font-weight: 700;
+    font-weight: 600;
 }
 
-/***********************/
-.principal-footer-content {
-    background-color: #1e293b;
-    text-align: center;
+.btn-add {
+    background-color: #007bff;
     color: #fff;
-    padding: 3px;
-}
-
-.principal-footer-content > h1 {
-    font-size: 21px;
-    font-weight: normal;
-}
-
-.breadcrum {
+    padding: 9px 15px;
+    border-radius: 6px;
     font-size: 15px;
-    margin-left: 90px;
-    margin-top: 15px;
+    font-weight: 500;
 }
 
+.btn-add:hover {
+    background-color: #0056b3;
+}
+
+/*********************/
+/*Seccion con filtros*/
+/*********************/
 .section-filter {
     display: flex;
     align-items: start;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
 }
 
 .section-filter > aside {
     flex: 1 1 calc(20%);
+    max-width: calc(20%);
 }
 
-.section-filter > aside,
 .section-filter > main {
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 0.75rem; /*12px*/
-    padding: 15px;
+    flex: 1 1 calc(80%);
+    max-width: calc(80%);
 }
 
 .section-filter > aside > h2 {
-    font-size: 1.875rem; /*30px*/
+    font-size: 24px;
     font-weight: 600;
     color: #000000;
     margin-bottom: 0.9375rem; /*15px*/
@@ -198,55 +243,60 @@ button {
     margin-bottom: 0;
 }
 
-.section-filter .filter-button.active {
-    background-color: #1e293b;
-    color: #fff;
-}
-
 .filter-button {
-    border: none;
-    border-radius: 6px; /*9px*/
-    color: #333333;
+    border-radius: 6px;
+    color: #000;
     background-color: transparent;
-    font-size: 1rem; /*16px*/
+    font-size: 15px;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
     padding: 0.375rem; /*6px*/
     transition: background-color 0.3s ease;
     will-change: background-color;
 }
 
-/********/
-/*Tablas*/
-/********/
-.tabla-lista th {
+.section-filter .filter-button.active {
     background-color: #1e293b;
-    color: white;
+    color: #fff;
 }
 
+/*********************/
+/*Tablas de los index*/
+/*********************/
 .tabla-lista {
     width: 100%;
     border-collapse: collapse;
 }
 
-.tabla-lista,
 .tabla-lista th,
 .tabla-lista td {
     border: 1px solid #ddd;
-}
-
-.tabla-lista th,
-.tabla-lista td {
-    padding: 10px;
+    padding: 9px;
     text-align: center;
+    font-size: 16px;
 }
 
+.tabla-lista th {
+    background-color: #1e293b;
+    color: white;
+    font-weight: 600;
+}
+
+.tabla-lista td {
+    color: #000;
+    font-weight: 400;
+}
+
+.tabla-lista > tbody > tr:hover {
+    background-color: #ccc;
+}
+
+/*********/
+/*Botones*/
+/*********/
 .btn-editar,
 .btn-eliminar {
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
+    font-size: 15px;
+    border-radius: 7.5px;
     padding: 6px;
     color: #fff;
 }
@@ -262,6 +312,13 @@ button {
 /*************/
 /*Formularios*/
 /*************/
+.titulo-formulario {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
 .form label,
 .form input,
 .form textarea,
@@ -270,7 +327,7 @@ button {
     margin-bottom: 18px;
     padding: 6px;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
-    border-radius: 6px;
+    border-radius: 7.5px;
     font-size: 16px;
 }
 
@@ -286,28 +343,31 @@ button {
     border: 1px solid #ddd;
 }
 
+.btn-form {
+    background-color: #28a745;
+}
+
+.btn-form:hover {
+    background-color: #1e7e34;
+}
+
+.btn-reset {
+    background-color: #f44336;
+}
+
+.btn-reset:hover {
+    background-color: #e53935;
+}
+
 .form button {
     padding: 9px 15px;
     display: block;
     margin: auto;
     font-size: 18px;
-    border: 1px solid #ddd;
     border-radius: 6px;
-    background-color: #28a745;
     color: #fff;
     font-weight: 500;
     width: 100%;
-}
-
-.titulo-formulario {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
-}
-
-.gadget-titulo {
-    font-size: 30px;
-    margin-bottom: 12px;
 }
 
 .form-edicion {
@@ -316,5 +376,17 @@ button {
 }
 
 .form-edicion label {
-    flex: 1 1 15%;
+    flex: 1 1 calc(15%);
+}
+
+/******************/
+/*Footer principal*/
+/******************/
+.principal-footer-content {
+    background-color: #1e293b;
+    text-align: center;
+    color: #fff;
+    padding: 9px;
+    font-size: 15px;
+    font-weight: normal;
 }

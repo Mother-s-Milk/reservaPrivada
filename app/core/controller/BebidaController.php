@@ -35,6 +35,11 @@
             require_once APP_TEMPLATE . "template.php";
         }
 
+        public function editar (): void {
+            $this->view = "bebida/editar.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
         public function save (Request $request, Response $response): void {
             try {
                 $data = $request->getData();
@@ -51,6 +56,7 @@
             }
         }
 
+<<<<<<< Updated upstream
         public function editar (): void {
             $this->view = "bebida/editar.php";
             $BC_actual="Editar Bebida";
@@ -59,6 +65,8 @@
             require_once APP_TEMPLATE . "template.php";
         }
 
+=======
+>>>>>>> Stashed changes
         public function load (Request $request, Response $response): void {
             try {
                 //Cargar bebida por id
@@ -104,7 +112,7 @@
             $response->send();
         }
 
-        public function list(Request $request, Response $response): void {
+        public function list (Request $request, Response $response): void {
             // Usamos el servicio para obtener los datos
             $service = new BebidaService();
             $data = $service->list();  // Obtienes las bebidas desde el servicio
@@ -114,7 +122,6 @@
             $response->send();  // Envías la respuesta con los datos
         }
         
-
     }
 
 ?>

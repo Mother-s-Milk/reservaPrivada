@@ -6,11 +6,12 @@
 
     final class CategoriaDTO implements InterfaceDTO {
 
-        private $id, $nombre;
+        private $id, $nombre, $descripcion;
 
         public function __construct ($data = []) {
             $this->setId($data["id"] ?? 0);
             $this->setNombre($data["nombre"] ?? "");
+            $this->setDescripcion($data["descripcion"] ?? "");
         }
 
         /*********/
@@ -24,6 +25,10 @@
             return $this->nombre;
         }
 
+        public function getDescripcion (): string {
+            return $this->descripcion;
+        }
+
         /*********/
         /*Setters*/
         /*********/
@@ -32,7 +37,11 @@
         }
 
         public function setNombre ($nombre): void {
-            $this->nombre = (preg_match('/^[a-zA-Z\s]{1,45}$/', $nombre)) ? $nombre : "";
+            $this->nombre = (is_string($nombre) && strlen(trim($nombre)) <= 45) ? trim($nombre) : "";
+        }
+
+        public function setDescripcion ($descripcion): void {
+            $this->descripcion = (is_string($descripcion) && strlen(trim($descripcion)) <= 100) ? trim($descripcion) : "";
         }
 
         /*********/
@@ -41,7 +50,8 @@
         public function toArray (): array {
             return [
                 "id" => $this->getId(),
-                "nombre" => $this->getNombre()
+                "nombre" => $this->getNombre(),
+                "descripcion" => $this->getDescripcion()
             ];
         }
 

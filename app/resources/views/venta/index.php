@@ -1,9 +1,9 @@
-<h1 class="breadcrum">Reservas</h1>
+<h1 class="breadcrum">Ventas</h1>
 
 <section class="container section">
     <div class="header-actions gadget">
-        <h2>Lista de Reservas</h2>
-        <button type="button" class="btn-add" onclick="window.location.href='reserva/create'">Agregar Reserva</button>
+        <h2>Historial de Ventas</h2>
+        <button type="button" class="btn-add" onclick="window.location.href='venta/create'">Nueva venta</button>
     </div>
     <div class="section-filter">
         <aside class="gadget">
@@ -17,18 +17,12 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Apellido</th>
-                        <th>Nombres</th>
-                        <th>Telefono</th>
-                        <th>Fecha</th>
                         <th>Hora</th>
-                        <th>Personas</th>
-                        <th>Detalles</th>
-                        <th>Estado</th>
+                        <th>Total</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="reservas-body">
+                <tbody id="ventas-body">
                 </tbody>
             </table>
         </main>

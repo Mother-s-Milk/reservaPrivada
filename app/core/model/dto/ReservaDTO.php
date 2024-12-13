@@ -6,7 +6,7 @@
 
     final class ReservaDTO implements InterfaceDTO {
 
-        private $id, $apellido, $nombres, $telefono, $fecha, $hora, $detalles, $estado;
+        private $id, $apellido, $nombres, $telefono, $fecha, $hora, $personas, $detalles, $estado;
 
         private const ESTADOS_VALIDOS = ['Pendiente', 'Confirmada', 'Cancelada'];
 
@@ -17,6 +17,7 @@
             $this->setTelefono($data["telefono"] ?? "");
             $this->setFecha($data["fecha"] ?? "");
             $this->setHora($data["hora"] ?? "");
+            $this->setPersonas($data["personas"] ?? 0);
             $this->setDetalles($data["detalles"] ?? "");
             $this->setEstado($data["estado"] ?? "");
         }
@@ -48,6 +49,10 @@
             return $this->hora;
         }
 
+        public function getPersonas (): int {
+            return $this->personas;
+        }
+
         public function getDetalles (): string {
             return $this->detalles;
         }
@@ -72,22 +77,26 @@
         }
 
         public function setTelefono ($telefono): void {
-            $this->telefono = (is_string($telefono) && strlen(trim($telefono)) <= 30) ? $telefono : "";
+            $this->telefono = (is_string($telefono) && strlen(trim($telefono)) <= 45) ? $telefono : "";
         }
 
-        public function setFecha($fecha): void {
+        public function setFecha ($fecha): void {
             $this->fecha = (is_string($fecha) && strlen(trim($fecha)) <= 30) ? $fecha : "";
         }
 
-        public function setHora($hora): void {
+        public function setHora ($hora): void {
             $this->hora = (is_string($hora) && strlen(trim($hora)) <= 30) ? $hora : "";
         }
 
-        public function setDetalles ($detalles): void {
-            $this->detalles = (is_string($detalles) && strlen(trim($detalles)) <= 150) ? trim($detalles) : "";
+        public function setPersonas ($personas): void {
+            $this->personas = (is_integer($personas) && $personas > 0) ? $personas : 0;
         }
 
-        public function setEstado($estado): void {
+        public function setDetalles ($detalles): void {
+            $this->detalles = (is_string($detalles) && strlen(trim($detalles)) <= 90) ? trim($detalles) : "";
+        }
+
+        public function setEstado ($estado): void {
             $this->estado = in_array($estado, self::ESTADOS_VALIDOS, true) ? $estado : 'Pendiente';
         }
 
@@ -102,6 +111,7 @@
                 "telefono" => $this->getTelefono(),
                 "fecha" => $this->getFecha(),
                 "hora" => $this->getHora(),
+                "personas" => $this->getPersonas(),
                 "detalles" => $this->getDetalles(),
                 "estado" => $this->getEstado()
             ];

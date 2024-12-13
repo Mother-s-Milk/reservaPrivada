@@ -1,9 +1,8 @@
 <?php
 
     use app\core\model\dao\BebidaDAO;
-    use app\libs\Connection\Connection;
-
     use app\core\model\dao\ReservaDAO;
+    use app\libs\Connection\Connection;
 
     $conn = Connection::get();
 
@@ -21,7 +20,7 @@
         }
     }
 
-    $fechaActual = date('Y-m-d'); // Esto te dará la fecha actual en formato 'YYYY-MM-DD'
+    $fechaActual = date('y-m-d'); //Fecha actual en formato 'YYYY-MM-DD'
     $reservasHoy = [];
 
     foreach($reservas as $reserva) {
@@ -48,11 +47,11 @@
                 </thead>
                 <tbody>
                     <?php
-                        $contador = 1;
                         if (count($bajoStock) == 0) {
-                            echo '<tr><td colspan="3">No hay stock bajo</td></tr>';
+                            echo '<tr><td colspan="3" style="text-align: center;">No hay stock bajo</td></tr>';
                         }
                         else {
+                            $contador = 1;
                             foreach($bajoStock as $bebida) {
                                 echo '<tr>';
                                 echo '<td>' . $contador . '</td>';
@@ -73,13 +72,26 @@
                     <tr>
                         <th>#</th>
                         <th>Hora</th>
-                        <th>Mesa</th>
+                        <th>Detalles</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="3">No hay reservas registradas</td>
-                    </tr>
+                    <?php
+                        if (count($reservasHoy) == 0) {
+                            echo '<tr><td colspan="3" style="text-align: center;">No hay reservas para hoy</td></tr>';
+                        }
+                        else {
+                            $contador = 1;
+                            foreach($reservasHoy as $reserva) {
+                                echo '<tr>';
+                                echo '<td>' . $contador . '</td>';
+                                echo '<td>' . $reserva['hora'] . '</td>';
+                                echo '<td>' . $reserva['detalles'] . '</td>';
+                                echo '</tr>';
+                                $contador++;
+                            }
+                        }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -91,14 +103,14 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Total</th>
                         <th>Fecha</th>
                         <th>Hora</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4">No hay ventas registradas</td>
+                        <td colspan="4" style="text-align: center;">No hay ventas registradas</td>
                     </tr>
                 </tbody>
             </table>
@@ -106,7 +118,7 @@
         <div class="double">
             <div></div>
             <div class="gadget grafico-dashboard">
-                <h2>Ventas Diarias</h2>
+                <h2 class="gadget-titulo">Ventas Diarias</h2>
                 <canvas id="ventasDiariasChart"></canvas>
             </div>
         </div>
