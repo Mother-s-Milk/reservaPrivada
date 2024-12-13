@@ -4,7 +4,7 @@
     use app\core\model\base\DAO;
     use app\core\model\base\InterfaceDAO;
     use app\core\model\base\InterfaceDTO;
-
+    use app\core\model\validate\CategoriaV;
     use app\core\model\dto\CategoriaDTO;
 
     final class CategoriaDAO extends DAO implements InterfaceDAO {
@@ -14,6 +14,10 @@
         }
 
         public function save (InterfaceDTO $object): void {
+
+            $validation = new CategoriaV($this->conn);
+            $validation->validationUS($object);
+
             $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, :nombre)";
             $stmt = $this->conn->prepare($sql);
             $data = $object->toArray();
@@ -38,12 +42,20 @@
         }
 
         public function update (InterfaceDTO $object): void {
+
+            $validation = new CategoriaV($this->conn);
+            $validation->validationUS($object);
+
             $sql = "UPDATE {$this->table} SET nombre = :nombre WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($object->toArray());
         }
 
         public function delete ($id): void {
+
+            $validation = new CategoriaV($this->conn);
+            $validation->validationD($id);
+
             $sql = "DELETE FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(["id" => $id]);

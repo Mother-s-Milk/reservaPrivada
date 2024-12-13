@@ -21,11 +21,17 @@
 
         public function index (): void {
             $this->view = "proveedor/index.php";
+            $BC_actual="Proveedores";
+            $BC_link_anterior=APP_FRONT."inicio/index";
+            $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
         }
 
         public function create (): void {
             $this->view = "proveedor/alta.php";
+            $BC_actual="Crear Proveedor";
+            $BC_link_anterior=APP_FRONT."proveedor/index";
+            $BC_anterior="Proveedores";
             require_once APP_TEMPLATE . "template.php";
         }
 
@@ -38,6 +44,9 @@
 
         public function editar (): void {
             $this->view = "proveedor/editar.php";
+            $BC_actual="Editar Proveedor";
+            $BC_link_anterior=APP_FRONT."Proveedor/index";
+            $BC_anterior="Proveedores";
             require_once APP_TEMPLATE . "template.php";
         }
 

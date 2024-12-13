@@ -21,11 +21,17 @@
 
         public function index (): void {
             $this->view = "bebida/index.php";
+            $BC_actual="Bebidas";
+            $BC_link_anterior=APP_FRONT."inicio/index";
+            $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
         }
 
         public function create (): void {
             $this->view = "bebida/alta.php";
+            $BC_actual="Crear Bebidas";
+            $BC_link_anterior=APP_FRONT."bebida/index";
+            $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
         }
 
@@ -47,6 +53,9 @@
 
         public function editar (): void {
             $this->view = "bebida/editar.php";
+            $BC_actual="Editar Bebida";
+            $BC_link_anterior=APP_FRONT."bebida/index";
+            $BC_anterior="Bebidas";
             require_once APP_TEMPLATE . "template.php";
         }
 

@@ -21,11 +21,17 @@
 
         public function index (): void {
             $this->view = "categoria/index.php";
+            $BC_actual="Categoria";
+            $BC_link_anterior=APP_FRONT."inicio/index";
+            $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
         }
 
         public function create (): void {
             $this->view = "categoria/alta.php";
+            $BC_actual="Crear Categoria";
+            $BC_link_anterior=APP_FRONT."categoria/index";
+            $BC_anterior="Categorias";
             require_once APP_TEMPLATE . "template.php";
         }
 
@@ -38,6 +44,9 @@
 
         public function editar (): void {
             $this->view = "categoria/editar.php";
+            $BC_actual="Editar Categoria";
+            $BC_link_anterior=APP_FRONT."categoria/index";
+            $BC_anterior="Categorias";
             require_once APP_TEMPLATE . "template.php";
         }
 
