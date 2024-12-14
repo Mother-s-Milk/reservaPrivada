@@ -14,15 +14,11 @@
         }
 
         public function save (InterfaceDTO $object): void {
-<<<<<<< Updated upstream
 
             $validation = new CategoriaV($this->conn);
             $validation->validationUS($object);
 
-            $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, :nombre)";
-=======
             $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, :nombre, :descripcion)";
->>>>>>> Stashed changes
             $stmt = $this->conn->prepare($sql);
             $data = $object->toArray();
 
@@ -46,15 +42,11 @@
         }
 
         public function update (InterfaceDTO $object): void {
-<<<<<<< Updated upstream
 
             $validation = new CategoriaV($this->conn);
             $validation->validationUS($object);
 
-            $sql = "UPDATE {$this->table} SET nombre = :nombre WHERE id = :id";
-=======
             $sql = "UPDATE {$this->table} SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
->>>>>>> Stashed changes
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($object->toArray());
         }
