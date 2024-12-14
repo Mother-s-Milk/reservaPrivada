@@ -9,6 +9,7 @@
         <li><a href="proveedor">Proveedores</a></li>
         <li><a href="venta">Ventas</a></li>
         <li><a href="reserva">Reservas</a></li>
+        <li><a href="mesa">Mesa</a></li>
     </ul>
     <div>
         <button type="button" class="btn-user"><i class="fa-solid fa-circle-user"></i></button>
