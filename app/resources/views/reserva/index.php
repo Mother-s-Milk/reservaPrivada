@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Reservas</h1>
+<h1 class="breadcrumbs">Reservas</h1>
 
 <section class="container section">
     <div class="header-actions gadget">
@@ -8,9 +8,6 @@
     <div class="section-filter">
         <aside class="gadget">
             <h2>Filtros</h2>
-            <ul>
-                <li><button type="button" class="filter-button active" data-filter="todas">Todas</button></li>
-            </ul>
         </aside>
         <main class="gadget">
             <table class="tabla-lista">

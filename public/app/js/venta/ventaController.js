@@ -1,51 +1,56 @@
+//Agregar un modal de confirmacion si el usuario presiona el boton de resertar formulario
+//Si al agregar un detalle de venta, el data-stock es menor a la cantidad solicitada, avisar.
+
 let ventaController = {
     ventas: [],
     venta: {
         id: 0,
         fecha: "",
         hora: "",
-        detalles: []
+        formaPago: "",
+        detalles: [],
+        total: 0
     },
     save: () => {
         //let detalles = ventaController.venta.detalles;
-
+        ventaController.venta.formaPago = document.getElementById('formaPago').value;
         //console.log(ventaController.venta);
         ventaService.save(ventaController.venta)
             .then(response => {
                 alert("Venta registrada con éxito.", response);
                 ventaController.venta.detalles = [];
-                ventaController.mostrarBebidas();
+                ventaController.venta.total = 0;
+                ventaController.resetearFormulario();
+                ventaController.mostrarDetallesVenta();
             })
             .catch(error => {
                 console.error("Error al guardar la venta:", error);
-                //alert("Ocurrió un error al registrar la venta.");
             });
     },
     agregarBebida: () => {
-        let idBebida = document.getElementById('productoCodigo').value;
+        let bebida = document.getElementById('bebidaNombre');
+        let cantidad = document.getElementById('bebidaCantidad');
 
-        ventaService.buscarBebida(idBebida)
-        .then(data => {
-            let cantidad = document.getElementById('productoCantidad').value;
-            if (data.result.stock >= cantidad) {
-                ventaController.venta.detalles.push({
-                    bebidaId: parseInt(data.result.id),
-                    nombre: data.result.nombre,
-                    precio: parseFloat(data.result.precioUnitario),
-                    cantidad: parseInt(cantidad)
-                });
-                ventaController.mostrarBebidas();
-            }
-            /*else {
-                alert('No hay stock suficiente');
-            }*/
-        });
+        if (bebida.value) {
+            let bebidaSeleccionada = bebida.options[bebida.selectedIndex];
+            //alert(`ID de la bebida seleccionada: ${idBebida}`);
+            //Consultar stock antes de almacenar
+            ventaController.venta.detalles.push({
+                bebidaId: parseInt(bebida.value),
+                precio: parseFloat(bebidaSeleccionada.getAttribute('data-precio')),
+                cantidad: parseInt(cantidad.value)
+            });
+
+            ventaController.mostrarDetallesVenta();
+        } else {
+            alert("Waskiii");
+        }
     },
-    mostrarBebidas: () => {
-        let bodyBebidas = document.getElementById('body-bebidas');
+    mostrarDetallesVenta: () => {
+        let bodyBebidas = document.getElementById('bebidas-venta-body');
 
         if (ventaController.venta.detalles.length === 0) {
-            bodyBebidas.innerHTML = '<tr><td class="text-center text-muted" colspan="6">No hay detalles cargados</td></tr>';
+            bodyBebidas.innerHTML = '<tr><td class="text-center text-muted" colspan="5">No hay detalles cargados</td></tr>';
             bodyBebidas.nextElementSibling.hidden = true;
         }
         else {
@@ -54,7 +59,6 @@ let ventaController = {
             ventaController.venta.detalles.forEach(bebida => {
                 let fila = `
                     <tr>
-                        <td>${bebida.bebidaId}</td>
                         <td>${bebida.nombre}</td>
                         <td>$${bebida.precio}</td>
                         <td>${bebida.cantidad}</td>
@@ -66,6 +70,7 @@ let ventaController = {
                     </tr>
                 `;
                 total += bebida.precio*bebida.cantidad;
+                ventaController.venta.total = total;
                 bodyBebidas.insertAdjacentHTML('beforeend', fila);
             });
             document.getElementById("total-venta").textContent = `$${total.toFixed(2)}`;
@@ -76,48 +81,48 @@ let ventaController = {
         ventaService.list()
         .then(data => {
             ventaController.ventas = data.result;
-            ventaController.render();
+            ventaController.mostrarVentas();
+            //console.log(data.result);
         })
         .catch(error => {
             console.error("Error al cargar las ventas (controller)", error);
         });
     },
-    render: () => {
+    mostrarVentas: () => {
         let ventasBody = document.getElementById('ventas-body');
 
         if (ventaController.ventas.length === 0) {
-            let fila = `
+            let nuevaFila = `
                 <tr>
-                    <td colspan="9">No hay ventas registradas</td>
+                    <td colspan="7">No hay ventas registradas</td>
                 </tr>
             `;
-            ventasBody.innerHTML = fila;
+            ventasBody.innerHTML = nuevaFila;
         }
         else {
             ventasBody.innerHTML = '';
-            let fila;
+            let nuevaFila;
             let contador = 1;
             ventaController.ventas.forEach(venta => {
-                fila = `
+                nuevaFila = `
                     <tr>
                         <td>${contador}</td>
-                        <td>${venta.nombre}</td>
-                        <td>${venta.descripcion}</td>
-                        <td>${venta.categoriaId}</td>
-                        <td>$${venta.precioUnitario}</td>
-                        <td>${venta.stock}</td>
-                        <td>${venta.marca}</td>
-                        <td>${venta.proveedorId}</td>
+                        <td>${venta.fecha}</td>
+                        <td>${venta.hora}</td>
+                        <td>${venta.formaPago}</td>
+                        <td>$${(venta.total).toFixed(2)}</td>
                         <td>
-                            <button type="button" class="btn-editar" data-id="${venta.id}" onclick="window.location.href='bebida/editar/${bebida.id}'"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button" class="btn-eliminar" data-id="${venta.id}" onclick=bebidaController.delete(${bebida.id})><i class="fa-solid fa-trash"></i></button>
+                            <button type="button" class="btn-check" data-id="${venta.id}" style="width: 100%">Ver detalles</button>
                         </td>
                     </tr>
                 `;
                 contador++;
-                ventasBody.insertAdjacentHTML('beforeend', fila);
+                ventasBody.insertAdjacentHTML('beforeend', nuevaFila);
             });
         }
+    },
+    resetearFormulario: () => {
+        document.getElementById('venta-form').reset();
     }
 }
 
@@ -126,9 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (path === "/reservaPrivada/public/venta") {
         ventaController.list();
     }
-    else if (path === "/reservaPrivada/public/venta/alta") {
-        let btnAgregarProducto = document.getElementById('btn-agregar-producto');
-        btnAgregarProducto.onclick = () => {
+    else if (path === "/reservaPrivada/public/venta/create") {
+        let btnAgregarBebida = document.getElementById('btn-agregar-bebida-venta');
+        btnAgregarBebida.onclick = () => {
             ventaController.agregarBebida();
         }
 

@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Proveedores</h1>
+<h1 class="breadcrumbs">Proveedores</h1>
 
 <section class="container section">
     <div class="header-actions gadget">
@@ -8,9 +8,6 @@
     <div class="section-filter">
         <aside class="gadget">
             <h2>Filtros</h2>
-            <ul>
-                <li><button type="button" class="filter-button active" data-filter="todas">Todos</button></li>
-            </ul>
         </aside>
         <main class="gadget">
             <table class="tabla-lista">
@@ -18,10 +15,10 @@
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Telefono</th>
+                        <th>Teléfono</th>
                         <th>Email</th>
                         <th>Localidad</th>
-                        <th>Direccion</th>
+                        <th>Dirección</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

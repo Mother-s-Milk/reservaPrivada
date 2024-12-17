@@ -74,7 +74,7 @@ final class ProveedorDAO extends DAO implements InterfaceDAO
 
     public function list(): array
     {
-        $sql = "SELECT id, nombre, telefono, email, direccion FROM {$this->table}";
+        $sql = "SELECT id, nombre, telefono, email, localidad, direccion FROM {$this->table}";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

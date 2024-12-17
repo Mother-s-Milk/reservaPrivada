@@ -37,6 +37,7 @@
                 
                 $service = new VentaService();
                 $service->save($data);
+
     
                 $response->setMessage("La venta fue registrada correctamente.");
                 $response->send();
@@ -58,16 +59,11 @@
         public function delete (Request $request, Response $response): void {
         }
 
-        public function list(Request $request, Response $response): void {
-        }
-
-        public function buscarBebida (Request $request, Response $response): void {
-            $bebidaService = new BebidaService();
-            $bebida = $bebidaService->load($request->getId());
-
-            $response->setMessage('Bebida encontrada.');
-
-            $response->setResult($bebida->toArray());
+        public function list (Request $request, Response $response): void {
+            $service = new VentaService();
+            $data = $service->list();
+            //var_dump($data);
+            $response->setResult($data);
             $response->send();
         }
 

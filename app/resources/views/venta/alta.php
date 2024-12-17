@@ -5,11 +5,12 @@
 
     $conn = Connection::get();
 
-    $bebidaDao = new BebidaDAO($conn);
+    $bebidaDAO = new BebidaDAO($conn);
+    $bebidas = $bebidaDAO->list();
 
 ?>
 
-<h1 class="breadcrum">Ventas/Alta</h1>
+<h1 class="breadcrumbs">Ventas/Alta</h1>
 
 <section class="container section">
     <div class="gadget">
@@ -17,31 +18,6 @@
             <h1>Formulario de Ventas</h1>
         </header>
         <form id="venta-form" class="form one">
-            <section>
-                <header>
-                    <h2 class="gadget-titulo">
-                        Datos del cliente
-                    </h2>
-                </header>
-                <main>
-                    <div class="double">
-                        <div>
-                            <input id="clienteNombre" type="text" placeholder="Apellido y nombre">
-                        </div>
-                        <div>
-                            <input id="clienteCuil" type="text" placeholder="CUIT / CUIL">
-                        </div>
-                    </div>
-                    <div class="double">
-                        <div>
-                            <input id="clienteDireccion" type="text" placeholder="Dirección">
-                        </div>
-                        <div>
-                            <input id="clienteTelefono" type="text" placeholder="Teléfono">
-                        </div>
-                    </div>
-                </main>
-            </section>
             <section>
                 <header>
                     <h2 class="gadget-titulo">
@@ -56,34 +32,40 @@
                         <input id="pagoHora" type="time">
                     </div>
                     <div>
-                        <select id="pagoForma">
-                            <option value="" disabled selected>Forma de pago</option>
-                            <option value="debito">Débito</option>
-                            <option value="credito">Crédito</option>
-                            <option value="transferencia">Transferencia</option>
+                        <select id="formaPago" name="formaPago" required>
+                            <option value="" disabled selected>Seleccionar medio de pago</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Debito">Débito</option>
+                            <option value="Credito">Crédito</option>
+                            <option value="Transferencia">Transferencia</option>
                         </select>
                     </div>
                 </main>
             </section>
-            <section id="productSection">
+            <section>
                 <header>
                     <h2 class="gadget-titulo">
-                        Productos
+                        Detalles de la venta
                     </h2>
                 </header>
-                <main class="four">
+                <main class="triple">
                     <div>
-                        <input id="productoCodigo" type="number" placeholder="Codigo">
+                        <select id="bebidaNombre" name="bebidaNombre" required>
+                            <option value="" selected disabled>Seleccionar bebida</option>
+                                <?php
+                                    foreach ($bebidas as $bebida) {
+                                        echo "<option value='{$bebida['id']}' data-nombre='{$bebida['nombre']}' data-precio='{$bebida['precioUnitario']}'  data-stock='{$bebida['stock']}'>{$bebida['nombre']}
+                                        </option>";
+                                    }
+                                ?>
+                        </select>
                     </div>
                     <div>
-                        <input id="productoDescripcion" type="number" placeholder="Descripcion">
+                        <input id="bebidaCantidad" type="number" placeholder="Cantidad" required>
                     </div>
                     <div>
-                        <input id="productoCantidad" type="number" placeholder="Cantidad">
-                    </div>
-                    <div>
-                        <button id="btn-agregar-producto" type="button" class="btn-add">
-                            Agregar
+                        <button id="btn-agregar-bebida-venta" type="button" class="btn-add">
+                            Agregar bebida
                         </button>
                     </div>
                 </main>
@@ -92,25 +74,24 @@
                 <table class="tabla-lista">
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
+                            <th>Nombre</th>
+                            <th>Precio unitario</th>
                             <th>Cantidad</th>
                             <th>SubTotal</th>
-                            <th>Opciones</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="body-bebidas">
+                    <tbody id="bebidas-venta-body">
                         <tr>
-                            <td colspan="6">
+                            <td colspan="5">
                                 No hay productos cargados
                             </td>
                         </tr>
                     </tbody>
-                    <tfoot>
+                    <tfoot hidden>
                         <tr>
-                            <th colspan="4" style="text-align: right;">Total:</th>
-                            <th id="total-venta">$0.00</th>
+                            <th colspan="3" style="text-align: right;">TOTAL:</th>
+                            <th colspan="1" id="total-venta">$0.00</th>
                         </tr>
                     </tfoot>
                 </table>

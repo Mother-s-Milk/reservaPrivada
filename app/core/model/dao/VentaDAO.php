@@ -16,24 +16,27 @@
         }
 
         public function save (InterfaceDTO $object): void {
-            $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, NOW(), CURTIME())";
+            $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, NOW(), CURTIME(), :formaPago, :total)";
             $stmt = $this->conn->prepare($sql);
 
-            $stmt->execute();
-
-            $object->setId((int)$this->conn->lastInsertId());
+            $formaPago = $object->getFormaPago();
+            $total = $object->getTotal();
+            $stmt->execute(["formaPago" => $formaPago, "total" => $total]);
 
             $data = $object->toArray();
+            
+            $object->setId((int)$this->conn->lastInsertId());
             $this->saveDetalles($object->getId(), $data["detalles"]);
         }
 
         private function saveDetalles (int $ventaId, array $detalles): void {
             foreach ($detalles as $detalle) {
-                $sql = "INSERT INTO detallesVenta VALUES (DEFAULT, :ventaId, :bebidaId, :cantidad)";
+                $sql = "INSERT INTO detallesVenta VALUES (DEFAULT, :ventaId, :bebidaId, :precio, :cantidad)";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
                     ":ventaId" => $ventaId,
                     ":bebidaId" => $detalle["bebidaId"],
+                    ":precio" => $detalle["precio"],
                     ":cantidad" => $detalle["cantidad"]
                 ]);
             }
@@ -55,14 +58,20 @@
             return $ventaDTO;
         }
 
-        private function getDetallesByVentaId (int $ventaId): array {
-            $sql = "SELECT ventaId, bebidaId, cantidad FROM detallesVenta WHERE ventaId = :ventaId";
+        private function getDetallesByVentaId ($ventaId): array {
+            $sql = "SELECT vd.*, b.nombre AS bebida 
+                    FROM detallesVenta vd
+                    INNER JOIN bebidas b ON vd.bebidaId = b.id
+                    WHERE vd.ventaId = :ventaId";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['ventaId' => $ventaId]);
-    
+            $stmt->execute(["ventaId" => $ventaId]);
+            $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $detalles = [];
-            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-                $detalles[] = new DetalleVentaDTO($row);
+            foreach ($rows as $row) {
+                unset($row['id']);
+                unset($row['ventaId']);
+                unset($row['bebidaId']);
+                $detalles[] = $row;
             }
 
             return $detalles;
@@ -90,15 +99,20 @@
         }
     
         public function list(): array {
-            $sql = "SELECT id, fecha, hora FROM {$this->table}";
+            $sql = "SELECT * FROM {$this->table}";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 
             $ventas = [];
-            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            //var_dump($rows);
+            foreach ($rows as $row) {
                 $ventaDTO = new VentaDTO($row);
-                $ventaDTO->setDetalles($this->getDetallesByVentaId($row['id']));
-                $ventas[] = $ventaDTO;
+                $detalles = $this->getDetallesByVentaId($row['id']);
+                $ventaDTO->setDetalles($detalles);
+        
+                // Convierte el objeto VentaDTO a un array asociativo
+                $ventas[] = $ventaDTO->toArray(); // Aquí estamos utilizando el método toArray() para convertir a array
             }
 
             return $ventas;

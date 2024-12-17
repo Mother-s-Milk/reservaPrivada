@@ -24,6 +24,8 @@ button {
     cursor: pointer;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
     border: none;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.1s ease;
+    text-transform: uppercase;
 }
 
 /****************************************************************************/
@@ -111,7 +113,7 @@ button {
 .dashboard-table th,
 .dashboard-table td {
     padding: 9px;
-    text-align: left;
+    text-align: center;
     border: 1px solid #ddd;
 }
 
@@ -127,24 +129,32 @@ button {
     padding: 6px 2.8125rem; /*45px*/
 }
 
+.nav-principal > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
 .logo {
     font-family: 'Island Moments';
     color: #fff;
     font-size: 45px;
     font-weight: 500;
+    margin-right: 45px;
 }
 
-.nav-principal > ul > li {
+.nav-principal > div > ul > li {
     display: inline-block;
     position: relative;
     margin-right: 15px;
 }
 
-.nav-principal > ul > li:last-child {
+.nav-principal > div > ul > li:last-child {
     margin-right: 0;
 }
 
-.nav-principal > ul > li > a {
+.nav-principal > div > ul > li > a,
+.dropdown-content > li > a {
     display: block;
     color: #fff;
     padding: 12px;
@@ -155,8 +165,39 @@ button {
     transition: background-color 0.3s ease;
 }
 
-.nav-principal > ul > li > a:hover {
+.nav-principal > div > ul > li > a:hover,
+.nav-principal > div > ul > li > a.active,
+.dropdown-content > li > a:hover {
     background-color: #334155;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #223044;
+    position: absolute;
+    width: 180px;
+    top: 48px;
+    border-radius: 15px;
+}
+
+.logout {
+    width: auto;
+    right: 30px;
+    margin-top: 6px;
+    background-color: #000;
+}
+
+.logout > li a {
+    color: #000;
+}
+
+.logout > li a:hover {
+    color: #fff;
+}
+
+.arrow-link {
+    display: inline-block;
+    margin-left: 12px;
 }
 
 /******************/
@@ -165,15 +206,26 @@ button {
 .btn-user {
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: #aaa;
     font-size: 30px;
+    display: block;
+    position: relative;
 }
 
-/***********/
-/*Breadcrum*/
-/***********/
-.breadcrum {
+.btn-user:hover {
+    color: #ddd;
+}
+
+.btn-user:active {
+    transform: scale(1.03);
+}
+
+/*************/
+/*Breadcrumbs*/
+/*************/
+.breadcrumbs {
     font-size: 15px;
+    font-weight: 700;
     margin-left: 2.8125rem; /*45px*/
     margin-top: 15px;
 }
@@ -204,6 +256,10 @@ button {
 
 .btn-add:hover {
     background-color: #0056b3;
+}
+
+.btn-add:active {
+    transform: scale(1.03);
 }
 
 /*********************/
@@ -272,7 +328,7 @@ button {
     border: 1px solid #ddd;
     padding: 9px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .tabla-lista th {
@@ -294,7 +350,8 @@ button {
 /*Botones*/
 /*********/
 .btn-editar,
-.btn-eliminar {
+.btn-eliminar,
+.btn-check {
     font-size: 15px;
     border-radius: 7.5px;
     padding: 6px;
@@ -305,8 +362,32 @@ button {
     background-color: orange;
 }
 
+.btn-editar:hover {
+    background-color: #cc8200;
+}
+
 .btn-eliminar {
     background-color: red;
+}
+
+.btn-eliminar:hover {
+    background-color: #CC0000;
+}
+
+.btn-eliminar:active {
+    transform: scale(1.01);
+}
+
+.btn-check {
+    background-color: #000;
+}
+
+.btn-check:hover {
+    background-color: #333;
+}
+
+.btn-check:active {
+    transform: scale(1.01);
 }
 
 /*************/
@@ -319,6 +400,18 @@ button {
     margin-bottom: 30px;
 }
 
+.error {
+    display: inline-block;
+    color: red;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.error:empty {
+    display: none;
+}
+
 .form label,
 .form input,
 .form textarea,
@@ -329,18 +422,36 @@ button {
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
     border-radius: 7.5px;
     font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form input,
+.form textarea,
+.form select {
+    border: 1px solid #ccc;
+}
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 9px rgba(52, 152, 219, 0.5);
+    background-color: #f9f9f9;
 }
 
 .form input,
 .form select {
     height: 39px;
-    border: 1px solid #ddd;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #95a5a6;
 }
 
 .form textarea {
     height: 90px;
     resize: none;
-    border: 1px solid #ddd;
 }
 
 .btn-form {
@@ -351,6 +462,10 @@ button {
     background-color: #1e7e34;
 }
 
+.btn-form:active {
+    transform: scale(1.01);
+}
+
 .btn-reset {
     background-color: #f44336;
 }
@@ -359,7 +474,13 @@ button {
     background-color: #e53935;
 }
 
-.form button {
+.btn-reset:active {
+    transform: scale(1.01);
+}
+
+.form > div > button,
+.form > button,
+#btn-agregar-bebida-venta {
     padding: 9px 15px;
     display: block;
     margin: auto;
@@ -367,7 +488,7 @@ button {
     border-radius: 6px;
     color: #fff;
     font-weight: 500;
-    width: 100%;
+    width: auto;
 }
 
 .form-edicion {

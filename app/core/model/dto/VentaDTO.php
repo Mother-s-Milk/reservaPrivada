@@ -1,76 +1,89 @@
 <?php
 
-namespace app\core\model\dto;
+    namespace app\core\model\dto;
 
-use app\core\model\base\InterfaceDTO;
+    use app\core\model\base\InterfaceDTO;
 
-final class VentaDTO implements InterfaceDTO {
+    final class VentaDTO implements InterfaceDTO {
 
-    private $id, $fecha, $hora, $detalles;
+        private $id, $fecha, $hora, $formaPago, $detalles, $total;
 
-    public function __construct($data = []) {
-        $this->setId($data["id"] ?? 0);
-        $this->setFecha($data["fecha"] ?? "");
-        $this->setHora($data["hora"] ?? "");
-        $this->setDetalles($data["detalles"] ?? []);
-    }
+        public function __construct ($data = []) {
+            $this->setId($data["id"] ?? 0);
+            $this->setFecha($data["fecha"] ?? "");
+            $this->setHora($data["hora"] ?? "");
+            $this->setFormaPago($data["formaPago"] ?? "");
+            $this->setDetalles($data["detalles"] ?? []);
+            $this->setTotal($data["total"] ?? 0);
+        }
 
-    /*********/
-    /*Getters*/
-    /*********/
-    public function getId (): int {
-        return $this->id;
-    }
+        /*********/
+        /*Getters*/
+        /*********/
+        public function getId (): int {
+            return $this->id;
+        }
 
-    public function getFecha (): string {
-        return $this->fecha;
-    }
+        public function getFecha (): string {
+            return $this->fecha;
+        }
 
-    public function getHora (): string {
-        return $this->hora;
-    }
+        public function getHora (): string {
+            return $this->hora;
+        }
 
-    public function getDetalles (): array {
-        return $this->detalles;
-    }
+        public function getFormaPago (): string {
+            return $this->formaPago;
+        }
 
-    /*********/
-    /*Setters*/
-    /*********/
-    public function setId ($id): void {
-        $this->id = (is_integer($id) && $id > 0) ? $id : 0;
-    }
+        public function getDetalles (): array {
+            return $this->detalles;
+        }
 
-    public function setFecha ($fecha): void {
-        $this->fecha = (is_string($fecha) && strtotime($fecha)) ? $fecha : "";
-    }
+        public function getTotal (): float {
+            return $this->total;
+        }
 
-    public function setHora ($hora): void {
-        $this->hora = (is_string($hora) && preg_match("/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/", $hora)) ? $hora : "";
-    }
+        /*********/
+        /*Setters*/
+        /*********/
+        public function setId ($id): void {
+            $this->id = (is_integer($id) && $id > 0) ? $id : 0;
+        }
 
-    public function setDetalles ($detalles): void {
-        $this->detalles = is_array($detalles) ? $detalles : [];
-    }
+        public function setFecha ($fecha): void {
+            $this->fecha = (is_string($fecha) && strtotime($fecha)) ? $fecha : "";
+        }
 
-    /*********/
-    /*Metodos*/
-    /*********/
-    public function toArray(): array {
-        /*$detallesArray = [];
-        foreach ($this->getDetalles() as $detalle) {
-            // Asegúrate de que el detalle tenga el método toArray() implementado
-            $detallesArray[] = $detalle->toArray();  
-        }*/
+        public function setHora ($hora): void {
+            $this->hora = (is_string($hora)) ? $hora : "";
+        }
 
-        return [
-            "id" => $this->getId(),
-            "fecha" => $this->getFecha(),
-            "hora" => $this->getHora(),
-            "detalles" => $this->getDetalles()
-            //"detalles" => $detallesArray
+        public function setFormaPago ($formaPago): void {
+            $this->formaPago = (is_string($formaPago) && strlen(trim($formaPago)) <= 45) ? trim($formaPago) : "";
+        }
+
+        public function setDetalles ($detalles): void {
+            $this->detalles = is_array($detalles) ? $detalles : [];
+        }
+
+        public function setTotal ($total): void {
+            $this->total = (is_numeric($total) && $total > 0) ? floatval($total) : 0;
+        }
+
+        /*********/
+        /*Metodos*/
+        /*********/
+        public function toArray(): array {
+            return [
+                "id" => $this->getId(),
+                "fecha" => $this->getFecha(),
+                "hora" => $this->getHora(),
+                "formaPago" => $this->getFormaPago(),
+                "detalles" => $this->getDetalles(),
+                "total" => $this->getTotal()
         ];
+        }
     }
-}
 
 ?>

@@ -10,7 +10,7 @@
 
 ?>
 
-<h1 class="breadcrum">Proveedores/Editar</h1>
+<h1 class="breadcrumbs">Proveedores/Editar</h1>
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
@@ -31,10 +31,10 @@
             </div>
             <div class="form-edicion">
                 <label for="proveedorLocalidad">Localidad:</label>
-                <input type="text" id="proveedorLocalidad" name="proveedorLocalidad" value="" required>
+                <input type="text" id="proveedorLocalidad" name="proveedorLocalidad" value="<?php echo $proveedor->getLocalidad()?>" required>
             </div>
             <div class="form-edicion">
-                <label for="proveedorDireccion">Direccion:</label>
+                <label for="proveedorDireccion">Dirección:</label>
                 <input type="text" id="proveedorDireccion" name="proveedorDireccion" value="<?php echo $proveedor->getDireccion()?>" required>
             </div>
             <button type="button" id="btn-proveedor-actualizar" class="btn-form" data-id="<?php echo $proveedor->getId(); ?>">Actualizar Proveedor</button>

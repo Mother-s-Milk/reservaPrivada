@@ -1,41 +1,44 @@
 <?php
-        use app\core\model\dao\BebidaDAO;
-        use app\libs\Connection\Connection;
-        
-        use app\core\model\dao\CategoriaDAO;
-        use app\core\model\dao\ProveedorDAO;
 
-        $id = $_GET['id'];
-        $conn = Connection::get();
-        
-        $dao= new BebidaDAO($conn);
-        $bebida = $dao->load($id);
+    use app\libs\Connection\Connection;
+    use app\core\model\dao\BebidaDAO;
+    use app\core\model\dao\CategoriaDAO;
+    use app\core\model\dao\ProveedorDAO;
 
-        $categoriaDao = new CategoriaDAO($conn);
-        $categorias = $categoriaDao->list();
+    $bebidaID = $_GET['id'];
+    $conn = Connection::get();
 
-        $proveedorDao = new ProveedorDAO($conn);
-        $proveedores = $proveedorDao->list();
+    $bebidaDAO = new BebidaDAO($conn);
+    $bebida = $bebidaDAO->load($bebidaID);
+
+    $categoriaDAO = new CategoriaDAO($conn);
+    $categorias = $categoriaDAO->list();
+
+    $proveedorDAO = new ProveedorDAO($conn);
+    $proveedores = $proveedorDAO->list();
 
 ?>
 
-<h1 class="breadcrum">Bebidas/Editar</h1>
+<h1 class="breadcrumbs">Bebidas/Editar</h1>
+
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
             <h1>Formulario de Bebidas</h1>
         </header>
         <form id="bebida-form" class="form">
+            <span id="error-nombre" class="error"></span>
             <div class="form-edicion">
-                <label for="">Nombre:</label>
+                <label for="bebidaNombre">Nombre:</label>
                 <input type="text" id="bebidaNombre" name="bebidaNombre" value="<?php echo $bebida->getNombre()?>" required>
             </div>
             <div class="form-edicion">
-                <label for="">Descripcion:</label>
-                <textarea id="bebidaDescripcion" name="bebidaDescripcion" rows="4"><?php echo $bebida->getDescripcion()?></textarea>
+                <label for="bebidaDescripcion">Descripción:</label>
+                <textarea id="bebidaDescripcion" name="bebidaDescripcion"><?php echo $bebida->getDescripcion()?></textarea>
             </div>
+            <span id="error-categoriaId" class="error"></span>
             <div class="form-edicion">
-                <label for="">Categoria:</label>
+                <label for="bebidaCategoriaId">Categoría:</label>
                 <select id="bebidaCategoriaId" name="bebidaCategoriaId" required>
                     <option value="" disabled>Seleccionar Categoría:</option>
                     <?php
@@ -48,22 +51,26 @@
                     ?>
                 </select>
             </div>
+            <span id="error-precioUnitario" class="error"></span>
             <div class="form-edicion">
-                <label for="">Precio unitario:</label>
-                <input type="number" id="bebidaPrecioUnitario" name="bebidaPrecioUnitario" step="0.01" value="<?php echo $bebida->getPrecioUnitario()?>" required>
+                <label for="bebidaPrecioUnitario">Precio unitario:</label>
+                <input type="number" id="bebidaPrecioUnitario" name="bebidaPrecioUnitario" step="0.01" value="<?php echo $bebida->getPrecioUnitario()?>" required min="0">
             </div>
+            <span id="error-stock" class="error"></span>
             <div class="form-edicion">
-                <label for="">Stock:</label>
-                <input type="number" id="bebidaStock" name="bebidaStock" min="0" value="<?php echo $bebida->getStock()?>" required>
+                <label for="bebidaStock">Stock:</label>
+                <input type="number" id="bebidaStock" name="bebidaStock" value="<?php echo $bebida->getStock()?>" required min="0">
             </div>
+            <span id="error-marca" class="error"></span>
             <div class="form-edicion">
-                <label for="">Marca:</label>
+                <label for="bebidaMarca">Marca:</label>
                 <input type="text" id="bebidaMarca" name="bebidaMarca" value="<?php echo $bebida->getMarca()?>" required>
             </div>
+            <span id="error-proveedorId" class="error"></span>
             <div class="form-edicion">
-                <label for="">Proveedor:</label>
+                <label for="bebidaProveedorId">Proveedor:</label>
                 <select id="bebidaProveedorId" name="bebidaProveedorId" required>
-                    <option value="<?php echo $bebida->getProveedorId()?>" disabled selected>Seleccionar Proveedor</option>
+                    <option value="" disabled>Seleccionar Proveedor</option>
                     <?php
 
                         foreach ($proveedores as $proveedor) {

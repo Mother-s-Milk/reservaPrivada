@@ -41,7 +41,7 @@
         }
 
         public function setDescripcion ($descripcion): void {
-            $this->descripcion = (is_string($descripcion) && strlen(trim($descripcion)) <= 100) ? trim($descripcion) : "";
+            $this->descripcion = (is_string($descripcion) && strlen(trim($descripcion)) <= 150) ? trim($descripcion) : "";
         }
 
         /*********/

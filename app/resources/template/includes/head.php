@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="app/css/estilo.css?v=<?php echo time();?>" type="text/css">
 
-<!-- <script defer src="app/js/script.js?v=<?php echo time();?>" type="text/javascript"></script> -->
+<script defer src="app/js/includes/script.js?v=<?php echo time();?>" type="text/javascript"></script>
 
 <!-- Bootstrap -->
 <!-- <script defer src="app/assets/libs/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>

@@ -1,20 +1,20 @@
 <?php
 
+    use app\libs\connection\Connection;
     use app\core\model\dao\CategoriaDAO;
     use app\core\model\dao\ProveedorDAO;
-    use app\libs\connection\Connection;
 
     $conn = Connection::get();
 
-    $categoriaDao = new CategoriaDAO($conn);
-    $categorias = $categoriaDao->list();
+    $categoriaDAO = new CategoriaDAO($conn);
+    $categorias = $categoriaDAO->list();
 
-    $proveedorDao = new ProveedorDAO($conn);
-    $proveedores = $proveedorDao->list();
+    $proveedorDAO = new ProveedorDAO($conn);
+    $proveedores = $proveedorDAO->list();
 
 ?>
 
-<h1 class="breadcrum">Bebidas/Alta</h1>
+<h1 class="breadcrumbs">Bebidas/Alta</h1>
 
 <section class="container section">
     <div class="gadget">
@@ -23,39 +23,45 @@
         </header>
         <form id="bebida-form" class="form">
             <div>
-                <input type="text" id="bebidaNombre" name="bebidaNombre" placeholder="Nombre del Producto" required>
+                <span id="error-nombre" class="error"></span>
+                <input type="text" id="bebidaNombre" name="bebidaNombre" placeholder="Nombre de la bebida" required>
             </div>
             <div>
-                <textarea id="bebidaDescripcion" name="bebidaDescripcion" rows="4" placeholder="Descripción"></textarea>
+                <textarea id="bebidaDescripcion" name="bebidaDescripcion" placeholder="Descripción"></textarea>
             </div>
             <div>
+                <span id="error-categoriaId" class="error"></span>
                 <select id="bebidaCategoriaId" name="bebidaCategoriaId" required>
-                    <option value="" disabled selected>Seleccionar Categoría</option>
+                    <option value="" disabled selected>Seleccionar categoría</option>
                     <?php
 
                         foreach ($categorias as $categoria) {
-                            echo '<option value="' . $categoria['id'] . '">' . $categoria['nombre'] . '</option>' . "\n";
+                            echo '<option value="' . htmlspecialchars($categoria['id']) . '">' . htmlspecialchars($categoria['nombre']) . '</option>' . "\n";
                         }
 
                     ?>
                 </select>
             </div>
             <div>
-                <input type="number" id="bebidaPrecioUnitario" name="bebidaPrecioUnitario" step="0.01" placeholder="Precio Unitario" required>
+                <span id="error-precioUnitario" class="error"></span>
+                <input type="number" id="bebidaPrecioUnitario" name="bebidaPrecioUnitario" step="0.01" placeholder="Precio unitario (sin puntos)" required min="0">
             </div>
             <div>
-                <input type="number" id="bebidaStock" name="bebidaStock" min="0" placeholder="Cantidad en Stock" required>
+                <span id="error-stock" class="error"></span>
+                <input type="number" id="bebidaStock" name="bebidaStock" placeholder="Cantidad en Stock" required min="0">
             </div>
             <div>
-                <input type="text" id="bebidaMarca" name="bebidaMarca" placeholder="Marca del Producto" required>
+                <span id="error-marca" class="error"></span>
+                <input type="text" id="bebidaMarca" name="bebidaMarca" placeholder="Marca de la bebida" required>
             </div>
             <div>
+                <span id="error-proveedorId" class="error"></span>
                 <select id="bebidaProveedorId" name="bebidaProveedorId" required>
                     <option value="" disabled selected>Seleccionar Proveedor</option>
                     <?php
 
                         foreach ($proveedores as $proveedor) {
-                            echo '<option value="' . $proveedor['id'] . '">' . $proveedor['nombre'] . '</option>' . "\n";
+                            echo '<option value="' . htmlspecialchars($proveedor['id']) . '">' . htmlspecialchars($proveedor['nombre']) . '</option>' . "\n";
                         }
 
                     ?>

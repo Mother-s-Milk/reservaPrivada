@@ -1,4 +1,5 @@
 let bebidaController = {
+    //En el array "bebidas" se van a almacenar las bebidas cuando se haga la solicitud al back para desplegarlas en el index relacionado a las mismas.
     bebidas: [],
     data: {
         id: 0,
@@ -22,14 +23,73 @@ let bebidaController = {
         bebidaController.data.marca = bebidaForm.bebidaMarca.value;
         bebidaController.data.proveedorId = parseInt(bebidaForm.bebidaProveedorId.value);
 
+        //Validar datos
+        const validacionErrores = bebidaController.validacion(bebidaController.data);
+
+        if (Object.keys(validacionErrores).length > 0) {
+            bebidaController.mostrarErrores(validacionErrores);
+
+            return;
+        }
+
         bebidaService.save(bebidaController.data)
         .then(response => {
             alert('Bebida almacenada exitosamente');
+            bebidaController.limpiarCamposErrores();
             bebidaController.resetForm();
         })
         .catch(error => {
             alert('Error al almacenar bebida');
         })
+    },
+    //Función para validar datos
+    validacion: (data) => {
+        const errores = {};
+
+        if (!data.nombre.trim()) {
+            errores.nombre = "El nombre es obligatorio.";
+        }
+
+        if (isNaN(data.categoriaId) || data.categoriaId <= 0) {
+            errores.categoriaId = "Debe seleccionar una categoria.";
+        }
+
+        if (isNaN(data.precioUnitario) || data.precioUnitario <= 0) {
+            errores.precioUnitario = "El precio debe ser mayor que 0.";
+        }
+
+        if (isNaN(data.stock) || data.stock < 0) {
+            errores.stock = "El stock no puede ser negativo ni estar vacío.";
+        }
+
+        if (!data.marca.trim()) {
+            errores.marca = "La marca es obligatoria.";
+        }
+
+        if (isNaN(data.proveedorId) || data.proveedorId <= 0) {
+            errores.proveedorId = "Debe seleccionar un proveedor.";
+        }
+
+        return errores;
+    },
+    //Mostrar errores en el formulario
+    mostrarErrores: (errores) => {
+        document.getElementById("error-nombre").textContent = errores.nombre || "";
+        document.getElementById("error-categoriaId").textContent = errores.categoriaId || "";
+        document.getElementById("error-precioUnitario").textContent = errores.precioUnitario || "";
+        document.getElementById("error-stock").textContent = errores.stock || "";
+        document.getElementById("error-marca").textContent = errores.marca || "";
+        document.getElementById("error-proveedorId").textContent = errores.proveedorId || "";
+    },
+    //Limpiar mensajes de error
+    limpiarCamposErrores: () => {
+        const camposError = document.querySelectorAll(".error");
+        camposError.forEach(campo => {
+            campo.textContent = "";
+        });
+    },
+    resetForm: () => {
+        document.forms["bebida-form"].reset();
     },
     update: (id) => {
         let bebidaForm = document.forms["bebida-form"];
@@ -43,13 +103,22 @@ let bebidaController = {
         bebidaController.data.marca = bebidaForm.bebidaMarca.value;
         bebidaController.data.proveedorId = parseInt(bebidaForm.bebidaProveedorId.value);
 
+        //Validar datos
+        const validacionErrores = bebidaController.validacion(bebidaController.data);
+
+        if (Object.keys(validacionErrores).length > 0) {
+            bebidaController.mostrarErrores(validacionErrores);
+
+            return;
+        }
+
         bebidaService.update(bebidaController.data)
         .then(response => {
             alert("Bebida actualizado exitosamente.");
             window.location.href = "bebida";
         })
         .catch(error => {
-            console.error("Error al actualizar el proveedor:", error);
+            console.error("Error al actualizar el proveedor");
             alert("Ocurrió un error al actualizar el proveedor.");
         });
     },
@@ -61,39 +130,40 @@ let bebidaController = {
                 bebidaController.list();
             })
             .catch(error => {
+                console.log(error.getMessage());
                 alert("Ocurrió un error al eliminar la bebida.");
             });
         }
     },
-    //Función que obtiene los productos y los despliega en el DOM
+    //Función que obtiene las bebidas y las despliega en el DOM
     list: () => {
         bebidaService.list()
         .then(data => {
             bebidaController.bebidas = data.result;
-            bebidaController.render();
+            bebidaController.mostrarBebidas();
         })
         .catch(error => {
-            console.error("Error al cargar las bebidas (controller)", error);
+            console.error("Error al cargar las bebidas (controller front)");
         });
     },
-    //Función que recorre las bebidas y las agrega al DOM
-    render: () => {
+    //Función que recorre el array "bebidas" y las agrega al DOM
+    mostrarBebidas: () => {
         let bebidasBody = document.getElementById('bebidas-body');
 
         if (bebidaController.bebidas.length === 0) {
-            let fila = `
+            let nuevaFila = `
                 <tr>
                     <td colspan="9">No hay bebidas registradas</td>
                 </tr>
             `;
-            bebidasBody.innerHTML = fila;
+            bebidasBody.innerHTML = nuevaFila;
         }
         else {
             bebidasBody.innerHTML = '';
-            let fila;
+            let nuevaFila;
             let contador = 1;
             bebidaController.bebidas.forEach(bebida => {
-                fila = `
+                nuevaFila = `
                     <tr>
                         <td>${contador}</td>
                         <td>${bebida.nombre}</td>
@@ -110,16 +180,14 @@ let bebidaController = {
                     </tr>
                 `;
                 contador++;
-                bebidasBody.insertAdjacentHTML('beforeend', fila);
+                bebidasBody.insertAdjacentHTML('beforeend', nuevaFila);
             });
         }
-    },
-    resetForm: () => {
-        document.forms["bebida-form"].reset();
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    //Despliega la lista de bebidas solamente si se encuentra en el index relacionado a las mismas.
     const path = window.location.pathname;
     if (path === "/reservaPrivada/public/bebida") {
         bebidaController.list();

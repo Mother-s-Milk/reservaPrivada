@@ -11,13 +11,56 @@ let categoriaController = {
         categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
         categoriaController.data.descripcion = categoriaForm.categoriaDescripcion.value;
 
+        //Validar datos
+        const validacionErrores = categoriaController.validacion(categoriaController.data);
+
+        if (Object.keys(validacionErrores).length > 0) {
+            categoriaController.mostrarErrores(validacionErrores);
+
+            return;
+        }
+
         categoriaService.save(categoriaController.data)
+    },
+    //Función para validar datos
+    validacion: (data) => {
+        const errores = {};
+
+        if (!data.nombre.trim()) {
+            errores.nombre = "El nombre es obligatorio.";
+        }
+
+        return errores;
+    },
+    //Mostrar errores en el formulario
+    mostrarErrores: (errores) => {
+        document.getElementById("error-nombre").textContent = errores.nombre || "";
+    },
+    //Limpiar mensajes de error
+    limpiarCamposErrores: () => {
+        const camposError = document.querySelectorAll(".error");
+        camposError.forEach(campo => {
+            campo.textContent = "";
+        });
+    },
+    resetForm: () => {
+        document.forms["categoria-form"].reset();
     },
     update: (id) => {
         let categoriaForm = document.forms["categoria-form"];
 
         categoriaController.data.id = parseInt(id);
         categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
+        categoriaController.data.descripcion = categoriaForm.categoriaDescripcion.value;
+
+        //Validar datos
+        const validacionErrores = categoriaController.validacion(categoriaController.data);
+
+        if (Object.keys(validacionErrores).length > 0) {
+            categoriaController.mostrarErrores(validacionErrores);
+
+            return;
+        }
 
         categoriaService.update(categoriaController.data)
         .then(response => {

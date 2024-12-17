@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Bebidas</h1>
+<h1 class="breadcrumbs">Bebidas</h1>
 
 <section class="container section">
     <div class="header-actions gadget">
@@ -8,12 +8,6 @@
     <div class="section-filter">
         <aside class="gadget">
             <h2>Filtros</h2>
-            <ul>
-                <li><button type="button" class="filter-button active" data-filter="todas">Todas</button></li>
-                <li><button type="button" class="filter-button" data-filter="1">Vinos</button></li>
-                <li><button type="button" class="filter-button" data-filter="2">Cervezas</button></li>
-                <li><button type="button" class="filter-button" data-filter="3">Sin alcohol</button></li>
-            </ul>
         </aside>
         <main class="gadget">
             <table class="tabla-lista">
@@ -21,8 +15,8 @@
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Categoria</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
                         <th>Precio</th>
                         <th>Stock</th>
                         <th>Marca</th>

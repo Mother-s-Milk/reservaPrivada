@@ -6,12 +6,13 @@
 
     final class DetalleVentaDTO implements InterfaceDTO {
 
-        private $id, $ventaId, $bebidaId, $cantidad;
+        private $id, $ventaId, $bebidaId, $precio, $cantidad;
 
         public function __construct ($data = []) {
             $this->setId($data["id"] ?? 0);
             $this->setVentaId($data["ventaId"] ?? 0);
             $this->setBebidaId($data["bebidaId"] ?? 0);
+            $this->setPrecio($data["precio"] ?? 0);
             $this->setCantidad($data["cantidad"] ?? 0);
         }
 
@@ -28,6 +29,10 @@
 
         public function getBebidaId (): int {
             return $this->bebidaId;
+        }
+
+        public function getPrecio (): float {
+            return $this->precio;
         }
 
         public function getCantidad (): int {
@@ -49,6 +54,10 @@
             $this->bebidaId = (is_integer($bebidaId) && $bebidaId > 0) ? $bebidaId : 0;
         }
 
+        public function setPrecio ($precio): void {
+            $this->precio = (is_numeric($precio) && $precio > 0) ? floatval($precio) : 0;
+        }
+
         public function setCantidad ($cantidad): void {
             $this->cantidad = (is_integer($cantidad) && $cantidad > 0) ? $cantidad : 0;
         }
@@ -61,6 +70,7 @@
                 "id" => $this->getId(),
                 "ventaId" => $this->getVentaId(),
                 "bebidaId" => $this->getBebidaId(),
+                "precio" => $this->getPrecio(),
                 "cantidad" => $this->getCantidad()
             ];
         }

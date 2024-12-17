@@ -14,10 +14,14 @@
             parent::__construct ($conn, 'detallesVenta');
         }
 
-        public function save(array $data): void {
-            $sql = "INSERT INTO detalle_venta (idVenta, idProducto, cantidad) VALUES (:idVenta, :idProducto, :cantidad)";
+        public function save (InterfaceDTO $object): void {
+            $sql = "INSERT INTO {$this->table} VALUES (DEFAULT, :ventaId, :bebidaId, :precio, :cantidad)";
             $stmt = $this->conn->prepare($sql);
+            $data = $object->toArray();
+            unset($data["id"]);
             $stmt->execute($data);
+
+            $object->setId((int)$this->conn->lastInsertId());
         }
 
         public function load ($id): InterfaceDTO {

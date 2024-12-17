@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Proveedores/Alta</h1>
+<h1 class="breadcrumbs">Proveedores/Alta</h1>
 
 <section class="container section">
     <div class="gadget">
