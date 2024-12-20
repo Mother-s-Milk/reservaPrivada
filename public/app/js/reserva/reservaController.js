@@ -2,6 +2,8 @@ let reservaController = {
   reservas: [],
   elementos:0,
   pagActual: 1,
+  tamPag:5,
+  
   save: () => {
     if (!confirm("¿Estás seguro de guardar la reserva?")) {
       return;
@@ -124,7 +126,7 @@ let reservaController = {
 
 render: () => {
     let reservasBody = document.getElementById("reservas-body");
-    let paginas=Math.ceil(reservaController.elementos/5)
+    let paginas=Math.ceil(reservaController.elementos/reservaController.tamPag)
     if (reservaController.reservas.length === 0) {
         let fila = `
             <tr>
