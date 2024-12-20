@@ -87,6 +87,21 @@
             }
         }
 
+        public function changeState (Request $request, Response $response): void {
+            try {
+                $data = $request->getData();
+
+                $service = new ReservaService();
+                $service->changeState($data);
+
+                $response->setMessage("La reserva se actualizo correctamente.");
+                $response->send();
+            }
+            catch (\Exception $ex) {
+                $response->setMessage($ex->getMessage());
+                $response->send();
+            }
+        }
         public function delete (Request $request, Response $response): void {
             $service = new ReservaService();
             $service->delete($request->getId());
@@ -101,7 +116,23 @@
             $response->setResult($data);
             $response->send();
         }
+
+        public function pages(Request $request, Response $response): void {
+            $service = new ReservaService();
+            $data = $service->pages();
         
+            $response->setResult($data);
+            $response->send();
+        }
+
+        public function listPage(Request $request, Response $response): void {
+        $data = $request->getData();
+        $service = new ReservaService();
+        $result = $service->listPage($data);
+
+        $response->setResult($result);
+        $response->send();
+        }
     }
 
 ?>
