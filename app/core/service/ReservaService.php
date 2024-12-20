@@ -65,7 +65,11 @@
             return $dao->listPage($data);
         }
 
-
+        public function filter($data ): array {
+            $conn = Connection::get();
+            $dao = new ReservaDAO($conn);
+            return $dao->filter($data);
+        }
 
     }
 

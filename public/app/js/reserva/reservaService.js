@@ -113,6 +113,29 @@ let reservaService = {
         });
     },
 
+    filter: (data) => {
+        return fetch(`${API_BASE_URL}filter`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al obtener las reservas");
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error("Error en la solicitud:", error);
+        });
+    },
+
     changeState: (data) => {
         return fetch (`${API_BASE_URL}changeState`, {
             method: "POST",

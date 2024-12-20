@@ -7,21 +7,20 @@ use app\core\model\base\InterfaceValidation;
 use app\core\model\dto\ReservaDTO;
 use app\core\model\base\VALIDATION;
 
-final class ReservaV extends VALIDATION implements InterfaceValidation {
+final class ReservaV extends VALIDATION implements InterfaceValidation
+{
     public function __construct($conn)
     {
         parent::__construct($conn, "reservas");
     }
     //Este método se encarga de validar el Update y el Save
-    public function validationUS (InterfaceDTO $object): void{
+    public function validationUS(InterfaceDTO $object): void
+    {
         $this->validate($object);
-
     }
 
     //Este método se encarga de validar el Delete
-    public function validationD ($id): void{
-        
-    }
+    public function validationD($id): void {}
 
     private function validate(ReservaDTO $object): void
     {
@@ -47,6 +46,8 @@ final class ReservaV extends VALIDATION implements InterfaceValidation {
         if (trim($object->getFecha()) === "") {
             throw new \Exception("El campo 'fecha' no puede estar vacío o contener caracteres no válidos.");
         }
+        if (trim($object->getPersonas() == 0)) {
+            throw new \Exception("El campo 'personas' no puede estar vacío o contener caracteres no válidos.");
+        }
     }
-
 }

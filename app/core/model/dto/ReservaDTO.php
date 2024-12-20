@@ -17,9 +17,10 @@
             $this->setTelefono($data["telefono"] ?? "");
             $this->setFecha($data["fecha"] ?? "");
             $this->setHora($data["hora"] ?? "");
+            $this->setPersonas($data["personas"] ?? 0);
             $this->setDetalles($data["detalles"] ?? "");
             $this->setEstado($data["estado"] ?? "");
-            // $this->setPersonas($data["personas"] ?? 0);
+            
         }
 
         /*********/
@@ -111,9 +112,10 @@
                 "telefono" => $this->getTelefono(),
                 "fecha" => $this->getFecha(),
                 "hora" => $this->getHora(),
+                "personas" => $this->getPersonas(),
                 "detalles" => $this->getDetalles(),
                 "estado" => $this->getEstado(),
-                // "personas" => $this->getPersonas(),
+                
             ];
         }
 

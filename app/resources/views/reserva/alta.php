@@ -15,9 +15,9 @@
             <div>
                 <input type="text" id="reservaTelefono" name="reservaTelefono" placeholder="Telefono" required>
             </div>
-            <!-- <div>
+             <div>
                 <input type="number" id="reservaPersonas" name="reservaPersonas" placeholder="Personas" required>
-            </div> -->
+            </div> 
             <div>
                 <input type="date" id="reservaFecha" name="reservaFecha" required>
             </div>

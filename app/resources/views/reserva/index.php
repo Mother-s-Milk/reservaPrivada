@@ -8,6 +8,27 @@
     <div class="section-filter">
         <aside class="gadget">
             <h2>Filtros</h2>
+            <form id="filtros-form">
+                <div>
+                    <label for="filtro-fecha-inicio">Fecha Inicio:</label>
+                    <input type="date" id="filtro-fecha-inicio" name="fechaInicio">
+                </div>
+                <div>
+                    <label for="filtro-fecha-fin">Fecha Fin:</label>
+                    <input type="date" id="filtro-fecha-fin" name="fechaFin">
+                </div>
+                <div>
+                    <label for="filtro-estado">Estado:</label>
+                    <select id="filtro-estado" name="estado">
+                        <option value="">Todos</option>
+                        <option value="Confirmada">Confirmado</option>
+                        <option value="Cancelada">Cancelado</option>
+                        <option value="Pendiente">Pendiente</option>
+                    </select>
+                </div>
+                <button type="button" id="btn-filtrar">Aplicar Filtros</button>
+                <button type="button" id="btn-borrar-filtrar">Borrar Filtros</button>
+            </form>
         </aside>
         <main class="gadget">
             <table class="tabla-lista">
