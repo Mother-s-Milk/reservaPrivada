@@ -32,6 +32,19 @@ final class ReservaDAO extends DAO implements InterfaceDAO
         $object->setId((int)$this->conn->lastInsertId());
     }
 
+    public function changeState (InterfaceDTO $object):void{
+
+        $sql = "UPDATE {$this->table} SET estado = :estado WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->execute([
+            ':estado' => $object->getEstado(),
+            ':id' => $object->getId()
+        ]);
+
+    }
+
+
     public function load($id): InterfaceDTO
     {
         $sql = "SELECT id, apellido, nombres, telefono, fecha, hora, detalles, estado FROM {$this->table} WHERE id = :id";
@@ -50,10 +63,11 @@ final class ReservaDAO extends DAO implements InterfaceDAO
         $validation = new ReservaV($this->conn);
         $validation->validationUS($object);
 
-
-        $sql = "UPDATE {$this->table} SET apellido = :apellido, nombres = :nombres, telefono = :telefono, fecha = :fecha, hora = :hora, detalles = :detalles, estado = :estado WHERE id = :id";
+        $sql = "UPDATE {$this->table} SET apellido = :apellido, nombres = :nombres, telefono = :telefono, fecha = :fecha, hora = :hora, detalles = :detalles, estado = :estado , personas = :personas WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($object->toArray());
+
+
     }
 
     public function delete($id): void
@@ -69,9 +83,32 @@ final class ReservaDAO extends DAO implements InterfaceDAO
 
     public function list(): array
     {
-        $sql = "SELECT apellido, nombres, telefono, fecha, hora, detalles, estado FROM {$this->table}";
+        $sql = "SELECT id,apellido, nombres, telefono, fecha, hora, detalles, estado FROM {$this->table}";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    
+public function listPage($data): array
+{
+    $offset = ($data["page"] - 1) * $data['pageSize'];
+    $sql = "SELECT id, apellido, nombres, telefono, fecha, hora, detalles, estado 
+            FROM {$this->table} 
+            LIMIT :limit OFFSET :offset";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':limit', $data['pageSize'], \PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
+public function pages(): int
+{
+    $sql = "SELECT COUNT(*) as total FROM {$this->table}";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+    return (int)$result['total'];
+}
 }

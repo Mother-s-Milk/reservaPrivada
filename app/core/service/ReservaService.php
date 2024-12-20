@@ -32,6 +32,12 @@
             $conn = Connection::get();
             $dao = new ReservaDAO($conn);
             $dao->update(new ReservaDTO($object));
+        }   
+
+        public function changeState (array $object): void {
+            $conn = Connection::get();
+            $dao = new ReservaDAO($conn);
+            $dao->changeState(new ReservaDTO($object));
         }
 
         public function delete ($id): void {
@@ -40,11 +46,26 @@
             $dao->delete($id);
         }
 
-        public function list (): array {
+       public function list (): array {
             $conn = Connection::get();
             $dao = new ReservaDAO($conn);
             return $dao->list();
         }
+
+        public function pages (): int {
+            $conn = Connection::get();
+            $dao = new ReservaDAO($conn);
+            return $dao->pages();
+        }
+
+
+        public function listPage($data ): array {
+            $conn = Connection::get();
+            $dao = new ReservaDAO($conn);
+            return $dao->listPage($data);
+        }
+
+
 
     }
 
