@@ -49,12 +49,16 @@ let ventaController = {
                             cantidad: parseInt(cantidad.value)
                         });
                         ventaController.mostrarDetallesVenta();
+                        ventaController.resetearFormulario();
                     }
                     else {
                         alert("No hay suficiente stock de la bebida seleccionada.");
                     }
                 });
             }
+        }
+        else {
+            alert("Debe seleccionar una bebida y una cantidad.");
         }
     },
     verificarLista: (idBebida) => {

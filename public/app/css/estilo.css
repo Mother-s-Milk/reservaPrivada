@@ -227,9 +227,6 @@ button {
 .dropdown-content {
     display: none;
     background-color: #477A91;
-    border-bottom: 1px solid #477A91;
-    border-left: 1px solid #477A91;
-    border-right: 1px solid #477A91;
     position: absolute;
     width: 180px;
     top: 50px;

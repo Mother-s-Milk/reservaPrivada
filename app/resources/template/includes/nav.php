@@ -4,7 +4,7 @@
             Reserva Privada
         </div>
         <ul class="nav-links">
-            <li><a href="inicio" class="active">Inicio</a></li>
+            <li><a href="inicio">Inicio</a></li>
             <li>
                 <a href="" class="dropdown-btn">Ventas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
                 <ul class="dropdown-content">
