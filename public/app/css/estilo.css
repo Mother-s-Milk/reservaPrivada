@@ -132,7 +132,7 @@ button {
 
 .resumen h2 {
     color: #333;
-    font-size: 27px;
+    font-size: 24px;
     margin-bottom: 3px;
 }
 
@@ -232,24 +232,15 @@ button {
     border-right: 1px solid #477A91;
     position: absolute;
     width: 180px;
-    top: 48px;
+    top: 50px;
     border-radius: 0 0 9px 9px;
-    color: #000;
 }
 
 .logout {
     width: auto;
     right: 45px;
-    margin-top: 6px;
-    /*background-color: #E1EBF0;*/
-}
-
-.logout > li a {
-    color: #000;
-}
-
-.logout > li a:hover {
-    color: #fff;
+    margin-top: 14px;
+    background-color: #477A91;
 }
 
 .arrow-link {
@@ -324,6 +315,12 @@ button {
 /*********************/
 /*Tablas de los index*/
 /*********************/
+.tabla-lista,
+.dashboard-table {
+    border-radius: 9px 9px 0 0;
+    overflow: hidden;
+}
+
 .tabla-lista {
     width: 100%;
     border-collapse: collapse;
