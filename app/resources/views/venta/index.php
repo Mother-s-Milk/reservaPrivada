@@ -18,15 +18,6 @@
                     <input type="date" id="filtro-fecha-fin" name="fechaFin">
                 </div>
                 <div>
-                    <label for="filtro-estado">Estado:</label>
-                    <select id="filtro-estado" name="estado">
-                        <option value="">Todas</option>
-                        <option value="Confirmada">Confirmada</option>
-                        <option value="Cancelada">Cancelada</option>
-                        <option value="Pendiente">Pendiente</option>
-                    </select>
-                </div>
-                <div>
                     <label for="filtro-estado">Medio de pago:</label>
                     <select id="filtro-estado" name="estado">
                         <option value="">Todos</option>
@@ -34,6 +25,15 @@
                         <option value="Cancelada">Debito</option>
                         <option value="Pendiente">Credito</option>
                         <option value="Pendiente">Transferencia</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filtro-estado">Estado:</label>
+                    <select id="filtro-estado" name="estado">
+                        <option value="">Todas</option>
+                        <option value="Confirmada">Confirmada</option>
+                        <option value="Cancelada">Cancelada</option>
+                        <option value="Pendiente">Pendiente</option>
                     </select>
                 </div>
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
