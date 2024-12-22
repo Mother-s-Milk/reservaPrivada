@@ -10,6 +10,33 @@ body {
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
 
+/***********/
+/***********/
+/*Scrollbar*/
+/***********/
+/***********/
+::-webkit-scrollbar {
+    width: 0.5625rem;/*9px*/ /*Ancho de la barra de desplazamiento*/
+}
+
+::-webkit-scrollbar-track {
+    background-color: #000; /*Color de fondo del track*/
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #477A91; /*Color del thumb*/
+    border-radius: 0.5625rem; /*Bordes redondeados*/
+    transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #A9CDD4; /*Cambia de color al pasar el mouse*/
+}
+
+::-webkit-scrollbar-button {
+    display: none; /*Esto oculta las flechas de arriba y abajo*/
+}
+
 /*******************/
 /*Estilos Generales*/
 /*******************/
