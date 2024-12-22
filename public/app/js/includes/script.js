@@ -1,3 +1,5 @@
+//En este archivo se encuentran los scripts que se utilizan en todas las páginas del sitio. En este caso los eventos relacionados a la barra de navegación y el botón de cerrar sesión.
+
 document.addEventListener("DOMContentLoaded", () => {
     const dropdownButtons = document.querySelectorAll(".dropdown-btn");
 
@@ -18,12 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Botón de cerrar sesión
-    const logoutButton = document.getElementById("logout");
+    /*const logoutButton = document.getElementById("logout");
     logoutButton.addEventListener("click", () => {
         const confirmLogout = confirm("¿Estás seguro de que deseas cerrar sesión?");
         if (confirmLogout) {
             alert("Sesión cerrada exitosamente.");
-            window.location.href = "login.html";
+            window.location.href = "inicio";
         }
-    });
+    });*/
 });

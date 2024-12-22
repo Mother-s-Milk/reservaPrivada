@@ -5,7 +5,7 @@
         <h2>Lista de Proveedores</h2>
         <button type="button" class="btn-add" onclick="window.location.href='proveedor/create'">Agregar Proveedor</button>
     </div>
-    <div class="section-filter">
+    <div class="one">
         <aside class="gadget">
             <h2>Filtros</h2>
         </aside>

@@ -46,6 +46,12 @@
             return $dao->list();
         }
 
+        public function consultarStock ($id): int {
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            return $dao->consultarStock($id);
+        }
+
     }
 
 ?>

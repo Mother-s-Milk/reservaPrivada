@@ -24,13 +24,7 @@
                         Datos del pago
                     </h2>
                 </header>
-                <main class="triple">
-                    <div>
-                        <input id="pagoFecha" type="date">
-                    </div>
-                    <div>
-                        <input id="pagoHora" type="time">
-                    </div>
+                <main class="one">
                     <div>
                         <select id="formaPago" name="formaPago" required>
                             <option value="" disabled selected>Seleccionar medio de pago</option>
@@ -54,7 +48,7 @@
                             <option value="" selected disabled>Seleccionar bebida</option>
                                 <?php
                                     foreach ($bebidas as $bebida) {
-                                        echo "<option value='{$bebida['id']}' data-nombre='{$bebida['nombre']}' data-precio='{$bebida['precioUnitario']}'  data-stock='{$bebida['stock']}'>{$bebida['nombre']}
+                                        echo "<option value='{$bebida['id']}' data-nombre='{$bebida['nombre']}' data-precio='{$bebida['precioUnitario']}'>{$bebida['nombre']}
                                         </option>";
                                     }
                                 ?>

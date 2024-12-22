@@ -59,7 +59,6 @@ button {
 
 .one {
     flex-direction: column;
-    
 }
 
 .double,
@@ -89,7 +88,7 @@ button {
 /******************************/
 .gadget {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 7.5px;
+    border-radius: 0.5625rem;
     padding: 15px;
 }
 
@@ -226,8 +225,9 @@ button {
 .breadcrumbs {
     font-size: 15px;
     font-weight: 700;
-    margin-left: 2.8125rem; /*45px*/
-    margin-top: 15px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0.9375rem 0 0 2.8125rem;
 }
 
 /****************************/
@@ -248,8 +248,8 @@ button {
 .btn-add {
     background-color: #007bff;
     color: #fff;
-    padding: 9px 15px;
-    border-radius: 6px;
+    padding: 0.5625rem 15px;
+    border-radius: 0.5625rem;
     font-size: 15px;
     font-weight: 500;
 }
@@ -260,59 +260,6 @@ button {
 
 .btn-add:active {
     transform: scale(1.03);
-}
-
-/*********************/
-/*Seccion con filtros*/
-/*********************/
-.section-filter {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 15px;
-    width: 100%;
-}
-
-.section-filter > aside {
-    flex: 1 1 calc(20%);
-    max-width: calc(20%);
-}
-
-.section-filter > main {
-    flex: 1 1 calc(80%);
-    max-width: calc(80%);
-}
-
-.section-filter > aside > h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 0.9375rem; /*15px*/
-}
-
-.section-filter > aside li {
-    margin-bottom: 0.5625rem; /*9px*/
-    position: relative;
-}
-
-.section-filter > aside li:last-child {
-    margin-bottom: 0;
-}
-
-.filter-button {
-    border-radius: 6px;
-    color: #000;
-    background-color: transparent;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 0.375rem; /*6px*/
-    transition: background-color 0.3s ease;
-    will-change: background-color;
-}
-
-.section-filter .filter-button.active {
-    background-color: #1e293b;
-    color: #fff;
 }
 
 /*********************/
@@ -353,7 +300,7 @@ button {
 .btn-eliminar,
 .btn-check {
     font-size: 15px;
-    border-radius: 7.5px;
+    border-radius: 0.5625rem;
     padding: 6px;
     color: #fff;
 }
@@ -420,7 +367,7 @@ button {
     margin-bottom: 18px;
     padding: 6px;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
-    border-radius: 7.5px;
+    border-radius: 0.5625rem;
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
@@ -485,7 +432,7 @@ input::placeholder, textarea::placeholder {
     display: block;
     margin: auto;
     font-size: 18px;
-    border-radius: 6px;
+    border-radius: 0.5625rem;
     color: #fff;
     font-weight: 500;
     width: auto;
@@ -511,3 +458,61 @@ input::placeholder, textarea::placeholder {
     font-size: 15px;
     font-weight: normal;
 }
+
+/*Filtros*/
+#filtros-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 9px;
+}
+
+#filtros-form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#filtros-form > div > label {
+    color: #555;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#filtros-form > div > input,
+#filtros-form > div > select {
+    border: 1px solid #555;
+    font-size: 15px;
+    border-radius: 9px;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+    color: #555;
+    padding: 3px;
+}
+
+#filtros-form > button {
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 12px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    will-change: background-color;
+}
+
+/*
+.filter-button {
+    border-radius: 0.5625rem;
+    color: #000;
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0.375rem;
+    transition: background-color 0.3s ease;
+    will-change: background-color;
+}*/
+
+/*.section-filter .filter-button.active {
+    background-color: #1e293b;
+    color: #fff;
+}*/

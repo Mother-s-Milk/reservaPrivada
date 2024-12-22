@@ -1,6 +1,27 @@
 const API_BASE_URL = "venta/";
 
 let ventaService = {
+    consultarStock: (id) => {
+        return fetch(`${API_BASE_URL}consultarStock/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la petición: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error("Error al consultar el stock:", error);
+        });
+    },
     save: (data) => {
         return fetch(`${API_BASE_URL}save`, {
             method: "POST",

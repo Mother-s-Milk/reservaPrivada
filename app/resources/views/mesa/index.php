@@ -5,7 +5,7 @@
         <h2>Lista de Mesas</h2>
         <button type="button" class="btn-add" onclick="window.location.href='mesa/create'">Agregar Mesa</button>
     </div>
-    <div class="section-filter">
+    <div class="one">
         <aside class="gadget">
             <h2>Filtros</h2>
             <ul>

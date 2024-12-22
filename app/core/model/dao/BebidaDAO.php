@@ -82,6 +82,15 @@
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
 
+        public function consultarStock ($id): int {
+            $sql = "SELECT stock FROM {$this->table} WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(["id" => $id]);
+
+            $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+            return (int)$data['stock'];
+        }
+
     }
 
 ?>

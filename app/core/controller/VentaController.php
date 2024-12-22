@@ -62,8 +62,16 @@
         public function list (Request $request, Response $response): void {
             $service = new VentaService();
             $data = $service->list();
-            //var_dump($data);
+
             $response->setResult($data);
+            $response->send();
+        }
+
+        public function consultarStock (Request $request, Response $response): void {
+            $service = new BebidaService();
+            $stock = $service->consultarStock($request->getId());
+            #var_dump($request->getId());
+            $response->setResult($stock);
             $response->send();
         }
 

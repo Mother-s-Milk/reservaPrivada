@@ -2,7 +2,7 @@
 //Si al agregar un detalle de venta, el data-stock es menor a la cantidad solicitada, avisar.
 
 let ventaController = {
-    ventas: [],
+    ventas: [],//Para guardar las ventas enviadas desde el back en las solicitudes
     venta: {
         id: 0,
         fecha: "",
@@ -13,6 +13,7 @@ let ventaController = {
     },
     save: () => {
         //let detalles = ventaController.venta.detalles;
+        //console.log(detalles);
         ventaController.venta.formaPago = document.getElementById('formaPago').value;
         //console.log(ventaController.venta);
         ventaService.save(ventaController.venta)
@@ -31,20 +32,70 @@ let ventaController = {
         let bebida = document.getElementById('bebidaNombre');
         let cantidad = document.getElementById('bebidaCantidad');
 
-        if (bebida.value) {
-            let bebidaSeleccionada = bebida.options[bebida.selectedIndex];
-            //alert(`ID de la bebida seleccionada: ${idBebida}`);
-            //Consultar stock antes de almacenar
-            ventaController.venta.detalles.push({
-                bebidaId: parseInt(bebida.value),
-                precio: parseFloat(bebidaSeleccionada.getAttribute('data-precio')),
-                cantidad: parseInt(cantidad.value)
-            });
-
-            ventaController.mostrarDetallesVenta();
-        } else {
-            alert("Waskiii");
+        if (bebida.value && cantidad.value) {
+            //Primero verifico si la bebida que se quiere agregar no está ya en la lista  
+            if (ventaController.verificarLista(bebida.value)) {
+                ventaController.actualizarCantidad(bebida.value, cantidad.value);
+            }
+            else {
+                ventaService.consultarStock(bebida.value)
+                .then(response => {
+                    let stockActual = response.result;
+                    if (stockActual >= cantidad.value) {
+                        ventaController.venta.detalles.push({
+                            bebidaId: parseInt(bebida.value),
+                            nombre: bebida.options[bebida.selectedIndex].getAttribute('data-nombre'),
+                            precio: parseFloat(bebida.options[bebida.selectedIndex].getAttribute('data-precio')),
+                            cantidad: parseInt(cantidad.value)
+                        });
+                        ventaController.mostrarDetallesVenta();
+                    }
+                    else {
+                        alert("No hay suficiente stock de la bebida seleccionada.");
+                    }
+                });
+            }
         }
+    },
+    verificarLista: (idBebida) => {
+        let estaEnLista = false;
+
+        for (let i = 0; i < ventaController.venta.detalles.length; i++) {
+            if (ventaController.venta.detalles[i].bebidaId == idBebida) {
+                estaEnLista = true;
+                return estaEnLista;
+            }
+        }
+
+        return estaEnLista;
+    },
+    actualizarCantidad: (idBebida, cantidad) => {
+        let bebida = document.getElementById('bebidaNombre');
+        let cantidadNueva = parseInt(cantidad);
+        let cantidadActual = 0;
+
+        for (let i = 0; i < ventaController.venta.detalles.length; i++) {
+            if (ventaController.venta.detalles[i].bebidaId == idBebida) {
+                cantidadActual = ventaController.venta.detalles[i].cantidad;
+                break;
+            }
+        }
+
+        ventaService.consultarStock(idBebida)
+        .then(response => {
+            let stockActual = response.result;
+            if (stockActual >= (cantidadActual + cantidadNueva)) {
+                for (let i = 0; i < ventaController.venta.detalles.length; i++) {
+                    if (ventaController.venta.detalles[i].bebidaId == idBebida) {
+                        ventaController.venta.detalles[i].cantidad += cantidadNueva;
+                        break;
+                    }
+                }
+                ventaController.mostrarDetallesVenta();
+            } else {
+                alert("No hay suficiente stock de la bebida seleccionada.");
+            }
+        });
     },
     mostrarDetallesVenta: () => {
         let bodyBebidas = document.getElementById('bebidas-venta-body');
@@ -82,7 +133,6 @@ let ventaController = {
         .then(data => {
             ventaController.ventas = data.result;
             ventaController.mostrarVentas();
-            //console.log(data.result);
         })
         .catch(error => {
             console.error("Error al cargar las ventas (controller)", error);
@@ -123,6 +173,12 @@ let ventaController = {
     },
     resetearFormulario: () => {
         document.getElementById('venta-form').reset();
+    },
+    resetearVenta: () => {
+        ventaController.venta.detalles = [];
+        ventaController.venta.total = 0;
+        ventaController.resetearFormulario();
+        ventaController.mostrarDetallesVenta();
     }
 }
 
@@ -131,15 +187,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (path === "/reservaPrivada/public/venta") {
         ventaController.list();
     }
-    else if (path === "/reservaPrivada/public/venta/create") {
-        let btnAgregarBebida = document.getElementById('btn-agregar-bebida-venta');
-        btnAgregarBebida.onclick = () => {
-            ventaController.agregarBebida();
-        }
 
-        let btnAltaVenta = document.getElementById('btn-venta-alta');
-        btnAltaVenta.onclick = () => {
-            ventaController.save();
-        }
+    let btnAgregarBebida = document.getElementById('btn-agregar-bebida-venta');
+    btnAgregarBebida.onclick = () => {
+        ventaController.agregarBebida();
+    }
+
+    let btnResetearVenta = document.getElementById('btn-venta-resetear');
+    btnResetearVenta.onclick = () => {
+        ventaController.resetearVenta();
+    }
+
+    let btnAltaVenta = document.getElementById('btn-venta-alta');
+    btnAltaVenta.onclick = () => {
+        ventaController.save();
     }
 });
