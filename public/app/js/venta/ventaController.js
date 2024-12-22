@@ -175,10 +175,12 @@ let ventaController = {
         document.getElementById('venta-form').reset();
     },
     resetearVenta: () => {
-        ventaController.venta.detalles = [];
-        ventaController.venta.total = 0;
-        ventaController.resetearFormulario();
-        ventaController.mostrarDetallesVenta();
+        if (confirm(`¿Estás seguro de resetear el formulario?`)) {
+            ventaController.venta.detalles = [];
+            ventaController.venta.total = 0;
+            ventaController.resetearFormulario();
+            ventaController.mostrarDetallesVenta();
+        }
     }
 }
 
