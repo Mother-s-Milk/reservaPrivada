@@ -38,6 +38,24 @@
 <h1 class="breadcrumbs">Inicio</h1>
 <!-- <h1 class="breadcrumbs">¡Hola, Franco!</h1> -->
 <section class="container section one">
+    <section class="four">
+        <div class="gadget resumen">
+            <h2>Ventas del día</h2>
+            <p>$150.700</p>
+        </div>
+        <div class="gadget resumen">
+            <h2>Bebidas guardadas</h2>
+            <p>54</p>
+        </div>
+        <div class="gadget resumen">
+            <h2>Proveedores guardados</h2>
+            <p>26</p>
+        </div>
+        <div class="gadget resumen">
+            <h2>Reservas de hoy</h2>
+            <p>5</p>
+        </div>
+    </section>
     <aside class="double">
         <div class="gadget">
             <h2 class="gadget-titulo">Historial de ventas</h2>

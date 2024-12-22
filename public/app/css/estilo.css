@@ -100,6 +100,22 @@ button {
     margin-bottom: 9px;
 }
 
+.resumen {
+    text-align: center;
+}
+
+.resumen h2 {
+    color: #333;
+    font-size: 21px;
+    margin-bottom: 3px;
+}
+
+.resumen p {
+    font-size: 21px;
+    font-weight: 400;
+    color: #000;
+}
+
 /**************************************/
 /*Tablas del dashboard de inicio index*/
 /**************************************/
@@ -324,8 +340,9 @@ button {
 /*********/
 .btn-editar,
 .btn-eliminar,
-.btn-check {
-    font-size: 15px;
+.btn-check,
+.btn-actualizar {
+    font-size: 12px;
     border-radius: 6px;
     padding: 9px;
     color: #fff;
