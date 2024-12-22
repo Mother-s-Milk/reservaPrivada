@@ -8,6 +8,23 @@
     <div class="one">
         <aside class="gadget">
             <h2>Filtros</h2>
+            <form id="filtros-form">
+                <div>
+                    <label for="filtro-estado">Localidad:</label>
+                    <select id="filtro-estado" name="estado">
+                        <option value="">Todos</option>
+                        <option value="Caleta Olivia">Caleta Olivia</option>
+                        <option value="Las Heras">Las Heras</option>
+                        <option value="Pico Truncado">Pico Truncado</option>
+                        <option value="Comodoro Rivadavia">Comodoro Rivadavia</option>
+                        <option value="Buenos Aires">Buenos Aires</option>
+                        <option value="Buenos Aires">Mendoza</option>
+                        <option value="Rosario">Rosario</option>
+                    </select>
+                </div>
+                <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
+                <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
+            </form>
         </aside>
         <main class="gadget">
             <table class="tabla-lista">

@@ -6,9 +6,9 @@
         <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoría</button>
     </div>
     <div class="one">
-        <aside class="gadget">
+        <!-- <aside class="gadget">
             <h2>Filtros</h2>
-        </aside>
+        </aside> -->
         <main class="gadget">
             <table class="tabla-lista">
                 <thead>

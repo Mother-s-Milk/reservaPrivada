@@ -465,6 +465,7 @@ input::placeholder, textarea::placeholder {
     justify-content: space-between;
     align-items: end;
     margin-top: 9px;
+    gap: 15px;
 }
 
 #filtros-form > div {
@@ -488,6 +489,8 @@ input::placeholder, textarea::placeholder {
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
     color: #555;
     padding: 3px;
+
+    width: 100%;
 }
 
 #filtros-form > button {
