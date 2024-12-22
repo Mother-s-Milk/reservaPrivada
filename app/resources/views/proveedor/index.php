@@ -1,10 +1,6 @@
 <h1 class="breadcrumbs">Proveedores</h1>
 
 <section class="container section">
-    <div class="header-actions gadget">
-        <h2>Lista de Proveedores</h2>
-        <button type="button" class="btn-add" onclick="window.location.href='proveedor/create'">Agregar Proveedor</button>
-    </div>
     <div class="one">
         <aside class="gadget">
             <h2>Filtros</h2>
@@ -24,6 +20,7 @@
                 </div>
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
                 <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
+                <button type="button" class="btn-add" onclick="window.location.href='proveedor/create'">Agregar Proveedor</button>
             </form>
         </aside>
         <main class="gadget">

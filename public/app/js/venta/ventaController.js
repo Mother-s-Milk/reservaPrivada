@@ -162,7 +162,7 @@ let ventaController = {
                         <td>${venta.formaPago}</td>
                         <td>$${(venta.total).toFixed(2)}</td>
                         <td>
-                            <button type="button" class="btn-check" data-id="${venta.id}" style="width: 100%">Ver detalles</button>
+                            <button type="button" class="btn-check" data-id="${venta.id}" style="width: auto">Ver detalles</button>
                         </td>
                     </tr>
                 `;

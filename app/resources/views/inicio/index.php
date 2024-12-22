@@ -62,7 +62,7 @@
                                 echo '<td>' . $contador . '</td>';
                                 echo '<td>' . $bebida['nombre'] . '</td>';
                                 echo '<td>' . $bebida['stock'] . '</td>';
-                                echo '<td><button type="button" class="btn-form btn-editar" data-id="' . $bebida['id'] . '" onclick="window.location.href=\'bebida/editar/' . $bebida['id'] . '\'" style="width: 100%">Actualizar</button></td>';
+                                echo '<td><button type="button" class="btn-form btn-editar" data-id="' . $bebida['id'] . '" onclick="window.location.href=\'bebida/editar/' . $bebida['id'] . '\'" style="width: auto">Actualizar</button></td>';
                                 echo '</tr>';
                                 $contador++;
                             }
@@ -131,7 +131,7 @@
                                 echo '<td>' . $venta['fecha'] . '</td>';
                                 echo '<td>' . $venta['hora'] . '</td>';
                                 echo '<td>$' . $venta['total'] . '</td>';
-                                echo '<td><button type="button" class="btn-check" data-id="' . $venta['id'] . '" style="width: 100%">Ver detalles</button></td>';
+                                echo '<td><button type="button" class="btn-check" data-id="' . $venta['id'] . '" style="width: auto">Ver detalles</button></td>';
                                 echo '</tr>';
                                 $contador++;
                             }

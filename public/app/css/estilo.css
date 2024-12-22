@@ -466,6 +466,7 @@ input::placeholder, textarea::placeholder {
     align-items: end;
     margin-top: 9px;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 #filtros-form > div {
