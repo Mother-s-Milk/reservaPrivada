@@ -326,11 +326,11 @@ button {
 }
 
 .btn-check {
-    background-color: #000;
+    background-color: #007bff;
 }
 
 .btn-check:hover {
-    background-color: #333;
+    background-color: #0056b3;
 }
 
 .btn-check:active {
