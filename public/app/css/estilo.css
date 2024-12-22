@@ -552,6 +552,7 @@ input::placeholder, textarea::placeholder {
     display: flex;
     flex-direction: column;
     align-items: start;
+    flex: 1;
 }
 
 #filtros-form > div > label {
