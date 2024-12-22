@@ -194,9 +194,9 @@ button {
 
 .logout {
     width: auto;
-    right: 30px;
+    right: 45px;
     margin-top: 6px;
-    background-color: #E1EBF0;
+    /*background-color: #E1EBF0;*/
 }
 
 .logout > li a {
@@ -218,14 +218,14 @@ button {
 .btn-user {
     background-color: transparent;
     border: none;
-    color: #aaa;
+    color: #fff;
     font-size: 30px;
     display: block;
     position: relative;
 }
 
 .btn-user:hover {
-    color: #ddd;
+    color: #333;
 }
 
 .btn-user:active {
@@ -395,25 +395,27 @@ button {
     padding: 6px;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
     border-radius: 0.5625rem;
-    font-size: 16px;
+    font-size: 18px;
     outline: none;
     transition: all 0.3s ease;
     background-color: #fff;
-    color: #333;
+    /*color: #666;*/
 }
 
 .form input,
 .form textarea,
 .form select {
-    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #666;
 }
 
 .form input:focus,
 .form select:focus,
 .form textarea:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 9px rgba(52, 152, 219, 0.5);
-    background-color: #f9f9f9;
+    border-color: #A9CDD4;
+    box-shadow: 0 0 9px rgba(169, 205, 212, 0.5);
+    background-color: #eee;
+    color: #333;
 }
 
 .form input,
@@ -422,7 +424,7 @@ button {
 }
 
 input::placeholder, textarea::placeholder {
-    color: #333;
+    color: #666;
 }
 
 .form textarea {
