@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color: #f8f9fa;
+    background-color: #fff;
+    color: #333;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
 
@@ -87,9 +88,11 @@ button {
 /*Contenedor estilo componente*/
 /******************************/
 .gadget {
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 3px #477A91;
     border-radius: 0.5625rem;
     padding: 15px;
+    background-color: #fff;
+    color: #333;
 }
 
 .gadget-titulo {
@@ -103,17 +106,14 @@ button {
 .dashboard-table {
     border-collapse: collapse;
     width: 100%;
-}
-
-.dashboard-table > thead {
-    background-color: #f0f0f0;
+    color: #fff;
 }
 
 .dashboard-table th,
 .dashboard-table td {
     padding: 9px;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #000;
 }
 
 /*****/
@@ -123,7 +123,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1e293b;
+    background-color: #477A91;
     box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.3);
     padding: 6px 2.8125rem; /*45px*/
 }
@@ -152,38 +152,51 @@ button {
     margin-right: 0;
 }
 
+.dropdown-content > li > a {
+    color: #000;
+}
+
 .nav-principal > div > ul > li > a,
 .dropdown-content > li > a {
-    display: block;
     color: #fff;
+    display: block;
     padding: 12px;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
-    border-radius: 15px;
+    border-radius: 9px;
     transition: background-color 0.3s ease;
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
 .nav-principal > div > ul > li > a:hover,
-.nav-principal > div > ul > li > a.active,
+.nav-principal > div > ul > li > a.active {
+    background-color: #A9CDD4;
+}
+
 .dropdown-content > li > a:hover {
-    background-color: #334155;
+    background-color: #A9CDD4;
+    color: #fff;
 }
 
 .dropdown-content {
     display: none;
-    background-color: #223044;
+    background-color: #477A91;
+    border-bottom: 1px solid #477A91;
+    border-left: 1px solid #477A91;
+    border-right: 1px solid #477A91;
     position: absolute;
     width: 180px;
     top: 48px;
-    border-radius: 15px;
+    border-radius: 0 0 9px 9px;
+    color: #000;
 }
 
 .logout {
     width: auto;
     right: 30px;
     margin-top: 6px;
-    background-color: #000;
+    background-color: #E1EBF0;
 }
 
 .logout > li a {
@@ -228,6 +241,7 @@ button {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0.9375rem 0 0 2.8125rem;
+    color: #333;
 }
 
 /****************************/
@@ -268,29 +282,41 @@ button {
 .tabla-lista {
     width: 100%;
     border-collapse: collapse;
+    color: #fff;
+}
+
+.tabla-lista thead,
+.dashboard-table thead {
+    background-color: #477A91;
 }
 
 .tabla-lista th,
-.tabla-lista td {
-    border: 1px solid #ddd;
+.dashboard-table th {
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.tabla-lista th,
+.tabla-lista td,
+.dashboard-table th,
+.dashboard-table td {
+    border: 1px solid #A9CDD4;
     padding: 9px;
     text-align: center;
-    font-size: 15px;
+    font-size: 18px;
+    /*color: #fff;*/
 }
 
-.tabla-lista th {
-    background-color: #1e293b;
-    color: white;
-    font-weight: 600;
-}
-
-.tabla-lista td {
-    color: #000;
+.tabla-lista td,
+.dashboard-table td {
+    color: #333;
     font-weight: 400;
+    background-color: #FFFFFF;
 }
 
-.tabla-lista > tbody > tr:hover {
-    background-color: #ccc;
+.tabla-lista tbody tr:hover,
+.dashboard-table tbody tr:hover {
+    background-color: #000;
+    color: #fff;
 }
 
 /*********/
@@ -300,8 +326,8 @@ button {
 .btn-eliminar,
 .btn-check {
     font-size: 15px;
-    border-radius: 0.5625rem;
-    padding: 6px;
+    border-radius: 6px;
+    padding: 9px;
     color: #fff;
 }
 
@@ -345,6 +371,7 @@ button {
     font-size: 30px;
     font-weight: 600;
     margin-bottom: 30px;
+    color: #333;
 }
 
 .error {
@@ -371,6 +398,8 @@ button {
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
+    background-color: #fff;
+    color: #333;
 }
 
 .form input,
@@ -393,7 +422,7 @@ button {
 }
 
 input::placeholder, textarea::placeholder {
-    color: #95a5a6;
+    color: #333;
 }
 
 .form textarea {
@@ -476,7 +505,7 @@ input::placeholder, textarea::placeholder {
 }
 
 #filtros-form > div > label {
-    color: #555;
+    color: #333;
     margin-bottom: 6px;
     font-size: 16px;
     font-weight: 500;
@@ -484,18 +513,18 @@ input::placeholder, textarea::placeholder {
 
 #filtros-form > div > input,
 #filtros-form > div > select {
-    border: 1px solid #555;
+    border: 1px solid #ccc;
     font-size: 15px;
-    border-radius: 9px;
+    border-radius: 6px;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
-    color: #555;
+    color: #333;
     padding: 3px;
 
     width: 100%;
 }
 
 #filtros-form > button {
-    border-radius: 9px;
+    border-radius: 6px;
     font-size: 15px;
     font-weight: 500;
     padding: 6px 12px;
@@ -504,19 +533,16 @@ input::placeholder, textarea::placeholder {
     will-change: background-color;
 }
 
-/*
-.filter-button {
-    border-radius: 0.5625rem;
-    color: #000;
-    background-color: transparent;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 0.375rem;
-    transition: background-color 0.3s ease;
-    will-change: background-color;
-}*/
-
 /*.section-filter .filter-button.active {
     background-color: #1e293b;
     color: #fff;
 }*/
+
+.total-venta {
+    background-color: #477A91;
+}
+
+.total-venta th {
+    font-size: 21px;
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+}

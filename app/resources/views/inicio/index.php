@@ -40,6 +40,40 @@
 <section class="container section one">
     <aside class="double">
         <div class="gadget">
+            <h2 class="gadget-titulo">Historial de ventas</h2>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                        if (count($ventas) == 0) {
+                            echo '<tr><td colspan="5" style="text-align: center;">No hay ventas de hoy</td></tr>';
+                        }
+                        else {
+                            $contador = 1;
+                            foreach($ventas as $venta) {
+                                echo '<tr>';
+                                echo '<td>' . $contador . '</td>';
+                                echo '<td>' . $venta['fecha'] . '</td>';
+                                echo '<td>' . $venta['hora'] . '</td>';
+                                echo '<td>$' . $venta['total'] . '</td>';
+                                echo '<td><button type="button" class="btn-check" data-id="' . $venta['id'] . '" style="width: auto">Ver detalles</button></td>';
+                                echo '</tr>';
+                                $contador++;
+                            }
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="gadget">
             <h2 class="gadget-titulo">Stock bajo</h2>
             <table class="dashboard-table">
                 <thead>
@@ -71,6 +105,8 @@
                 </tbody>
             </table>
         </div>
+    </aside>
+    <main class="double">
         <div class="gadget">
             <h2 class="gadget-titulo">Reservas</h2>
             <table class="dashboard-table">
@@ -96,42 +132,6 @@
                                 echo '<td>' . $reserva['detalles'] . '</td>';
                                 echo '<td><button type="button" class="btn-form btn-eliminar" data-id="' . $reserva['id'] . '">Cancelar</button></td>';
                                 echo '<td><button type="button" class="btn-form btn-actualizar" data-id="' . $reserva['id'] . '">Confirmar</button></td>';
-                                echo '</tr>';
-                                $contador++;
-                            }
-                        }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </aside>
-    <main class="double">
-        <div class="gadget">
-            <h2 class="gadget-titulo">Historial de ventas</h2>
-            <table class="dashboard-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                        if (count($ventas) == 0) {
-                            echo '<tr><td colspan="5" style="text-align: center;">No hay ventas de hoy</td></tr>';
-                        }
-                        else {
-                            $contador = 1;
-                            foreach($ventas as $venta) {
-                                echo '<tr>';
-                                echo '<td>' . $contador . '</td>';
-                                echo '<td>' . $venta['fecha'] . '</td>';
-                                echo '<td>' . $venta['hora'] . '</td>';
-                                echo '<td>$' . $venta['total'] . '</td>';
-                                echo '<td><button type="button" class="btn-check" data-id="' . $venta['id'] . '" style="width: auto">Ver detalles</button></td>';
                                 echo '</tr>';
                                 $contador++;
                             }

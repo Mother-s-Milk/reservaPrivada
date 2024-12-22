@@ -83,7 +83,7 @@
                         </tr>
                     </tbody>
                     <tfoot hidden>
-                        <tr>
+                        <tr class="total-venta">
                             <th colspan="3" style="text-align: right;">TOTAL:</th>
                             <th colspan="1" id="total-venta">$0.00</th>
                         </tr>
