@@ -342,7 +342,7 @@ button {
 .btn-eliminar,
 .btn-check,
 .btn-actualizar {
-    font-size: 12px;
+    font-size: 15px;
     border-radius: 6px;
     padding: 9px;
     color: #fff;
@@ -369,11 +369,13 @@ button {
 }
 
 .btn-check {
-    background-color: #007bff;
+    /*background-color: #007bff;*/
+    background-color: #333;
 }
 
 .btn-check:hover {
-    background-color: #0056b3;
+    /*background-color: #0056b3;*/
+    background-color: #666;
 }
 
 .btn-check:active {
