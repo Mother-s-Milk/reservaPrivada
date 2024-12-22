@@ -5,9 +5,15 @@
         <aside class="gadget">
             <h2>Filtros</h2>
             <form id="filtros-form">
+
                 <div>
-                    <label for="filtro-estado">Localidad:</label>
-                    <select id="filtro-estado" name="estado">
+                    <label for="filtro-nombre">Nombre del Proveedor:</label>
+                    <input type="text" id="filtro-nombre" name="nombre" placeholder="Ingrese el nombre del Proveedor">
+                </div>
+
+                <div>
+                    <label for="filtro-localidad">Localidad:</label>
+                    <select id="filtro-localidad" name="localidad">
                         <option value="">Todos</option>
                         <option value="Caleta Olivia">Caleta Olivia</option>
                         <option value="Las Heras">Las Heras</option>
@@ -18,6 +24,7 @@
                         <option value="Rosario">Rosario</option>
                     </select>
                 </div>
+
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
                 <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
                 <button type="button" class="btn-add" onclick="window.location.href='proveedor/create'">Agregar Proveedor</button>
@@ -39,6 +46,10 @@
                 <tbody id="proveedores-body">
                 </tbody>
             </table>
+
+            <div id="pagination" class="pagination">
+                <!-- Botones de paginación se agregarán aquí -->
+            </div>
         </main>
     </div>
 </section>

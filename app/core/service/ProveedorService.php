@@ -46,6 +46,17 @@
             return $dao->list();
         }
 
+        public function listPage($data): array {
+            $conn = Connection::get();
+            $dao = new ProveedorDAO($conn);
+            return $dao->listPage($data);
+        }
+
+        public function filter($data ): array {
+            $conn = Connection::get();
+            $dao = new ProveedorDAO($conn);
+            return $dao->filter($data);
+        }
     }
 
 ?>
