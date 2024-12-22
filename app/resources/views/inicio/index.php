@@ -44,11 +44,11 @@
             <p>$150.700</p>
         </div>
         <div class="gadget resumen">
-            <h2>Bebidas guardadas</h2>
+            <h2>Bebidas</h2>
             <p>54</p>
         </div>
         <div class="gadget resumen">
-            <h2>Proveedores guardados</h2>
+            <h2>Proveedores</h2>
             <p>26</p>
         </div>
         <div class="gadget resumen">
