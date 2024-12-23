@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     datasets: [{
       label: 'Ventas Diarias ($)',
       data: [1500, 2300, 1800, 2000, 3000, 2500, 2200], // Ventas por día
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
+      backgroundColor: '#FA7F08',
+      borderColor: '#333',
+      borderWidth: 0.5
     }]
   };
   

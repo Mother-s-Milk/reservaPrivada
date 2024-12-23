@@ -1,7 +1,7 @@
 //Agregar un modal de confirmacion si el usuario presiona el boton de resertar formulario
 //Si al agregar un detalle de venta, el data-stock es menor a la cantidad solicitada, avisar.
 
-let ventaController = {
+const ventaController = {
     ventas: [],//Para guardar las ventas enviadas desde el back en las solicitudes
     venta: {
         id: 0,
@@ -28,13 +28,29 @@ let ventaController = {
                 console.error("Error al guardar la venta:", error);
             });
     },
-    agregarBebida: () => {
-        let bebida = document.getElementById('bebidaNombre');
+    agregarProducto: () => {
+        let formulario = document.forms["venta-form"];
+        let nuevoDetalle = {
+            bebidaId: parseInt(formulario["bebidaNombre"].value),
+            nombre: formulario["bebidaNombre"].options[formulario["bebidaNombre"].selectedIndex].getAttribute('data-nombre'),
+            precio: parseFloat(formulario["bebidaNombre"].options[formulario["bebidaNombre"].selectedIndex].getAttribute('data-precio')),
+            cantidad: parseInt(formulario["bebidaCantidad"].value)
+        };
+        /*if (estaEnLista(nuevoDetalle.bebidaId)) {
+            actualizarCantidad(nuevoDetalle.bebidaId, nuevoDetalle.cantidad);
+        }
+        else {
+            ventaController.venta.detalles.push(nuevoDetalle);
+        }*/
+
+        console.log(nuevoDetalle);
+
+        /*let bebida = document.getElementById('bebidaNombre');
         let cantidad = document.getElementById('bebidaCantidad');
 
-        if (bebida.value && cantidad.value) {
+        if (bebida.value && (cantidad.value > 0)) {*/
             //Primero verifico si la bebida que se quiere agregar no está ya en la lista  
-            if (ventaController.verificarLista(bebida.value)) {
+            /*if (ventaController.verificarLista(bebida.value)) {
                 ventaController.actualizarCantidad(bebida.value, cantidad.value);
             }
             else {
@@ -58,8 +74,8 @@ let ventaController = {
             }
         }
         else {
-            alert("Debe seleccionar una bebida y una cantidad.");
-        }
+            alert("Debe seleccionar una bebida y una cantidad mayor a 0.");
+        }*/
     },
     verificarLista: (idBebida) => {
         let estaEnLista = false;
@@ -196,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let btnAgregarBebida = document.getElementById('btn-agregar-bebida-venta');
     btnAgregarBebida.onclick = () => {
-        ventaController.agregarBebida();
+        ventaController.agregarProducto();
     }
 
     let btnResetearVenta = document.getElementById('btn-venta-resetear');

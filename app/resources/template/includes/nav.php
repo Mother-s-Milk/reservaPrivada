@@ -37,6 +37,9 @@
         </ul>
     </div>
     <div>
+        <div class="boton-dark-mode" id="dark-mode">
+            <div class="deslizador"></div>
+        </div>
         <button type="button" class="btn-user dropdown-btn"><i class="fa-solid fa-circle-user"></i></button>
         <ul class="dropdown-content logout">
             <li><a href="">Cerrar sesión</a></li>

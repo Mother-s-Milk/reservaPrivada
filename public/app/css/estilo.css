@@ -169,7 +169,7 @@ button {
     padding: 6px 2.8125rem; /*45px*/
 }
 
-.nav-principal > div:first-of-type {
+.nav-principal > div {
     display: flex;
     align-items: center;
     justify-content: left;
@@ -428,7 +428,7 @@ button {
     display: none;
 }
 
-.form label,
+/*.form label,*/
 .form input,
 .form textarea,
 .form select {
@@ -590,4 +590,86 @@ input::placeholder, textarea::placeholder {
 .total-venta th {
     font-size: 21px;
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+/* Contenedor del interruptor */
+.boton-dark-mode {
+    display: flex;
+    align-items: center;
+    width: 48px;
+    height: 27px;
+    background-color: rgba(169, 205, 212, 0.5);
+    border-radius: 45px;
+    padding: 3px;
+    margin-right: 30px;
+    justify-content: start;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.deslizador {
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #eee;
+    transition: transform 0.3s ease;
+}
+
+/* Clase activa para el contenedor */
+.boton-dark-mode.active {
+    background-color: #333;
+    justify-content: end;
+}
+
+.deslizador.active {
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+/*.boton-dark-mode.active .deslizador {
+    transform: translateX(-24px);*/ /* Desplaza el deslizador a la izquierda */
+/*}*/
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: #111;
+    color: #fff;
+}
+
+body.dark-mode .gadget {
+    background-color: #222;
+    box-shadow: 0px 0px 3px rgba(169, 205, 212, 0.3)
+    ;
+    color: #eee;
+}
+
+body.dark-mode .gadget h2 {
+    color: #eee;
+}
+
+body.dark-mode #filtros-form label {
+    color: #ddd;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #666;
+    border: 1px solid #999;
+    color: #eee;
+}
+
+body.dark-mode .breadcrumbs {
+    color: #ddd;
+}
+
+body.dark-mode .titulo-formulario {
+    color: #eee;
+}
+
+body.dark-mode input::placeholder, textarea::placeholder {
+    color: #eee;
 }

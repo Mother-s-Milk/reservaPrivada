@@ -28,4 +28,27 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "inicio";
         }
     });*/
+
+    const darkModeToggle = document.getElementById("dark-mode");
+    const body = document.body;
+    
+    // Verificar el modo oscuro en localStorage
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        darkModeToggle.classList.add("active");
+    }
+    
+    // Alternar modo oscuro
+    darkModeToggle.addEventListener("click", () => {
+        const isDarkMode = body.classList.toggle("dark-mode");
+        darkModeToggle.classList.toggle("active");
+            
+        // Guardar preferencia en localStorage
+        if (isDarkMode) {
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+        }
+    });
+
 });
