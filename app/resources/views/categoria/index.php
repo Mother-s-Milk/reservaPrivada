@@ -22,6 +22,12 @@
                 <tbody id="categorias-body">
                 </tbody>
             </table>
+            
+            <div id="pagination" class="pagination">
+                <!-- Botones de paginación se agregarán aquí -->
+            </div>
+
+
         </main>
     </div>
 </section>

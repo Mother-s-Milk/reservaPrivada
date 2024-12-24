@@ -51,7 +51,17 @@
             $dao = new BebidaDAO($conn);
             return $dao->consultarStock($id);
         }
+        public function listPage($data): array {
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            return $dao->listPage($data);
+        }
 
+        public function filter($data ): array {
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            return $dao->filter($data);
+        }
     }
 
 ?>

@@ -90,5 +90,49 @@ let bebidaService = {
         .catch(error => {
                 console.error("Error en la solicitud:", error);
         });
-    }
+    },
+    listPage: (data) => {
+        return fetch(`${API_BASE_URL}listPage`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al obtener los proveedores");
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error("Error en la solicitud:", error);
+        });
+    },
+    filter: (data) => {
+        return fetch(`${API_BASE_URL}filter`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al obtener las reservas");
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error("Error en la solicitud:", error);
+        });
+    },
 }

@@ -23,9 +23,9 @@
             <h2>Filtros</h2>
             <form id="filtros-form">
                 <div>
-                    <label for="filtro-estado">Categoría:</label>
+                    <label for="filtro-categoria">Categoría:</label>
                     <select id="bebidaCategoriaId" name="bebidaCategoriaId" required>
-                        <option value="" disabled selected>Seleccionar categoría</option>
+                        <option value=""   selected>Seleccionar categoría</option>
                             <?php
 
                             foreach ($categorias as $categoria) {
@@ -36,9 +36,9 @@
                     </select>
                 </div>
                 <div>
-                    <label for="filtro-estado">Proveedor:</label>
+                    <label for="filtro-proveedor">Proveedor:</label>
                     <select id="bebidaProveedorId" name="bebidaProveedorId" required>
-                        <option value="" disabled selected>Seleccionar Proveedor</option>
+                        <option value=""  selected>Seleccionar Proveedor</option>
                             <?php
 
                                 foreach ($proveedores as $proveedor) {
@@ -47,6 +47,14 @@
 
                         ?>
                     </select>
+                </div>
+                <div>
+                    <label for="filtro-nombre">Nombre:</label>
+                    <input type="text" id="bebidaNombre" name="bebidaNombre" placeholder="Nombre de la bebida">
+                </div>
+                <div>
+                    <label for="filtro-stock">Cantidad de Stock:</label>
+                    <input type="number" id="bebidaStock" name="bebidaStock" placeholder="Cantidad de stock">
                 </div>
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
                 <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
@@ -71,6 +79,9 @@
                 <tbody id="bebidas-body">
                 </tbody>
             </table>
+            <div id="pagination" class="pagination">
+                <!-- Botones de paginación se agregarán aquí -->
+            </div>
         </main>
     </div>
 </section>

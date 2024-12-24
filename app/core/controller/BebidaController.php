@@ -114,6 +114,25 @@
             $response->send();  // Envías la respuesta con los datos
         }
         
+        public function listPage(Request $request, Response $response): void
+        {
+        $data = $request->getData();
+        $service = new BebidaService();
+        $result = $service->listPage($data);
+
+        $response->setResult($result);
+        $response->send();
+        }
+
+        public function filter(Request $request, Response $response): void
+    {
+        $data = $request->getData();
+        $service = new BebidaService();
+        $result = $service->filter($data);
+
+        $response->setResult($result);
+        $response->send();
+    }
     }
 
 ?>

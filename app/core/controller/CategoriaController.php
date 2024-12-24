@@ -100,7 +100,15 @@
             $response->send();
         }
 
+        public function listPage(Request $request, Response $response): void
+        {
+        $data = $request->getData();
+        $service = new CategoriaService();
+        $result = $service->listPage($data);
 
+        $response->setResult($result);
+        $response->send();
+        }
     }
 
 ?>
