@@ -1,3 +1,0 @@
-/*
-Aca se tendria que implementar el formulario dedicado a la carga de una venta para consulta.
-*/

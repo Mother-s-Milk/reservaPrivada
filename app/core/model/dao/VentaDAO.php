@@ -118,6 +118,39 @@
             return $ventas;
         }
 
+        public function consultarVentas (): array {
+            $sql = "SELECT * FROM {$this->table} 
+                    WHERE DATE(fecha) = CURRENT_DATE()
+                    ORDER BY TIME(hora) DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchall(\PDO::FETCH_ASSOC);
+            
+            return $result;
+        }
+        
+        public function consultarVentasSemanales (): array {
+            $sql = "SELECT 
+                DATE(fecha) AS dia,
+                    SUM(total) AS total
+                FROM 
+                    ventas
+                WHERE 
+                    fecha >= CURDATE() - INTERVAL 7 DAY
+                AND fecha <= CURDATE()
+                GROUP BY 
+                DATE(fecha)
+                ORDER BY 
+                DATE(fecha) ASC";
+            ;
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchall(\PDO::FETCH_ASSOC);
+            
+            return $result;
+        }
+
     }
 
 ?>

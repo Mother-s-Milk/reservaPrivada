@@ -18,10 +18,6 @@
 <h1 class="breadcrumbs">Bebidas</h1>
 
 <section class="container section">
-    <!-- <div class="header-actions gadget">
-        <h2>Lista de Bebidas</h2>
-        <button type="button" class="btn-add" onclick="window.location.href='bebida/create'">Agregar Bebida</button>
-    </div> -->
     <div class="one">
         <aside class="gadget">
             <h2>Filtros</h2>

@@ -48,7 +48,6 @@
                     </tr>
                 </thead>
                 <tbody id="reservas-body">
-                    
                 </tbody>
                 
             </table>

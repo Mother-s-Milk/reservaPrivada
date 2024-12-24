@@ -29,55 +29,30 @@ const ventaController = {
             });
     },
     agregarProducto: () => {
-        let formulario = document.forms["venta-form"];
-        let nuevoDetalle = {
-            bebidaId: parseInt(formulario["bebidaNombre"].value),
-            nombre: formulario["bebidaNombre"].options[formulario["bebidaNombre"].selectedIndex].getAttribute('data-nombre'),
-            precio: parseFloat(formulario["bebidaNombre"].options[formulario["bebidaNombre"].selectedIndex].getAttribute('data-precio')),
-            cantidad: parseInt(formulario["bebidaCantidad"].value)
-        };
-        /*if (estaEnLista(nuevoDetalle.bebidaId)) {
-            actualizarCantidad(nuevoDetalle.bebidaId, nuevoDetalle.cantidad);
-        }
-        else {
-            ventaController.venta.detalles.push(nuevoDetalle);
-        }*/
-
-        console.log(nuevoDetalle);
-
-        /*let bebida = document.getElementById('bebidaNombre');
+        let bebida = document.getElementById('bebidaNombre');
         let cantidad = document.getElementById('bebidaCantidad');
 
-        if (bebida.value && (cantidad.value > 0)) {*/
-            //Primero verifico si la bebida que se quiere agregar no está ya en la lista  
-            /*if (ventaController.verificarLista(bebida.value)) {
-                ventaController.actualizarCantidad(bebida.value, cantidad.value);
+        if (bebida.value && (cantidad.value > 0)) {
+            let formulario = document.forms["venta-form"];
+            let nuevoDetalle = {
+                bebidaId: parseInt(formulario["bebidaNombre"].value),
+                nombre: formulario["bebidaNombre"].options[formulario["bebidaNombre"].selectedIndex].getAttribute('data-nombre'),
+                precio: parseFloat(formulario["bebidaNombre"].options[formulario["bebidaNombre"].selectedIndex].getAttribute('data-precio')),
+                cantidad: parseInt(formulario["bebidaCantidad"].value)
+            };
+            if (ventaController.estaEnLista(nuevoDetalle.bebidaId)) {
+                ventaController.actualizarCantidad(nuevoDetalle.bebidaId,   nuevoDetalle.cantidad);
             }
             else {
-                ventaService.consultarStock(bebida.value)
-                .then(response => {
-                    let stockActual = response.result;
-                    if (stockActual >= cantidad.value) {
-                        ventaController.venta.detalles.push({
-                            bebidaId: parseInt(bebida.value),
-                            nombre: bebida.options[bebida.selectedIndex].getAttribute('data-nombre'),
-                            precio: parseFloat(bebida.options[bebida.selectedIndex].getAttribute('data-precio')),
-                            cantidad: parseInt(cantidad.value)
-                        });
-                        ventaController.mostrarDetallesVenta();
-                        ventaController.resetearFormulario();
-                    }
-                    else {
-                        alert("No hay suficiente stock de la bebida seleccionada.");
-                    }
-                });
+                ventaController.venta.detalles.push(nuevoDetalle);
             }
+            ventaController.mostrarDetallesVenta();
         }
         else {
             alert("Debe seleccionar una bebida y una cantidad mayor a 0.");
-        }*/
+        }
     },
-    verificarLista: (idBebida) => {
+    estaEnLista: (idBebida) => {
         let estaEnLista = false;
 
         for (let i = 0; i < ventaController.venta.detalles.length; i++) {
@@ -182,7 +157,7 @@ const ventaController = {
                         <td>${venta.formaPago}</td>
                         <td>$${(venta.total).toFixed(2)}</td>
                         <td>
-                            <button type="button" class="btn-check" data-id="${venta.id}" style="width: auto">Ver detalles</button>
+                            <button type="button" class="btn-check" data-id="${venta.id}" onclick="window.location.href='venta/consultar/${venta.id}'" style="width: auto">Ver detalles</button>
                         </td>
                     </tr>
                 `;

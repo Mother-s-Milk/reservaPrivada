@@ -46,6 +46,11 @@
                 $response->send();
             }
         }
+        
+        public function consultar (): void {
+            $this->view = "venta/consultar.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
 
         public function editar (): void {
         }

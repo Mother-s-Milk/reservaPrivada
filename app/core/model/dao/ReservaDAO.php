@@ -181,12 +181,19 @@ final class ReservaDAO extends DAO implements InterfaceDAO
         ];
     }
 
-    public function pages(): int
-    {
+    public function pages(): int {
         $sql = "SELECT COUNT(*) as total FROM {$this->table}";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
         return (int)$result['total'];
+    }
+
+    public function consultarReservas(): array {
+        $sql = "SELECT * FROM {$this->table} WHERE DATE(fecha) = CURRENT_DATE()
+        ORDER BY TIME(hora) ASC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

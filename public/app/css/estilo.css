@@ -126,18 +126,18 @@ button {
     margin-bottom: 9px;
 }
 
-.resumen {
+.notificacion {
     text-align: center;
 }
 
-.resumen h2 {
+.notificacion h2 {
     color: #333;
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 3px;
 }
 
-.resumen p {
-    font-size: 21px;
+.notificacion p {
+    font-size: 18px;
     font-weight: 400;
 }
 
@@ -393,12 +393,12 @@ button {
 
 .btn-check {
     /*background-color: #007bff;*/
-    background-color: #333;
+    background-color: #5AB3B0;
 }
 
 .btn-check:hover {
     /*background-color: #0056b3;*/
-    background-color: #000;
+    background-color: #499897;
 }
 
 .btn-check:active {
@@ -670,6 +670,8 @@ body.dark-mode .titulo-formulario {
     color: #eee;
 }
 
-body.dark-mode input::placeholder, textarea::placeholder {
+body.dark-mode input::placeholder,
+textarea::placeholder,
+select::placeholder {
     color: #eee;
 }

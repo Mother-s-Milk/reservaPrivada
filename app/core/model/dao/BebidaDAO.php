@@ -91,6 +91,21 @@
             return (int)$data['stock'];
         }
 
+        public function consultarBebidas(): int {
+            $sql = "SELECT COUNT(*) as total FROM {$this->table}";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetch(\PDO::FETCH_ASSOC)['total'];
+        }
+
+        public function consultarBajoStock(): array {
+            $sql = "SELECT * FROM {$this->table} WHERE stock <= 10
+            ORDER BY stock ASC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        }
+
     }
 
 ?>
