@@ -312,8 +312,7 @@ button {
 /*********************/
 /*Tablas de los index*/
 /*********************/
-.tabla-lista,
-.dashboard-table {
+.tabla-lista {
     border-radius: 9px 9px 0 0;
     overflow: hidden;
 }
@@ -324,37 +323,33 @@ button {
     color: #fff;
 }
 
-.tabla-lista thead,
-.dashboard-table thead {
+.tabla-lista thead {
     background-color: #477A91;
 }
 
-.tabla-lista th,
-.dashboard-table th {
+.tabla-lista th {
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
 .tabla-lista th,
-.tabla-lista td,
-.dashboard-table th,
-.dashboard-table td {
+.tabla-lista td {
     border: 1px solid #A9CDD4;
     padding: 9px;
     text-align: center;
     font-size: 18px;
-    /*color: #fff;*/
 }
 
-.tabla-lista td,
-.dashboard-table td {
-    color: #333;
+.tabla-lista td {
     font-weight: 400;
-    background-color: #FFFFFF;
 }
 
-.tabla-lista tbody tr:hover,
-.dashboard-table tbody tr:hover {
-    background-color: #000;
+.tabla-lista tbody tr {
+    background-color: #FFFFFF;
+    color: #333;
+}
+
+.tabla-lista tbody tr:hover {
+    background-color: #333;
     color: #fff;
 }
 

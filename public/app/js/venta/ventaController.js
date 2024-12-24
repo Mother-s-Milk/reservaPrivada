@@ -11,23 +11,6 @@ const ventaController = {
         detalles: [],
         total: 0
     },
-    save: () => {
-        //let detalles = ventaController.venta.detalles;
-        //console.log(detalles);
-        ventaController.venta.formaPago = document.getElementById('formaPago').value;
-        //console.log(ventaController.venta);
-        ventaService.save(ventaController.venta)
-            .then(response => {
-                alert("Venta registrada con éxito.", response);
-                ventaController.venta.detalles = [];
-                ventaController.venta.total = 0;
-                ventaController.resetearFormulario();
-                ventaController.mostrarDetallesVenta();
-            })
-            .catch(error => {
-                console.error("Error al guardar la venta:", error);
-            });
-    },
     agregarProducto: () => {
         let bebida = document.getElementById('bebidaNombre');
         let cantidad = document.getElementById('bebidaCantidad');
@@ -46,10 +29,68 @@ const ventaController = {
             else {
                 ventaController.venta.detalles.push(nuevoDetalle);
             }
+            ventaController.resetearCamposBebida();
             ventaController.mostrarDetallesVenta();
         }
         else {
             alert("Debe seleccionar una bebida y una cantidad mayor a 0.");
+        }
+    },
+    resetearCamposBebida: () => {
+        let controls = document.querySelectorAll("#form-bebida input[type=text], #form-bebida input[type=number], #form-bebida select");
+        controls.forEach(control => {
+            control.value = "";
+        })
+    },
+    mostrarDetallesVenta: () => {
+        let bodyBebidas = document.getElementById('bebidas-venta-body');
+
+        if (ventaController.venta.detalles.length === 0) {
+            bodyBebidas.innerHTML = '<tr><td class="text-center text-muted" colspan="5">No hay detalles cargados</td></tr>';
+            bodyBebidas.nextElementSibling.hidden = true;
+        }
+        else {
+            bodyBebidas.innerHTML = '';
+            let total = 0;
+            ventaController.venta.detalles.forEach(bebida => {
+                let fila = `
+                    <tr>
+                        <td>${bebida.nombre}</td>
+                        <td>$${bebida.precio}</td>
+                        <td>${bebida.cantidad}</td>
+                        <td>$${(bebida.precio*bebida.cantidad).toFixed(2)}</td>
+                        <td>
+                            <button type="button" class="btn-editar"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button type="button" class="btn-eliminar"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+                total += bebida.precio*bebida.cantidad;
+                ventaController.venta.total = total;
+                bodyBebidas.insertAdjacentHTML('beforeend', fila);
+            });
+            document.getElementById("total-venta").textContent = `$${total.toFixed(2)}`;
+            bodyBebidas.nextElementSibling.hidden = false;
+        }
+    },
+    save: () => {
+        ventaController.venta.formaPago = document.getElementById('formaPago').value;
+
+        if (ventaController.venta.formaPago && ventaController.venta.detalles.length > 0) {
+            ventaService.save(ventaController.venta)
+            .then(response => {
+            alert("Venta registrada con éxito.", response);
+            ventaController.venta.detalles = [];
+            ventaController.venta.total = 0;
+            ventaController.resetearFormulario();
+            ventaController.mostrarDetallesVenta();
+            })
+            .catch(error => {
+                console.error("Error al guardar la venta:", error);
+            });
+        }
+        else {
+            alert('Debe especificar un medio de pago y al menos un producto a la venta.');
         }
     },
     estaEnLista: (idBebida) => {
@@ -91,37 +132,6 @@ const ventaController = {
                 alert("No hay suficiente stock de la bebida seleccionada.");
             }
         });
-    },
-    mostrarDetallesVenta: () => {
-        let bodyBebidas = document.getElementById('bebidas-venta-body');
-
-        if (ventaController.venta.detalles.length === 0) {
-            bodyBebidas.innerHTML = '<tr><td class="text-center text-muted" colspan="5">No hay detalles cargados</td></tr>';
-            bodyBebidas.nextElementSibling.hidden = true;
-        }
-        else {
-            bodyBebidas.innerHTML = '';
-            let total = 0;
-            ventaController.venta.detalles.forEach(bebida => {
-                let fila = `
-                    <tr>
-                        <td>${bebida.nombre}</td>
-                        <td>$${bebida.precio}</td>
-                        <td>${bebida.cantidad}</td>
-                        <td>$${(bebida.precio*bebida.cantidad).toFixed(2)}</td>
-                        <td>
-                            <button type="button" class="btn-editar"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button" class="btn-eliminar"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `;
-                total += bebida.precio*bebida.cantidad;
-                ventaController.venta.total = total;
-                bodyBebidas.insertAdjacentHTML('beforeend', fila);
-            });
-            document.getElementById("total-venta").textContent = `$${total.toFixed(2)}`;
-            bodyBebidas.nextElementSibling.hidden = false;
-        }
     },
     list: () => {
         ventaService.list()

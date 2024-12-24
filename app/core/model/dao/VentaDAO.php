@@ -99,7 +99,8 @@
         }
     
         public function list(): array {
-            $sql = "SELECT * FROM {$this->table}";
+            $sql = "SELECT * FROM {$this->table}
+            ORDER BY DATE(fecha) DESC";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
 

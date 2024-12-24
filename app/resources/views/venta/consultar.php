@@ -55,7 +55,7 @@
                             foreach ($venta->getDetalles() as $detalle) {
                                 echo '<tr>';
                                 echo '<td>' . $detalle['bebida'] . '</td>';
-                                echo '<td>' . $detalle['precio'] . '</td>';
+                                echo '<td>$' . $detalle['precio'] . '</td>';
                                 echo '<td>' . $detalle['cantidad'] . '</td>';
                                 echo '<td>$' . $detalle['precio'] * $detalle['cantidad'] . '</td>';
                                 echo '</tr>';

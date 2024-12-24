@@ -42,7 +42,7 @@
                         Detalles de la venta
                     </h2>
                 </header>
-                <main class="triple">
+                <main class="triple" id="form-bebida">
                     <div>
                         <select id="bebidaNombre" name="bebidaNombre" required>
                             <option value="" selected disabled>Seleccionar bebida</option>
