@@ -1,104 +1,125 @@
 let categoriaController = {
-    categorias: [],
-    data: {
-        id: 0,
-        nombre: "",
-        descripcion: ""
-    },
-    save: () => {
-        let categoriaForm = document.forms["categoria-form"];
+  categorias: [],
+  data: {
+    id: 0,
+    nombre: "",
+    descripcion: "",
+  },
 
-        categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
-        categoriaController.data.descripcion = categoriaForm.categoriaDescripcion.value;
+  pagActual: 1,
+  tamPag: 5,
 
-        //Validar datos
-        const validacionErrores = categoriaController.validacion(categoriaController.data);
+  save: () => {
+    let categoriaForm = document.forms["categoria-form"];
 
-        if (Object.keys(validacionErrores).length > 0) {
-            categoriaController.mostrarErrores(validacionErrores);
+    categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
+    categoriaController.data.descripcion =
+      categoriaForm.categoriaDescripcion.value;
 
-            return;
-        }
+    //Validar datos
+    const validacionErrores = categoriaController.validacion(
+      categoriaController.data
+    );
 
-        categoriaService.save(categoriaController.data)
-    },
-    //Función para validar datos
-    validacion: (data) => {
-        const errores = {};
+    if (Object.keys(validacionErrores).length > 0) {
+      categoriaController.mostrarErrores(validacionErrores);
 
-        if (!data.nombre.trim()) {
-            errores.nombre = "El nombre es obligatorio.";
-        }
+      return;
+    }
 
-        return errores;
-    },
-    //Mostrar errores en el formulario
-    mostrarErrores: (errores) => {
-        document.getElementById("error-nombre").textContent = errores.nombre || "";
-    },
-    //Limpiar mensajes de error
-    limpiarCamposErrores: () => {
-        const camposError = document.querySelectorAll(".error");
-        camposError.forEach(campo => {
-            campo.textContent = "";
-        });
-    },
-    resetForm: () => {
-        document.forms["categoria-form"].reset();
-    },
-    update: (id) => {
-        let categoriaForm = document.forms["categoria-form"];
+    categoriaService.save(categoriaController.data);
+  },
+  //Función para validar datos
+  validacion: (data) => {
+    const errores = {};
 
-        categoriaController.data.id = parseInt(id);
-        categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
-        categoriaController.data.descripcion = categoriaForm.categoriaDescripcion.value;
+    if (!data.nombre.trim()) {
+      errores.nombre = "El nombre es obligatorio.";
+    }
 
-        //Validar datos
-        const validacionErrores = categoriaController.validacion(categoriaController.data);
+    return errores;
+  },
+  //Mostrar errores en el formulario
+  mostrarErrores: (errores) => {
+    document.getElementById("error-nombre").textContent = errores.nombre || "";
+  },
+  //Limpiar mensajes de error
+  limpiarCamposErrores: () => {
+    const camposError = document.querySelectorAll(".error");
+    camposError.forEach((campo) => {
+      campo.textContent = "";
+    });
+  },
+  resetForm: () => {
+    document.forms["categoria-form"].reset();
+  },
+  update: (id) => {
+    let categoriaForm = document.forms["categoria-form"];
 
-        if (Object.keys(validacionErrores).length > 0) {
-            categoriaController.mostrarErrores(validacionErrores);
+    categoriaController.data.id = parseInt(id);
+    categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
+    categoriaController.data.descripcion =
+      categoriaForm.categoriaDescripcion.value;
 
-            return;
-        }
+    //Validar datos
+    const validacionErrores = categoriaController.validacion(
+      categoriaController.data
+    );
 
-        categoriaService.update(categoriaController.data)
-        .then(response => {
-            alert("Categoria actualizada exitosamente.");
-            window.location.href = "categoria";
+    if (Object.keys(validacionErrores).length > 0) {
+      categoriaController.mostrarErrores(validacionErrores);
+
+      return;
+    }
+
+    categoriaService
+      .update(categoriaController.data)
+      .then((response) => {
+        alert("Categoria actualizada exitosamente.");
+        window.location.href = "categoria";
+      })
+      .catch((error) => {
+        console.error("Error al actualizar la categoria:", error);
+        alert("Ocurrió un error al actualizar la categoria.");
+      });
+  },
+  delete: (event) => {
+    if (confirm(`¿Estás seguro de eliminar la categoria con ID`)) {
+      
+      return categoriaService
+        .delete(parseInt(event.target.getAttribute("data-id")))
+        .then((data) => {
+          alert(data.message);
         })
-        .catch(error => {
-            console.error("Error al actualizar la categoria:", error);
-            alert("Ocurrió un error al actualizar la categoria.");
+        .catch((error) => {
+          alert("Ocurrió un error al eliminar la categoria.");
         });
-    },
-    delete: (id) => {
-        if (confirm(`¿Estás seguro de eliminar la categoria con ID`, id)) {
-            categoriaService.delete(id)
-            .then(data => {
-                alert(data.message);
-                categoriaController.list();
-            })
-            .catch(error => {
-                alert("Ocurrió un error al eliminar la categoria.");
-            });
-        }
-    },
-    list: () => {
-        categoriaService.list()
-            .then(data => {
-                categoriaController.categorias = data.result;
-                categoriaController.render();
-            })
-            .catch(error => {
-                console.error("Error al cargar las categorias", error);
-            });
-    },
-    render: () => {
-        let categoriasBody = document.getElementById('categorias-body');
+    }
+  },
+  list: (page) => {
+    let data = {
+      page: page,
+      pageSize: categoriaController.tamPag,
+    };
 
-        if (categoriaController.categorias.length === 0) {
-            let fila = `
+    categoriaService
+      .listPage(data)
+      .then((data) => {
+        categoriaController.categorias = data.result.data;
+        categoriaController.render(data.result.total);
+      })
+      .catch((error) => {
+        console.error("Error al cargar los categorias", error);
+      });
+  },
+
+  render: (page) => {
+    let categoriasBody = document.getElementById("categorias-body");
+
+    let paginas = Math.ceil(page / categoriaController.tamPag);
+
+    if (categoriaController.categorias.length === 0) {
+      let fila = `
                 <tr>
                     <td colspan="4">
                         No hay categorias registradas
@@ -106,48 +127,74 @@ let categoriaController = {
                 </tr>
             `;
 
-            categoriasBody.innerHTML = fila;
-        } else {
-            categoriasBody.innerHTML = '';
-            let fila;
-            let contador = 1;
-            categoriaController.categorias.forEach(categoria => {
-                fila = `
+      categoriasBody.innerHTML = fila;
+    } else {
+      categoriasBody.innerHTML = "";
+      let fila;
+      let contador = 1;
+      categoriaController.categorias.forEach((categoria) => {
+        fila = `
                     <tr>
                         <td>${contador}</td>
                         <td>${categoria.nombre}</td>
                         <td>${categoria.descripcion}</td>
                         <td>
                             <button type="button" class="btn-editar" data-id="${categoria.id}" onclick="window.location.href='categoria/editar/${categoria.id}'"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button type="button" class="btn-eliminar" data-id="${categoria.id}" onclick=categoriaController.delete(${categoria.id})><i class="fa-solid fa-trash"></i></button>
+                            <button type="button" class="btn-eliminar" data-id="${categoria.id}"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
-                contador++;
-                categoriasBody.insertAdjacentHTML('beforeend', fila);
-            });
-        }
+        contador++;
+        categoriasBody.insertAdjacentHTML("beforeend", fila);
+      });
+
+      document.querySelectorAll(".btn-eliminar").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          categoriaController.delete(event).then(() => {
+            categoriaController.list(categoriaController.pagActual);
+          });
+        });
+      });
     }
-}
+
+    let pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+    for (let i = 1; i <= paginas; i++) {
+      let button = document.createElement("button");
+      button.textContent = i;
+      button.id = `${i}`; // Agregar id único para cada botón
+      button.classList.add("pagination-button");
+
+      button.addEventListener("click", () => {
+        categoriaController.list(i);
+        categoriaController.pagActual = i;
+      });
+      pagination.appendChild(button);
+    }
+
+  },
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-    const path = window.location.pathname;
-    if (path === "/reservaPrivada/public/categoria") {
-        categoriaController.list();
-    }
+  const path = window.location.pathname;
+  if (path === "/reservaPrivada/public/categoria") {
+    categoriaController.list(1);
+  }
 
-    let btnCategoriaAlta = document.getElementById("btn-categoria-alta");
-    if (btnCategoriaAlta != null) {
-        btnCategoriaAlta.onclick = () => {
-            categoriaController.save();
-        }
-    }
+  let btnCategoriaAlta = document.getElementById("btn-categoria-alta");
+  if (btnCategoriaAlta != null) {
+    btnCategoriaAlta.onclick = () => {
+      categoriaController.save();
+    };
+  }
 
-    let btnCategoriaActualizar = document.getElementById('btn-categoria-actualizar');
-    if (btnCategoriaActualizar != null) {
-        btnCategoriaActualizar.onclick = () => {
-            let id = document.getElementById("btn-categoria-actualizar").dataset.id;
-            categoriaController.update(id);
-        }
-    }
+  let btnCategoriaActualizar = document.getElementById(
+    "btn-categoria-actualizar"
+  );
+  if (btnCategoriaActualizar != null) {
+    btnCategoriaActualizar.onclick = () => {
+      let id = document.getElementById("btn-categoria-actualizar").dataset.id;
+      categoriaController.update(id);
+    };
+  }
 });

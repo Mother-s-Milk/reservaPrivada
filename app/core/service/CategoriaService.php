@@ -46,6 +46,12 @@
             return $dao->list();
         }
 
+        public function listPage($data): array {
+            $conn = Connection::get();
+            $dao = new CategoriaDAO($conn);
+            return $dao->listPage($data);
+        }
+
     }
 
 ?>

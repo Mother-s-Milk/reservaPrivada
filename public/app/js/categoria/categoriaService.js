@@ -99,5 +99,27 @@ let categoriaService = {
             .catch(error => {
                 console.error("Error en la solicitud:", error);
             });
+    },
+    listPage: (data) => {
+        return fetch(`${API_BASE_URL}listPage`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al obtener los proveedores");
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error("Error en la solicitud:", error);
+        });
     }
 }
