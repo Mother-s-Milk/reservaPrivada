@@ -2,7 +2,7 @@
 <section class="container section one">
     <section class="four" id="notificaciones">
     </section>
-    <aside class="double">
+    <aside class="two">
         <div class="gadget">
             <h2 class="gadget-titulo">Últimas ventas</h2>
             <table class="tabla-lista">
@@ -35,7 +35,7 @@
             </table>
         </div>
     </aside>
-    <main class="double">
+    <main class="two">
         <div class="gadget">
             <h2 class="gadget-titulo">Reservas</h2>
             <table class="tabla-lista">

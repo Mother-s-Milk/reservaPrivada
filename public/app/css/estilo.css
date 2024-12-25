@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #eee;
+    background-color: #F3F6FB;
     color: #000;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
@@ -52,6 +52,7 @@ button {
     cursor: pointer;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
     border: none;
+    border-radius: 0.5625rem; /*9px*/
     transition: color 0.3s ease, background-color 0.3s ease, transform 0.1s ease;
     text-transform: uppercase;
 }
@@ -78,8 +79,8 @@ button {
 }
 
 .one,
-.double,
-.triple,
+.two,
+.three,
 .four {
     display: flex;
     gap: 15px;
@@ -89,19 +90,19 @@ button {
     flex-direction: column;
 }
 
-.double,
-.triple,
+.two,
+.three,
 .four {
     justify-content: space-between;
     align-items: start;
 }
 
-.double > div {
+.two > div {
     flex: 1 1 calc(50%);
     max-width: calc(50%);
 }
 
-.triple > div {
+.three > div {
     flex: 1 1 calc(33%);
     max-width: calc(33%);
 }
@@ -115,14 +116,14 @@ button {
 /*Contenedor estilo componente*/
 /******************************/
 .gadget {
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.6);
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     border-radius: 0.5625rem;
     padding: 15px;
     background-color: #fff;
 }
 
 .gadget-titulo {
-    font-size: 27px;
+    font-size: 30px;
     margin-bottom: 9px;
 }
 
@@ -131,30 +132,14 @@ button {
 }
 
 .notificacion h2 {
-    color: #333;
+    color: #222;
     font-size: 18px;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
 }
 
 .notificacion p {
     font-size: 18px;
     font-weight: 400;
-}
-
-/**************************************/
-/*Tablas del dashboard de inicio index*/
-/**************************************/
-.dashboard-table {
-    border-collapse: collapse;
-    width: 100%;
-    color: #fff;
-}
-
-.dashboard-table th,
-.dashboard-table td {
-    padding: 9px;
-    text-align: center;
-    border: 1px solid #666;
 }
 
 /*****/
@@ -164,8 +149,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #477A91;
-    box-shadow: 0px 0px 3px #A9CDD4;
+    background-color: #1B263B;/*#477A91*/
+    box-shadow: 0px 0px 3px #64B5F6;/*#A9CDD4*/
     padding: 6px 2.8125rem; /*45px*/
 }
 
@@ -211,22 +196,22 @@ button {
     font-weight: 600;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
-    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.3);
 }
 
 .nav-principal > div > ul > li > a:hover,
 .nav-principal > div > ul > li > a.active {
-    background-color: #A9CDD4;
+    background-color: #64B5F6;
 }
 
 .dropdown-content > li > a:hover {
-    background-color: #A9CDD4;
+    background-color: #64B5F6;
     color: #fff;
 }
 
 .dropdown-content {
     display: none;
-    background-color: #477A91;
+    background-color: #1B263B;
     position: absolute;
     width: 180px;
     top: 50px;
@@ -237,7 +222,7 @@ button {
     width: auto;
     right: 45px;
     margin-top: 14px;
-    background-color: #477A91;
+    background-color: #1B263B;
 }
 
 .arrow-link {
@@ -258,7 +243,7 @@ button {
 }
 
 .btn-user:hover {
-    color: #333;
+    color: #64B5F6;
 }
 
 .btn-user:active {
@@ -313,18 +298,15 @@ button {
 /*Tablas de los index*/
 /*********************/
 .tabla-lista {
-    border-radius: 9px 9px 0 0;
-    overflow: hidden;
-}
-
-.tabla-lista {
     width: 100%;
     border-collapse: collapse;
     color: #fff;
+    /*border-radius: 6px 6px 0 0;
+    overflow: hidden;*/
 }
 
 .tabla-lista thead {
-    background-color: #477A91;
+    background-color: #1B263B;/*#477A91*/
 }
 
 .tabla-lista th {
@@ -346,6 +328,7 @@ button {
 .tabla-lista tbody tr {
     background-color: #FFFFFF;
     color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tabla-lista tbody tr:hover {
@@ -519,7 +502,7 @@ input::placeholder, textarea::placeholder {
 /*Footer principal*/
 /******************/
 .principal-footer-content {
-    background-color: #477A91;
+    background-color: #1B263B;
     text-align: center;
     color: #fff;
     padding: 9px;
@@ -596,7 +579,7 @@ input::placeholder, textarea::placeholder {
     align-items: center;
     width: 48px;
     height: 27px;
-    background-color: rgba(169, 205, 212, 0.5);
+    background-color: #F3F6FB;
     border-radius: 45px;
     padding: 3px;
     margin-right: 30px;
@@ -611,11 +594,12 @@ input::placeholder, textarea::placeholder {
     border-radius: 50%;
     background-color: #eee;
     transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 /* Clase activa para el contenedor */
 .boton-dark-mode.active {
-    background-color: #333;
+    background-color: #121A26;
     justify-content: end;
 }
 
@@ -630,14 +614,13 @@ input::placeholder, textarea::placeholder {
 
 /* Modo oscuro */
 body.dark-mode {
-    background-color: #111;
-    color: #fff;
+    background-color: #121212;
+    color: #eee;
 }
 
 body.dark-mode .gadget {
-    background-color: #222;
-    box-shadow: 0px 0px 3px rgba(169, 205, 212, 0.3)
-    ;
+    background-color: #1E1E1E;/*#222*/
+    box-shadow: 0px 0px 3px #555555;
     color: #eee;
 }
 
@@ -646,19 +629,19 @@ body.dark-mode .gadget h2 {
 }
 
 body.dark-mode #filtros-form label {
-    color: #ddd;
+    color: #eee;
 }
 
 body.dark-mode input,
 body.dark-mode select,
 body.dark-mode textarea {
-    background-color: #666;
-    border: 1px solid #999;
+    background-color: #2A2A2A;
+    border: 1px solid #444444;
     color: #eee;
 }
 
 body.dark-mode .breadcrumbs {
-    color: #ddd;
+    color: #eee;
 }
 
 body.dark-mode .titulo-formulario {
@@ -668,5 +651,20 @@ body.dark-mode .titulo-formulario {
 body.dark-mode input::placeholder,
 textarea::placeholder,
 select::placeholder {
+    color: #AAAAAA;
+}
+
+body.dark-mode #filtros-form > div > label {
     color: #eee;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+body.dark-mode #filtros-form > div > input,
+body.dark-mode #filtros-form > div > select {
+    border: 1px solid #444444;
+    color: #eee;
+
+    width: 100%;
 }

@@ -42,7 +42,7 @@
                         Detalles de la venta
                     </h2>
                 </header>
-                <main class="triple" id="form-bebida">
+                <main class="three" id="form-bebida">
                     <div>
                         <select id="bebidaNombre" name="bebidaNombre" required>
                             <option value="" selected disabled>Seleccionar bebida</option>
@@ -90,7 +90,7 @@
                     </tfoot>
                 </table>
             </section>
-            <div class="double">
+            <div class="two">
                 <button type="button" id="btn-venta-resetear" class="btn-reset">Resetear formulario</button>
                 <button type="button" id="btn-venta-alta" class="btn-form">Registrar venta</button>
             </div>
