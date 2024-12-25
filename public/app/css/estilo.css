@@ -578,6 +578,7 @@ input::placeholder, textarea::placeholder {
     height: 27px;
     background-color: #F3F6FB;
     border-radius: 45px;
+    border: 1px solid #64B5F6;
     padding: 3px;
     margin-right: 30px;
     justify-content: start;
