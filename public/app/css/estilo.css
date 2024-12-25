@@ -52,7 +52,7 @@ button {
     cursor: pointer;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
     border: none;
-    border-radius: 0.5625rem; /*9px*/
+    border-radius: 0.375rem; /*6px*/
     transition: color 0.3s ease, background-color 0.3s ease, transform 0.1s ease;
     text-transform: uppercase;
 }
@@ -117,7 +117,7 @@ button {
 /******************************/
 .gadget {
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 0.5625rem;
+    border-radius: 0.375rem; /*6px*/
     padding: 15px;
     background-color: #fff;
 }
@@ -281,7 +281,6 @@ button {
     background-color: #007bff;
     color: #fff;
     padding: 0.5625rem 15px;
-    border-radius: 0.5625rem;
     font-size: 15px;
     font-weight: 500;
 }
@@ -344,7 +343,6 @@ button {
 .btn-check,
 .btn-actualizar {
     font-size: 15px;
-    border-radius: 6px;
     padding: 9px;
     color: #fff;
 }
@@ -483,7 +481,6 @@ input::placeholder, textarea::placeholder {
     display: block;
     margin: auto;
     font-size: 18px;
-    border-radius: 0.5625rem;
     color: #fff;
     font-weight: 500;
     width: auto;
