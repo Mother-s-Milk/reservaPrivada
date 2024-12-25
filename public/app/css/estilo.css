@@ -326,12 +326,12 @@ button {
 
 .tabla-lista tbody tr {
     background-color: #FFFFFF;
-    color: #333;
+    color: #222;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tabla-lista tbody tr:hover {
-    background-color: #333;
+    background-color: #121212;
     color: #fff;
 }
 
@@ -559,7 +559,7 @@ input::placeholder, textarea::placeholder {
 }*/
 
 .total-venta {
-    background-color: #477A91;
+    background-color: #1B263B;
 }
 
 .total-venta th {
@@ -633,7 +633,7 @@ body.dark-mode #filtros-form label {
 body.dark-mode input,
 body.dark-mode select,
 body.dark-mode textarea {
-    background-color: #2A2A2A;
+    background-color: #333;
     border: 1px solid #444444;
     color: #eee;
 }
@@ -665,4 +665,20 @@ body.dark-mode #filtros-form > div > select {
     color: #eee;
 
     width: 100%;
+}
+
+body.dark-mode .tabla-lista th,
+body.dark-mode .tabla-lista td {
+    border: 1px solid #666;
+}
+
+body.dark-mode .tabla-lista tbody tr {
+    background-color: #333;
+    color: #eee;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .tabla-lista tbody tr:hover {
+    background-color: #F3F6FB;
+    color: #222;
 }
