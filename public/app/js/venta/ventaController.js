@@ -15,6 +15,8 @@ const ventaController = {
         let bebida = document.getElementById('bebidaNombre');
         let cantidad = document.getElementById('bebidaCantidad');
 
+        
+
         if (bebida.value && (cantidad.value > 0)) {
             let formulario = document.forms["venta-form"];
             let nuevoDetalle = {
@@ -24,12 +26,13 @@ const ventaController = {
                 cantidad: parseInt(formulario["bebidaCantidad"].value)
             };
             if (ventaController.estaEnLista(nuevoDetalle.bebidaId)) {
-                ventaController.actualizarCantidad(nuevoDetalle.bebidaId,   nuevoDetalle.cantidad);
+                ventaController.actualizarCantidad(nuevoDetalle.bebidaId,  nuevoDetalle.cantidad);
             }
             else {
                 ventaController.venta.detalles.push(nuevoDetalle);
+                ventaController.resetearCamposBebida();
             }
-            ventaController.resetearCamposBebida();
+            
             ventaController.mostrarDetallesVenta();
         }
         else {
@@ -74,25 +77,31 @@ const ventaController = {
         }
     },
     save: () => {
-        ventaController.venta.formaPago = document.getElementById('formaPago').value;
-
-        if (ventaController.venta.formaPago && ventaController.venta.detalles.length > 0) {
-            ventaService.save(ventaController.venta)
+        const formaPagoInput = document.getElementById('formaPago').value;
+        ventaController.venta.formaPago = formaPagoInput;
+    
+        if (!ventaController.venta.formaPago || ventaController.venta.detalles.length === 0) {
+            alert('Debe especificar un medio de pago y al menos un producto a la venta.');
+            return;
+        }
+    
+        ventaService.save(ventaController.venta)
             .then(response => {
-            alert("Venta registrada con éxito.", response);
-            ventaController.venta.detalles = [];
-            ventaController.venta.total = 0;
-            ventaController.resetearFormulario();
-            ventaController.mostrarDetallesVenta();
+                if (response.message === "La venta fue registrada correctamente.") {
+                    alert(response.message);
+                    ventaController.venta.detalles = [];
+                    ventaController.venta.total = 0;
+                    ventaController.resetearFormulario();
+                    ventaController.mostrarDetallesVenta();
+                } else {
+                    alert(response.message);
+                }
             })
             .catch(error => {
                 console.error("Error al guardar la venta:", error);
             });
-        }
-        else {
-            alert('Debe especificar un medio de pago y al menos un producto a la venta.');
-        }
     },
+
     estaEnLista: (idBebida) => {
         let estaEnLista = false;
 
@@ -105,6 +114,7 @@ const ventaController = {
 
         return estaEnLista;
     },
+
     actualizarCantidad: (idBebida, cantidad) => {
         let bebida = document.getElementById('bebidaNombre');
         let cantidadNueva = parseInt(cantidad);
@@ -119,6 +129,8 @@ const ventaController = {
 
         ventaService.consultarStock(idBebida)
         .then(response => {
+
+
             let stockActual = response.result;
             if (stockActual >= (cantidadActual + cantidadNueva)) {
                 for (let i = 0; i < ventaController.venta.detalles.length; i++) {
