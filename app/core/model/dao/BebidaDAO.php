@@ -29,14 +29,13 @@
             $object->setId((int)$this->conn->lastInsertId());
         }
 
-        //Ver como puedo usar los id para obtener los nombres en lugar del valor del id de la categoria y el proveedor.
         public function load ($id): InterfaceDTO {
             $sql = "SELECT id, nombre, descripcion, categoriaId, precioUnitario, stock, marca, proveedorId FROM {$this->table} WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(["id" => $id]);
 
             //prueba de id inexistente
-            $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $data = $stmt->fetch(\PDO::FETCH_ASSOC);#:: significa que se invoca algun metodo del PDO en este caso
             if (!$data) {
                 throw new \Exception("Bebida con ID {$id} no encontrada.");
             }
