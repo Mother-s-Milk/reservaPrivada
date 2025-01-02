@@ -14,24 +14,24 @@
                     <input type="date" id="filtro-fecha-fin" name="fechaFin">
                 </div>
                 <div>
-                    <label for="filtro-estado">Medio de pago:</label>
-                    <select id="filtro-estado" name="estado">
+                    <label for="filtro-medio-pago">Medio de pago:</label>
+                    <select id="filtro-medio-pago" name="medioPago">
                         <option value="">Todos</option>
-                        <option value="Confirmada">Efectivo</option>
-                        <option value="Cancelada">Debito</option>
-                        <option value="Pendiente">Credito</option>
-                        <option value="Pendiente">Transferencia</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Debito">Debito</option>
+                        <option value="Credito">Credito</option>
+                        <option value="Transferencia">Transferencia</option>
                     </select>
                 </div>
                 <div>
-                    <label for="filtro-estado">Estado:</label>
-                    <select id="filtro-estado" name="estado">
-                        <option value="">Todas</option>
-                        <option value="Confirmada">Confirmada</option>
-                        <option value="Cancelada">Cancelada</option>
-                        <option value="Pendiente">Pendiente</option>
-                    </select>
+                    <label for="filtro-precio-minimo">Precio Mínimo:</label>
+                    <input type="number" id="filtro-precio-minimo" name="precioMinimo" placeholder="0" min="0" step="0.01">
                 </div>
+                <div>
+                    <label for="filtro-precio-maximo">Precio Máximo:</label>
+                    <input type="number" id="filtro-precio-maximo" name="precioMaximo" placeholder="0" min="0" step="0.01">
+                </div>
+
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
                 <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
                 <button type="button" class="btn-add" onclick="window.location.href='venta/create'">Nueva venta</button>
@@ -52,6 +52,9 @@
                 <tbody id="ventas-body">
                 </tbody>
             </table>
+            <div id="pagination" class="pagination">
+                <!-- Botones de paginación se agregarán aquí -->
+            </div>
         </main>
     </div>
 </section>

@@ -201,4 +201,103 @@ final class VentaDAO extends DAO implements InterfaceDAO
 
         return $result;
     }
+
+    public function listPage($data): array
+    {
+        $offset = ($data["page"] - 1) * $data['pageSize'];
+
+        // Consulta para obtener los datos paginados
+        $sql = "SELECT id, fecha, hora, formaPago,total 
+            FROM {$this->table}
+            LIMIT :limit OFFSET :offset";
+
+        // Consulta para contar el total de elementos
+        $countSql = "SELECT COUNT(*) as total FROM {$this->table}";
+
+        // Ejecutar la consulta de conteo
+        $countStmt = $this->conn->prepare($countSql);
+        $countStmt->execute();
+        $total = $countStmt->fetch(\PDO::FETCH_ASSOC)['total'];
+
+        // Ejecutar la consulta principal con paginación
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':limit', $data['pageSize'], \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        // Retornar los resultados y el total
+        return [
+            'data' => $results,
+            'total' => $total
+        ];
+    }
+
+    public function filter($data): array {
+        $offset = ($data["page"] - 1) * $data['pageSize'];
+    
+        // Base de las consultas
+        $sql = "SELECT id, fecha, hora, formaPago, total 
+                FROM {$this->table}";
+        $countSql = "SELECT COUNT(*) as total FROM {$this->table}";
+    
+        $conditions = [];
+        $params = [];
+    
+        // Filtro por precio mínimo y máximo
+        if (!empty($data['pMin']) && !empty($data['pMax'])) {
+            $conditions[] = "total BETWEEN :pMin AND :pMax";
+            $params[':pMin'] = $data['pMin'];
+            $params[':pMax'] = $data['pMax'];
+        }
+    
+        // Filtro por rango de fechas
+        if (!empty($data['fMin']) && !empty($data['fMax'])) {
+            $conditions[] = "fecha BETWEEN :fMin AND :fMax";
+            $params[':fMin'] = $data['fMin'];
+            $params[':fMax'] = $data['fMax'];
+        }
+    
+        // Filtro por medio de pago
+        if (!empty($data['medioPago'])) {
+            $conditions[] = "formaPago = :medioPago";
+            $params[':medioPago'] = $data['medioPago'];
+        }
+    
+        // Agregar las condiciones a las consultas si existen
+        if (!empty($conditions)) {
+            $whereClause = " WHERE " . implode(" AND ", $conditions);
+            $sql .= $whereClause;
+            $countSql .= $whereClause;
+        }
+    
+        // Agregar paginación a la consulta principal
+        $sql .= " LIMIT :limit OFFSET :offset";
+    
+        // Ejecutar la consulta para contar el total
+        $countStmt = $this->conn->prepare($countSql);
+        foreach ($params as $key => $value) {
+            $countStmt->bindValue($key, $value);
+        }
+        $countStmt->execute();
+        $total = $countStmt->fetch(\PDO::FETCH_ASSOC)['total'];
+    
+        // Ejecutar la consulta principal con paginación
+        $stmt = $this->conn->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->bindValue(':limit', $data['pageSize'], \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    
+        // Retornar los resultados y el total
+        return [
+            'data' => $results,
+            'total' => $total
+        ];
+    }
+    
+
 }
