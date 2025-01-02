@@ -149,8 +149,8 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1B263B;/*#477A91*/
-    box-shadow: 0px 0px 3px #64B5F6;/*#A9CDD4*/
+    background-color: #477A91;/*#477A91*/
+    box-shadow: 0px 0px 3px #A9CDD4;/*#A9CDD4*/
     padding: 6px 2.8125rem; /*45px*/
 }
 
@@ -201,17 +201,17 @@ button {
 
 .nav-principal > div > ul > li > a:hover,
 .nav-principal > div > ul > li > a.active {
-    background-color: #64B5F6;
+    background-color: #A9CDD4;
 }
 
 .dropdown-content > li > a:hover {
-    background-color: #64B5F6;
+    background-color: #A9CDD4;
     color: #fff;
 }
 
 .dropdown-content {
     display: none;
-    background-color: #1B263B;
+    background-color: #477A91;
     position: absolute;
     width: 180px;
     top: 50px;
@@ -222,7 +222,7 @@ button {
     width: auto;
     right: 45px;
     margin-top: 14px;
-    background-color: #1B263B;
+    background-color: #477A91;
 }
 
 .arrow-link {
@@ -243,7 +243,7 @@ button {
 }
 
 .btn-user:hover {
-    color: #64B5F6;
+    color: #A9CDD4;
 }
 
 .btn-user:active {
@@ -305,7 +305,7 @@ button {
 }
 
 .tabla-lista thead {
-    background-color: #1B263B;/*#477A91*/
+    background-color: #6a9cb2;/*#477A91*/
 }
 
 .tabla-lista th {
@@ -499,7 +499,7 @@ input::placeholder, textarea::placeholder {
 /*Footer principal*/
 /******************/
 .principal-footer-content {
-    background-color: #1B263B;
+    background-color: #477A91;
     text-align: center;
     color: #fff;
     padding: 9px;
@@ -559,7 +559,7 @@ input::placeholder, textarea::placeholder {
 }*/
 
 .total-venta {
-    background-color: #1B263B;
+    background-color: #6a9cb2;
 }
 
 .total-venta th {
@@ -576,9 +576,9 @@ input::placeholder, textarea::placeholder {
     align-items: center;
     width: 48px;
     height: 27px;
-    background-color: #F3F6FB;
+    background-color: #A9CDD4;
     border-radius: 45px;
-    border: 1px solid #64B5F6;
+    /*border: 1px solid #fff;*/
     padding: 3px;
     margin-right: 30px;
     justify-content: start;

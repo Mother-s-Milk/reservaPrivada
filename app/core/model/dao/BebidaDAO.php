@@ -32,45 +32,41 @@ final class BebidaDAO extends DAO implements InterfaceDAO
         $object->setId((int)$this->conn->lastInsertId());
     }
 
-    //Ver como puedo usar los id para obtener los nombres en lugar del valor del id de la categoria y el proveedor.
-    public function load($id): InterfaceDTO
-    {
-        $sql = "SELECT id, nombre, descripcion, categoriaId, precioUnitario, stock, marca, proveedorId FROM {$this->table} WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute(["id" => $id]);
 
-        //prueba de id inexistente
-        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
-        if (!$data) {
-            throw new \Exception("Bebida con ID {$id} no encontrada.");
+        public function load ($id): InterfaceDTO {
+            $sql = "SELECT id, nombre, descripcion, categoriaId, precioUnitario, stock, marca, proveedorId FROM {$this->table} WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(["id" => $id]);
+
+            //prueba de id inexistente
+            $data = $stmt->fetch(\PDO::FETCH_ASSOC);#:: significa que se invoca algun metodo del PDO en este caso
+            if (!$data) {
+                throw new \Exception("Bebida con ID {$id} no encontrada.");
+            }
+            return new BebidaDTO($data);
         }
-        return new BebidaDTO($data);
-    }
 
-    public function update(InterfaceDTO $object): void
-    {
-        //$validation = new BebidadV($this->conn);
-        //$validation->validationUS($object);
-
-        $sql = "UPDATE {$this->table} SET nombre = :nombre, descripcion = :descripcion, categoriaId = :categoriaId, precioUnitario = :precioUnitario, stock = :stock, marca = :marca, proveedorId = :proveedorId WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($object->toArray());
-    }
-
-    public function delete($id): void
-    {
-        $sql = "DELETE FROM {$this->table} WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute(["id" => $id]);
-
-        if ($stmt->rowCount() === 0) {
-            throw new \Exception("No se encontró la bebida con ID {$id}.");
+        public function update (InterfaceDTO $object): void {
+            //$validation = new BebidadV($this->conn);
+            //$validation->validationUS($object);
+            
+            $sql = "UPDATE {$this->table} SET nombre = :nombre, descripcion = :descripcion, categoriaId = :categoriaId, precioUnitario = :precioUnitario, stock = :stock, marca = :marca, proveedorId = :proveedorId WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($object->toArray());
         }
-    }
 
-    public function list(): array
-    {
-        $sql = "
+        public function delete ($id): void {
+            $sql = "DELETE FROM {$this->table} WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(["id" => $id]);
+
+            if ($stmt->rowCount() === 0) {
+                throw new \Exception("No se encontró la bebida con ID {$id}.");
+            }
+        }
+
+        public function list (): array {
+            $sql = "
                 SELECT
                     b.id,
                     b.nombre,
