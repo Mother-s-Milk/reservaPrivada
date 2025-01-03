@@ -4,7 +4,8 @@
 
     use app\core\controller\base\Controller;
     use app\core\controller\base\InterfaceController;
-
+    use Dompdf\Dompdf;
+use Dompdf\Options;
     use app\core\service\CategoriaService;
 
     use app\libs\request\Request;
@@ -109,6 +110,73 @@
         $response->setResult($result);
         $response->send();
         }
-    }
+
+        public function pdf(): void {
+            $requestData = json_decode(file_get_contents("php://input"), true);
+            $categorias = $requestData['categorias'] ?? [];
+    
+            $html = '<h1>Lista de Categorías</h1>';
+            $html .= '<table border="1" cellspacing="0" cellpadding="5">';
+            $html .= '<thead><tr><th>#</th><th>Nombre</th><th>Descripción</th></tr></thead>';
+            $html .= '<tbody>';
+            foreach ($categorias as $categoria) {
+                $html .= '<tr>';
+                $html .= '<td>' . htmlspecialchars($categoria['id']) . '</td>';
+                $html .= '<td>' . htmlspecialchars($categoria['nombre']) . '</td>';
+                $html .= '<td>' . htmlspecialchars($categoria['descripcion']) . '</td>';
+                $html .= '</tr>';
+            }
+            $html .= '</tbody></table>';
+    
+            $options = new Options();
+            $options->set('isHtml5ParserEnabled', true);
+            $options->set('isRemoteEnabled', true);
+    
+            $dompdf = new Dompdf($options);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+    
+            $response = new Response();
+            $response->setController('Categoria');
+            $response->setAction('pdf');
+    
+            try {
+                $pdfContent = $dompdf->output();
+                $response->sendFile($pdfContent, 'categorias.pdf');
+            } catch (\Exception $e) {
+                $response->setError(true);
+                $response->setMessage("Error al generar el PDF: " . $e->getMessage());
+                $response->send();
+            }
+        }
+
+        public function excel(): void {
+            $requestData = json_decode(file_get_contents("php://input"), true);
+            $categorias = $requestData['categorias'] ?? [];
+    
+            $html = '<table border="1" cellspacing="0" cellpadding="5">';
+            $html .= '<thead><tr><th>#</th><th>Nombre</th><th>Descripción</th></tr></thead>';
+            $html .= '<tbody>';
+            foreach ($categorias as $categoria) {
+                $html .= '<tr>';
+                $html .= '<td>' . htmlspecialchars($categoria['id']) . '</td>';
+                $html .= '<td>' . htmlspecialchars($categoria['nombre']) . '</td>';
+                $html .= '<td>' . htmlspecialchars($categoria['descripcion']) . '</td>';
+                $html .= '</tr>';
+            }
+            $html .= '</tbody></table>';
+    
+            $response = new Response();
+            $response->setController('Categoria');
+            $response->setAction('excel');
+    
+            header('Content-Type: application/vnd.ms-excel');
+            header('Content-Disposition: inline;filename=categorias.xls');
+    
+            echo $html;
+        }
+
+}
 
 ?>

@@ -37,6 +37,14 @@
             $this->result = $result;
         }
 
+        public function sendFile(string $fileContent, string $fileName, string $mimeType = 'application/pdf'): void {
+            header("Content-Type: $mimeType");
+            header("Content-Disposition: inline; filename=\"$fileName\"");
+            echo $fileContent;
+        }
+        
+
+
         /*********/
         public function send (): void {
             header("Content-Type: application/json; charset=utf-8");

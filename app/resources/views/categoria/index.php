@@ -4,7 +4,12 @@
     <div class="header-actions gadget">
         <h2>Lista de Categorías</h2>
         <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoría</button>
+        <button type="button" class="btn-add" id="btn-pdf"> PDF</button>
+        <button type="button" class="btn-add" id="btn-excel"> Excel</button>
     </div>
+
+    
+
     <div class="one">
         <!-- <aside class="gadget">
             <h2>Filtros</h2>

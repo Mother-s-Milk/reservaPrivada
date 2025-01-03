@@ -7,7 +7,7 @@ let categoriaController = {
   },
 
   pagActual: 1,
-  tamPag: 5,
+  tamPag: 3,
 
   save: () => {
     let categoriaForm = document.forms["categoria-form"];
@@ -85,7 +85,6 @@ let categoriaController = {
   },
   delete: (event) => {
     if (confirm(`¿Estás seguro de eliminar la categoria con ID`)) {
-      
       return categoriaService
         .delete(parseInt(event.target.getAttribute("data-id")))
         .then((data) => {
@@ -171,8 +170,54 @@ let categoriaController = {
       });
       pagination.appendChild(button);
     }
-
   },
+
+  pdf: () => {
+    // Obtener los datos de la tabla en el frontend
+    let table = document.getElementById("categorias-body");
+    let rows = Array.from(table.rows);
+    let categorias = rows.map(row => {
+        let cells = row.cells;
+        return {
+            id: cells[0].innerText,
+            nombre: cells[1].innerText,
+            descripcion: cells[2].innerText
+        };
+    });
+
+    categoriaService
+        .pdf(categorias) // Envía las categorías al servicio
+        .then((response) => {
+            window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+        })
+        .catch((error) => {
+            console.error("Error al generar el PDF", error);
+        });
+}
+,
+excel: () => {
+  // Obtener los datos de la tabla en el frontend
+  let table = document.getElementById("categorias-body");
+  let rows = Array.from(table.rows);
+  let categorias = rows.map(row => {
+      let cells = row.cells;
+      return {
+          id: cells[0].innerText,
+          nombre: cells[1].innerText,
+          descripcion: cells[2].innerText
+      };
+  });
+
+  categoriaService
+      .excel(categorias) // Envía las categorías al servicio
+      .then((response) => {
+          window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+      })
+      .catch((error) => {
+          console.error("Error al generar el PDF", error);
+      });
+}
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -191,10 +236,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let btnCategoriaActualizar = document.getElementById(
     "btn-categoria-actualizar"
   );
+
   if (btnCategoriaActualizar != null) {
     btnCategoriaActualizar.onclick = () => {
       let id = document.getElementById("btn-categoria-actualizar").dataset.id;
       categoriaController.update(id);
     };
   }
+
+  let btnPDF = document.getElementById("btn-pdf");
+
+  if (btnPDF != null) {
+    btnPDF.onclick = () => {
+      categoriaController.pdf(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+    };
+  }
+
+  let btnExcel = document.getElementById("btn-excel");
+  if(btnExcel != null) {
+      btnExcel.onclick = () => {
+          categoriaController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+      };
+  }
+
 });
