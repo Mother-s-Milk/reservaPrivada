@@ -4,7 +4,7 @@
 
     use app\core\controller\base\Controller;
     use app\core\controller\base\InterfaceController;
-
+    use app\libs\report\ReportGenerator;
     use app\core\service\ProveedorService;
 
     use app\libs\request\Request;
@@ -108,7 +108,35 @@
 
         $response->setResult($result);
         $response->send();
+    }  
+
+    public function pdf(): void
+    {
+        $requestData = json_decode(file_get_contents("php://input"), true);
+        $proveedores = $requestData['proveedores'] ?? [];
+    
+        $headers = ['ID', 'Nombre', 'Teléfono','Email','Localidad','Dirección'];
+        $rows = array_map(fn($proveedor) => [$proveedor['id'], $proveedor['nombre'], $proveedor['telefono'],$proveedor['email'],$proveedor['localidad'],$proveedor['direccion']], $proveedores);
+    
+        $reportGenerator = new ReportGenerator();
+        $reportGenerator->generatePDF('Lista de Proveedores', $headers, $rows, 'proveedores.pdf');
     }
+
+    public function excel(): void
+    {
+        {
+            $requestData = json_decode(file_get_contents("php://input"), true);
+            $proveedores = $requestData['proveedores'] ?? [];
+    
+            $headers = ['ID', 'Nombre', 'Teléfono','Email','Localidad','Dirección'];
+        $rows = array_map(fn($proveedor) => [$proveedor['id'], $proveedor['nombre'], $proveedor['telefono'],$proveedor['email'],$proveedor['localidad'],$proveedor['direccion']], $proveedores);
+    
+    
+            $excelReportGenerator = new ReportGenerator();
+            $excelReportGenerator->generateExcel('Lista de Proveedores', $headers, $rows, 'proveedores.xlsx');
+        }
+    }
+
 
     }
 

@@ -29,6 +29,8 @@
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
                 <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
                 <button type="button" class="btn-add" onclick="window.location.href='reserva/create'">Agregar Reserva</button>
+                <button type="button" class="btn-pdf" id="btn-pdf">PDF</button>
+                <button type="button" class="btn-excel" id="btn-excel">Excel</button>
             </form>
         </aside>
         <main class="gadget">
@@ -38,7 +40,7 @@
                         <th>#</th>
                         <th>Apellido</th>
                         <th>Nombres</th>
-                        <th>Telefono</th>
+                        <th>Teléfono</th>
                         <th>Fecha</th>
                         <th>Hora</th>
                         <th>Personas</th>

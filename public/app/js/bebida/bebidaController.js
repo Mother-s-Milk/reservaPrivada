@@ -227,6 +227,69 @@ let bebidaController = {
     }
   },
 
+
+  pdf: () => {
+    // Obtener los datos de la tabla en el frontend
+    let table = document.getElementById("bebidas-body");
+    let rows = Array.from(table.rows);
+    let bebidas = rows.map(row => {
+        let cells = row.cells;
+        return {
+            id: cells[0].innerText,
+            nombre: cells[1].innerText,
+            descripcion: cells[2].innerText,
+            categoria: cells[3].innerText,
+            precio: cells[4].innerText,
+            stock: cells[5].innerText,
+            marca: cells[6].innerText,
+            proveedor: cells[7].innerText
+        };
+    });
+
+    bebidaService
+        .pdf(bebidas) // Envía las categorías al servicio
+        .then((response) => {
+            window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+        })
+        .catch((error) => {
+            console.error("Error al generar el PDF", error);
+        });
+}
+,
+excel: () => {
+  // Obtener los datos de la tabla en el frontend
+  let table = document.getElementById("bebidas-body");
+  let rows = Array.from(table.rows);
+  let bebidas = rows.map(row => {
+      let cells = row.cells;
+      return {
+        id: cells[0].innerText,
+        nombre: cells[1].innerText,
+        descripcion: cells[2].innerText,
+        categoria: cells[3].innerText,
+        precio: cells[4].innerText,
+        stock: cells[5].innerText,
+        marca: cells[6].innerText,
+        proveedor: cells[7].innerText
+      };
+  });
+
+  bebidaService
+      .excel(bebidas) // Envía las categorías al servicio
+      .then((response) => {
+          window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+      })
+      .catch((error) => {
+          console.error("Error al generar el PDF", error);
+      });
+}
+
+
+
+  ,
+
+
+
   filter: (page) => {
 
     let data = {
@@ -350,4 +413,21 @@ document.addEventListener("DOMContentLoaded", () => {
       bebidaController.update(id);
     };
   }
+
+  let btnPDF = document.getElementById("btn-pdf");
+
+  if (btnPDF != null) {
+    btnPDF.onclick = () => {
+      bebidaController.pdf(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+    };
+  }
+
+  let btnExcel = document.getElementById("btn-excel");
+  if(btnExcel != null) {
+      btnExcel.onclick = () => {
+          bebidaController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+      };
+  }
+
+
 });

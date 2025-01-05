@@ -333,6 +333,65 @@ let reservaController = {
     }
   },
 
+  pdf: () => {
+    // Obtener los datos de la tabla en el frontend
+    let table = document.getElementById("reservas-body");
+    let rows = Array.from(table.rows);
+    let reservas = rows.map(row => {
+        let cells = row.cells;
+        return {
+          id: cells[0].innerText,
+          apellido: cells[1].innerText,
+          nombre: cells[2].innerText,
+          telefono: cells[3].innerText,
+          fecha: cells[4].innerText,
+          hora: cells[5].innerText,
+          personas: cells[6].innerText,
+          detalles: cells[7].innerText,
+          estado: cells[8].innerText
+        };
+    });
+
+    reservaService
+        .pdf(reservas) // Envía las categorías al servicio
+        .then((response) => {
+            window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+        })
+        .catch((error) => {
+            console.error("Error al generar el PDF", error);
+        });
+}
+,
+excel: () => {
+  // Obtener los datos de la tabla en el frontend
+  let table = document.getElementById("reservas-body");
+  let rows = Array.from(table.rows);
+  let reservas = rows.map(row => {
+      let cells = row.cells;
+      return {
+        id: cells[0].innerText,
+            apellido: cells[1].innerText,
+            nombre: cells[2].innerText,
+            telefono: cells[3].innerText,
+            fecha: cells[4].innerText,
+            hora: cells[5].innerText,
+            personas: cells[6].innerText,
+            detalles: cells[7].innerText,
+            estado: cells[8].innerText
+      };
+  });
+
+  reservaService
+      .excel(reservas) // Envía las categorías al servicio
+      .then((response) => {
+          window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+      })
+      .catch((error) => {
+          console.error("Error al generar el PDF", error);
+      });
+}
+
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -362,4 +421,20 @@ document.addEventListener("DOMContentLoaded", () => {
       reservaController.list(1);
     };
   }
+
+  let btnPDF = document.getElementById("btn-pdf");
+
+  if (btnPDF != null) {
+    btnPDF.onclick = () => {
+      reservaController.pdf(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+    };
+  }
+
+  let btnExcel = document.getElementById("btn-excel");
+  if(btnExcel != null) {
+      btnExcel.onclick = () => {
+          reservaController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+      };
+  }
+
 });

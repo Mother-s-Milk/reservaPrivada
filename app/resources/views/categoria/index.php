@@ -5,7 +5,7 @@
         <h2>Lista de Categorías</h2>
         <div>
             <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoría</button>
-            <button type="button" class="btn-eliminar" id="btn-pdf">PDF</button>
+            <button type="button" class="btn-pdf" id="btn-pdf">PDF</button>
             <button type="button" class="btn-excel" id="btn-excel">Excel</button>
         </div>
     </div>

@@ -4,6 +4,7 @@ namespace app\core\controller;
 
 use app\core\controller\base\Controller;
 use app\core\controller\base\InterfaceController;
+use app\libs\report\ReportGenerator;
 
 use app\core\service\ReservaService;
 
@@ -150,5 +151,34 @@ final class ReservaController extends Controller implements InterfaceController
 
         $response->setResult($result);
         $response->send();
+    }
+
+    public function pdf(): void
+    {
+        $requestData = json_decode(file_get_contents("php://input"), true);
+        $reservas = $requestData['reservas'] ?? [];
+    
+        $headers = ['ID','Apellido', 'Nombre','Teléfono','Fecha','Hora','Personas','Detalles','Estado'];
+
+        $rows = array_map(fn($reserva) => [$reserva['id'], $reserva['apellido'], $reserva['nombre'],$reserva['telefono'],$reserva['fecha'],$reserva['hora'],$reserva['personas'],$reserva['detalles'],$reserva['estado']], $reservas);
+    
+        $reportGenerator = new ReportGenerator();
+        $reportGenerator->generatePDF('Lista de Reservas', $headers, $rows, 'reservas.pdf');
+    }
+
+    public function excel(): void
+    {
+        {
+            $requestData = json_decode(file_get_contents("php://input"), true);
+            $reservas = $requestData['reservas'] ?? [];
+    
+        $headers = ['ID','Apellido', 'Nombre','Teléfono','Fecha','Hora','Personas','Detalles','Estado'];
+
+        $rows = array_map(fn($reserva) => [$reserva['id'], $reserva['apellido'], $reserva['nombre'],$reserva['telefono'],$reserva['fecha'],$reserva['hora'],$reserva['personas'],$reserva['detalles'],$reserva['estado']], $reservas);
+    
+    
+            $excelReportGenerator = new ReportGenerator();
+            $excelReportGenerator->generateExcel('Lista de Reservas', $headers, $rows, 'reservas.xlsx');
+        }
     }
 }

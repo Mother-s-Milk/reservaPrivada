@@ -4,7 +4,7 @@
 
     use app\core\controller\base\Controller;
     use app\core\controller\base\InterfaceController;
-
+    use app\libs\report\ReportGenerator;
     use app\core\service\VentaService;
 
     use app\core\service\BebidaService;
@@ -97,6 +97,32 @@
 
         $response->setResult($result);
         $response->send();
+    }
+
+
+    public function pdf(): void
+    {
+        $requestData = json_decode(file_get_contents("php://input"), true);
+        $ventas = $requestData['ventas'] ?? [];
+    
+        $headers = ['ID', 'Fecha', 'Hora','Forma de Pago','Total'];
+        $rows = array_map(fn($venta) => [$venta['id'], $venta['fecha'], $venta['hora'],$venta['formaPago'],$venta['total']], $ventas);
+        $reportGenerator = new ReportGenerator();
+        $reportGenerator->generatePDF('Lista de Ventas', $headers, $rows, 'ventas.pdf');
+    }
+
+    public function excel(): void
+    {
+        {
+            $requestData = json_decode(file_get_contents("php://input"), true);
+            $ventas = $requestData['ventas'] ?? [];
+    
+        $headers = ['ID', 'Fecha', 'Hora','Forma de Pago','Total'];
+        $rows = array_map(fn($venta) => [$venta['id'], $venta['fecha'], $venta['hora'],$venta['formaPago'],$venta['total']], $ventas);
+    
+            $excelReportGenerator = new ReportGenerator();
+            $excelReportGenerator->generateExcel('Lista de Ventas', $headers, $rows, 'ventas.xlsx');
+        }
     }
 
 
