@@ -1,4 +1,4 @@
-let mesaController = {
+/*let mesaController = {
   mesas: [],  
   data: {
     id: 0,
@@ -114,4 +114,50 @@ document.addEventListener("DOMContentLoaded", () => {
       mesaController.update(id);
     };
   }
+});*/
+
+let mesaController = {
+  mesas: [],
+  mostrarOpciones: (id) => {
+    let mesaInfo = document.getElementById("mesa-info");
+    let ocupar = document.createElement("button");
+    ocupar.innerHTML = "Ocupar";
+    let reservar = document.createElement("button");
+    reservar.innerHTML = "Reservar";
+
+    mesaInfo.innerHTML = "";
+    mesaInfo.appendChild(ocupar);
+    ocupar.onclick = () => {
+      mesaController.abrirMesa(id);
+    };
+    mesaInfo.appendChild(reservar);
+    reservar.onclick = () => {
+      mesaController.reservarMesa(id);
+    }
+  },
+  mostrarDetalles: (id) => {
+    alert("Detalles de mesa");
+  },
+  abrirMesa: (id) => {
+    alert("Mesa abierta");
+  },
+  reservarMesa: (id) => {
+    alert("Mesa reservada");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  let mesas = document.querySelectorAll(".mesa");
+  mesas.forEach((mesa) => {
+    mesa.addEventListener("click", () => {
+      const id = mesa.dataset.id;
+      const estado = mesa.dataset.estado;
+
+      if (estado === "ocupada") {
+        mesaController.mostrarDetalles(id);
+      } else if (estado === "libre") {
+        mesaController.mostrarOpciones(id);
+      }
+    });
+  });
 });

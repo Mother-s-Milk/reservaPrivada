@@ -1,10 +1,9 @@
 //Agregar un modal de confirmacion si el usuario presiona el boton de resertar formulario
 //Si al agregar un detalle de venta, el data-stock es menor a la cantidad solicitada, avisar.
-
+//Agregar el atributo "tipo de venta" para identificar si fue una venta al paso o de una mesa
 const ventaController = {
   pagActual: 1,
   tamPag: 3,
-
   ventas: [], //Para guardar las ventas enviadas desde el back en las solicitudes
   venta: {
     id: 0,
@@ -14,7 +13,6 @@ const ventaController = {
     detalles: [],
     total: 0,
   },
-
   agregarProducto: () => {
     const bebida = document.getElementById("bebidaNombre");
     const cantidad = document.getElementById("bebidaCantidad");
@@ -95,7 +93,7 @@ const ventaController = {
             <td>${bebida.cantidad}</td>
             <td>$${(bebida.precio * bebida.cantidad).toFixed(2)}</td>
             <td>
-              <button type="button" class="btn-modificar" data-index="${index}" data-value="${
+              <button type="button" class="btn-editar" data-index="${index}" data-value="${
           bebida.bebidaId
         }">
                 <i class="fa-solid fa-pen-to-square"></i>
@@ -397,18 +395,19 @@ const ventaController = {
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
   if (path === "/reservaPrivada/public/venta") {
-    ventaController.list(1);
+    ventaController.list(1); //Se listan las ventas solamente si la ruta es igual al index de ventas
+
+    let btnResetearFiltros = document.getElementById("btn-borrar-filtrar");
+    btnResetearFiltros.onclick = () => {
+      ventaController.list(1);
+    };
+  
+    let btnFiltros = document.getElementById("btn-filtrar");
+    btnFiltros.onclick = () => {
+      ventaController.Filter(1);
+    };
+
   }
-
-  let btnResetearFiltros = document.getElementById("btn-borrar-filtrar");
-  btnResetearFiltros.onclick = () => {
-    ventaController.list(1);
-  };
-
-  let btnFiltros = document.getElementById("btn-filtrar");
-  btnFiltros.onclick = () => {
-    ventaController.Filter(1);
-  };
 
   let btnAgregarBebida = document.getElementById("btn-agregar-bebida-venta");
   btnAgregarBebida.onclick = () => {
@@ -424,4 +423,5 @@ document.addEventListener("DOMContentLoaded", () => {
   btnAltaVenta.onclick = () => {
     ventaController.save();
   };
+
 });

@@ -43,9 +43,9 @@
                     <tr>
                         <th>#</th>
                         <th>Hora</th>
-                        <th>Detalles</th>
                         <th>Apellido</th>
                         <th>Nombres</th>
+                        <th>Personas</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>

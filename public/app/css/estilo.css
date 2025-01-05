@@ -277,6 +277,18 @@ button {
     font-weight: 600;
 }
 
+.btn-excel {
+    background-color: #28a745;
+    color: #fff;
+    padding: 0.5625rem 15px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.btn-excel:hover {
+    background-color: #1e7e34;
+}
+
 .btn-add {
     background-color: #007bff;
     color: #fff;
@@ -441,7 +453,8 @@ button {
     height: 39px;
 }
 
-input::placeholder, textarea::placeholder {
+.form input::placeholder,
+.form textarea::placeholder {
     color: #666;
 }
 
@@ -567,7 +580,23 @@ input::placeholder, textarea::placeholder {
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
+.pagination {
+    margin-top: 15px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 7.5px;
+}
 
+.pagination button {
+    background-color: #ccc;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
 
 
 /* Contenedor del interruptor */
@@ -681,4 +710,110 @@ body.dark-mode .tabla-lista tbody tr {
 body.dark-mode .tabla-lista tbody tr:hover {
     background-color: #F3F6FB;
     color: #222;
+}
+
+/*******/
+/*Mesas*/
+/*******/
+.seccion-mesas {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 15px;
+}
+
+.seccion-mesas > main {
+    flex: 1 1 calc(60%);
+    max-width: calc(60%);
+}
+
+.seccion-mesas > aside {
+    flex: 1 1 calc(40%);
+    max-width: calc(40%);
+    background-color: #ddd;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid black;
+}
+
+.mesas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 180px;
+    gap: 30px;
+}
+
+.mesa {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: green;
+}
+
+.mesa-info > div {
+    margin-bottom: 7.5px;
+}
+
+.mesa-info > div p {
+    font-size: 18px;
+    margin-bottom: 7.5px;
+}
+
+.mesa-info > div p:last-child {
+    margin-bottom: 0;
+}
+
+.mesa-info > div p span {
+    font-weight: 600;
+}
+
+.mesa-info button {
+    border: 1px solid black;
+    padding: 3.75px 7.5px;
+    font-size: 16px;
+}
+
+.mesa-info table {
+    margin: 7.5px 0;
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+    font-size: 16px;
+}
+
+.mesa-info thead,
+.mesa-info tfoot {
+    background-color: #000;/*#477A91*/
+}
+
+.mesa-info th {
+    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.mesa-info th,
+.mesa-info td {
+    border: 1px solid #333;
+    padding: 7.5px;
+    text-align: center;
+}
+
+.mesa-info td {
+    font-weight: 400;
+}
+
+.mesa-info tbody tr {
+    background-color: #FFFFFF;
+    color: #111;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mesa-info tbody tr:hover {
+    background-color: #666;
+    color: #fff;
 }

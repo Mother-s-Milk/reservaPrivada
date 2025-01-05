@@ -168,11 +168,10 @@ final class VentaDAO extends DAO implements InterfaceDAO
         return $ventas;
     }
 
-    public function consultarVentas(): array
-    {
-        $sql = "SELECT * FROM {$this->table} 
-                    WHERE DATE(fecha) = CURRENT_DATE()
-                    ORDER BY TIME(hora) DESC";
+    public function consultarVentas (): array {
+        $sql = "SELECT id, fecha, hora, total FROM {$this->table} 
+                WHERE DATE(fecha) = CURRENT_DATE()
+                ORDER BY TIME(hora) DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchall(\PDO::FETCH_ASSOC);
@@ -180,8 +179,7 @@ final class VentaDAO extends DAO implements InterfaceDAO
         return $result;
     }
 
-    public function consultarVentasSemanales(): array
-    {
+    public function consultarVentasSemanales (): array {
         $sql = "SELECT 
                 DATE(fecha) AS dia,
                     SUM(total) AS total
@@ -193,7 +191,7 @@ final class VentaDAO extends DAO implements InterfaceDAO
                 GROUP BY 
                 DATE(fecha)
                 ORDER BY 
-                DATE(fecha) ASC";;
+                DATE(fecha) ASC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
 

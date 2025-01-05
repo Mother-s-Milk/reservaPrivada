@@ -6,20 +6,6 @@
         <ul class="nav-links">
             <li><a href="inicio">Inicio</a></li>
             <li>
-                <a href="" class="dropdown-btn">Ventas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
-                <ul class="dropdown-content">
-                    <li><a href="venta/create">Nueva venta</a></li>
-                    <li><a href="venta">Historial ventas</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="" class="dropdown-btn">Reservas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
-                <ul class="dropdown-content">
-                    <li><a href="reserva/create">Nueva reserva</a></li>
-                    <li><a href="reserva">Historial reservas</a></li>
-                </ul>
-            </li>
-            <li>
                 <a href="" class="dropdown-btn">Bebidas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
                 <ul class="dropdown-content">
                     <li><a href="bebida/create">Agregar bebida</a></li>
@@ -33,6 +19,23 @@
                     <li><a href="proveedor/create">Agregar proveedor</a></li>
                     <li><a href="proveedor">Registro proveedores</a></li>
                 </ul>
+            </li>
+            <li>
+                <a href="" class="dropdown-btn">Reservas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
+                <ul class="dropdown-content">
+                    <li><a href="reserva/create">Nueva reserva</a></li>
+                    <li><a href="reserva">Historial reservas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="" class="dropdown-btn">Ventas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
+                <ul class="dropdown-content">
+                    <li><a href="venta/create">Nueva venta</a></li>
+                    <li><a href="venta">Historial ventas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="mesa">Mesas</a>
             </li>
         </ul>
     </div>

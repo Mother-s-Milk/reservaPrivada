@@ -190,7 +190,7 @@ final class ReservaDAO extends DAO implements InterfaceDAO
     }
 
     public function consultarReservas(): array {
-        $sql = "SELECT * FROM {$this->table} WHERE DATE(fecha) = CURRENT_DATE()
+        $sql = "SELECT id, apellido, nombres, hora, personas FROM  {$this->table} WHERE DATE(fecha) =   CURRENT_DATE()
         ORDER BY TIME(hora) ASC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();

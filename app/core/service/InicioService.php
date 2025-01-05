@@ -16,6 +16,24 @@
             parent::__construct();
         }
 
+        public function consultarVentas (): array {
+            $conn = Connection::get();
+            $dao = new VentaDAO($conn);
+            return $dao->consultarVentas();
+        }
+
+        public function consultarBajoStock (): array {
+            $conn = Connection::get();
+            $dao = new BebidaDAO($conn);
+            return $dao->consultarBajoStock();
+        }
+
+        public function consultarReservas (): array {
+            $conn = Connection::get();
+            $dao = new ReservaDAO($conn);
+            return $dao->consultarReservas();
+        }
+
         public function consultarProveedores (): int {
             $conn = Connection::get();
             $dao = new ProveedorDAO($conn);
@@ -26,24 +44,6 @@
             $conn = Connection::get();
             $dao = new BebidaDAO($conn);
             return $dao->consultarBebidas();
-        }
-
-        public function consultarVentas (): array {
-            $conn = Connection::get();
-            $dao = new VentaDAO($conn);
-            return $dao->consultarVentas();
-        }
-
-        public function consultarReservas (): array {
-            $conn = Connection::get();
-            $dao = new ReservaDAO($conn);
-            return $dao->consultarReservas();
-        }
-
-        public function consultarBajoStock (): array {
-            $conn = Connection::get();
-            $dao = new BebidaDAO($conn);
-            return $dao->consultarBajoStock();
         }
 
         public function consultarVentasSemanales (): array {

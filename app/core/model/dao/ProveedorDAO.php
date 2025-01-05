@@ -173,9 +173,7 @@ final class ProveedorDAO extends DAO implements InterfaceDAO
         ];
     }
 
-    /**/
-    public function consultarProveedores(): int
-    {
+    public function consultarProveedores(): int {
         $sql = "SELECT COUNT(*) as total FROM {$this->table}";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();

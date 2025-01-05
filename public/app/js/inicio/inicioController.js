@@ -20,7 +20,6 @@ const inicioController = {
       `;
       notificaciones.insertAdjacentHTML('beforeend', data);
       inicioController.mostrarVentas(inicioController.ventas);
-      //inicioController.crearGraficoVentas(inicioController.ventas);
     });
   },
   mostrarVentas: (ventas) => {
@@ -28,11 +27,11 @@ const inicioController = {
 
     if (ventas.length === 0) {
       let nuevaFila = `
-          <tr>
-            <td colspan="5">No hay ventas de hoy</td>
-          </tr>
-        `;
-        ventasBody.innerHTML = nuevaFila;
+        <tr>
+          <td colspan="5">No hay ventas de hoy</td>
+        </tr>
+      `;
+      ventasBody.innerHTML = nuevaFila;
     }
     else {
       ventasBody.innerHTML = '';
@@ -50,8 +49,8 @@ const inicioController = {
             </td>
           </tr>
         `;
-        contador++;
         ventasBody.insertAdjacentHTML('beforeend', nuevaFila);
+        contador++;
       });
     }
   },
@@ -75,11 +74,11 @@ const inicioController = {
 
     if (bajoStock.length === 0) {
       let nuevaFila = `
-          <tr>
-            <td colspan="4">No hay bajo stock</td>
-          </tr>
-        `;
-        bajoStockBody.innerHTML = nuevaFila;
+        <tr>
+          <td colspan="4">No hay bajo stock</td>
+        </tr>
+      `;
+      bajoStockBody.innerHTML = nuevaFila;
     }
     else {
       bajoStockBody.innerHTML = '';
@@ -96,8 +95,8 @@ const inicioController = {
             </td>
           </tr>
         `;
-        contador++;
         bajoStockBody.insertAdjacentHTML('beforeend', nuevaFila);
+        contador++;
       });
     }
   },
@@ -106,7 +105,6 @@ const inicioController = {
     .then((response) => {
       inicioController.reservas = response.result;
       let notificaciones = document.getElementById('notificaciones');
-      
       data = `
         <div class="gadget notificacion">
           <h2>Reservas de hoy:</h2>
@@ -115,7 +113,6 @@ const inicioController = {
       `;
       notificaciones.insertAdjacentHTML('beforeend', data);
       inicioController.mostrarReservas();
-
     });
   },
   mostrarReservas: () => {
@@ -123,10 +120,10 @@ const inicioController = {
 
     if (inicioController.reservas.length === 0) {
       let nuevaFila = `
-          <tr>
-            <td colspan="6">No hay reservas para hoy</td>
-          </tr>
-        `;
+        <tr>
+          <td colspan="6">No hay reservas para hoy</td>
+        </tr>
+      `;
       reservasBody.innerHTML = nuevaFila;
     }
     else {
@@ -138,17 +135,17 @@ const inicioController = {
           <tr>
             <td>${contador}</td>
             <td>${reserva.hora}</td>
-            <td>${reserva.detalles}</td>
             <td>${reserva.apellido}</td>
             <td>${reserva.nombres}</td>
+            <td>${reserva.personas}</td>
             <td>
               <button type="button" class="btn-confirmar btn-actualizar btn-form" data-id="${reserva.id}"><i class="fa-solid fa-check"></i></button>
               <button type="button" class="btn-cancelar btn-eliminar" data-id="${reserva.id}"><i class="fa-solid fa-x"></i></button>
             </td>
           </tr>
         `;
-        contador++;
         reservasBody.insertAdjacentHTML('beforeend', nuevaFila);
+        contador++;
       });
     }
   },
@@ -182,12 +179,15 @@ const inicioController = {
     inicioService.consultarVentasSemanales()
     .then((response) => {
       inicioController.ventasSemanales = response.result;
-      console.log(inicioController.ventasSemanales);
       inicioController.mostrarGrafica(inicioController.ventasSemanales);
     });
   },
   mostrarGrafica: (ventasSemanales) => {
     const grafica = document.getElementById('grafica');
+
+    if (grafica.chart) {
+      grafica.chart.destroy(); //Elimina la gráfica previa
+    }
 
     //Mapear los datos
     const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -195,20 +195,20 @@ const inicioController = {
     //Extraer las fechas y totales
     const labels = ventasSemanales.map((venta) => {
         const fecha = new Date(venta.dia);
-        return diasSemana[fecha.getDay()]; // Convertir fecha a nombre de día
+        return diasSemana[fecha.getDay()]; //Convertir fecha a nombre de día
     });
 
     const data = ventasSemanales.map((venta) => venta.total);
 
     //Crear la gráfica
     new Chart(grafica, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: labels, // Etiquetas (nombres de días)
+            labels: labels, //Etiquetas (nombres de días)
             datasets: [{
                 label: 'Ganancias por día',
-                data: data, // Datos (totales)
-                borderWidth: 2,
+                data: data, //Datos (totales)
+                borderWidth: 1,
                 borderColor: '#A9CDD4',
                 backgroundColor: '#477A91',
             }],
@@ -229,8 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
   inicioController.consultarVentas();
   inicioController.consultarBajoStock();
   inicioController.consultarReservas();
-  inicioController.consultarBebidas();
   inicioController.consultarProveedores();
+  inicioController.consultarBebidas();
   inicioController.consultarVentasSemanales();
 
 });

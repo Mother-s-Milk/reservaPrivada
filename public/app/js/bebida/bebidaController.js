@@ -1,5 +1,5 @@
 let bebidaController = {
-  //En el array "bebidas" se van a almacenar las bebidas cuando se haga la solicitud al back para desplegarlas en el index relacionado a las mismas.
+  //En el array "bebidas" se van a almacenar las bebidas cuando se haga la solicitud al back para desplegarlas
   bebidas: [],
   pagActual: 1,
   tamPag: 3,
@@ -19,22 +19,14 @@ let bebidaController = {
     //Recupero los valores del formulario
     bebidaController.data.nombre = bebidaForm.bebidaNombre.value;
     bebidaController.data.descripcion = bebidaForm.bebidaDescripcion.value;
-    bebidaController.data.categoriaId = parseInt(
-      bebidaForm.bebidaCategoriaId.value
-    );
-    bebidaController.data.precioUnitario = parseFloat(
-      bebidaForm.bebidaPrecioUnitario.value
-    );
+    bebidaController.data.categoriaId = parseInt(bebidaForm.bebidaCategoriaId.value);
+    bebidaController.data.precioUnitario = parseFloat(bebidaForm.bebidaPrecioUnitario.value);
     bebidaController.data.stock = parseInt(bebidaForm.bebidaStock.value);
     bebidaController.data.marca = bebidaForm.bebidaMarca.value;
-    bebidaController.data.proveedorId = parseInt(
-      bebidaForm.bebidaProveedorId.value
-    );
+    bebidaController.data.proveedorId = parseInt(bebidaForm.bebidaProveedorId.value);
 
     //Validar datos
-    const validacionErrores = bebidaController.validacion(
-      bebidaController.data
-    );
+    const validacionErrores = bebidaController.validacion(bebidaController.data);
 
     if (Object.keys(validacionErrores).length > 0) {
       bebidaController.mostrarErrores(validacionErrores);
@@ -346,10 +338,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let btnReset = document.getElementById("btn-borrar-filtrar");
   if (btnReset != null) {
     btnReset.onclick = () => {
+      document.forms["filtros-form"].reset();
       bebidaController.list(1);
     };
   }
-
 
   let btnBebidaActualizar = document.getElementById("btn-bebida-actualizar");
   if (btnBebidaActualizar != null) {

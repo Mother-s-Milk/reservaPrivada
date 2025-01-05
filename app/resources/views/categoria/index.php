@@ -3,17 +3,13 @@
 <section class="container section">
     <div class="header-actions gadget">
         <h2>Lista de Categorías</h2>
-        <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoría</button>
-        <button type="button" class="btn-add" id="btn-pdf"> PDF</button>
-        <button type="button" class="btn-add" id="btn-excel"> Excel</button>
+        <div>
+            <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoría</button>
+            <button type="button" class="btn-eliminar" id="btn-pdf">PDF</button>
+            <button type="button" class="btn-excel" id="btn-excel">Excel</button>
+        </div>
     </div>
-
-    
-
     <div class="one">
-        <!-- <aside class="gadget">
-            <h2>Filtros</h2>
-        </aside> -->
         <main class="gadget">
             <table class="tabla-lista">
                 <thead>
@@ -27,12 +23,9 @@
                 <tbody id="categorias-body">
                 </tbody>
             </table>
-            
             <div id="pagination" class="pagination">
                 <!-- Botones de paginación se agregarán aquí -->
             </div>
-
-
         </main>
     </div>
 </section>

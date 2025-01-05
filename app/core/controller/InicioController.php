@@ -25,7 +25,27 @@
             $BC_link_anterior=APP_FRONT."inicio/index";
             $BC_anterior="Inicio";
             require_once APP_TEMPLATE . "template.php";
-            
+        }
+
+        public function consultarVentas (Request $request, Response $response): void {
+            $service = new InicioService();
+            $ventas = $service->consultarVentas();
+            $response->setResult($ventas);
+            $response->send();
+        }
+
+        public function consultarBajoStock (Request $request, Response $response): void {
+            $service = new InicioService();
+            $bajoStock = $service->consultarBajoStock();
+            $response->setResult($bajoStock);
+            $response->send();
+        }
+
+        public function consultarReservas (Request $request, Response $response): void {
+            $service = new InicioService();
+            $reservas = $service->consultarReservas();
+            $response->setResult($reservas);
+            $response->send();
         }
 
         public function consultarProveedores (Request $request, Response $response): void {
@@ -39,27 +59,6 @@
             $service = new InicioService();
             $bebidas = $service->consultarBebidas();
             $response->setResult($bebidas);
-            $response->send();
-        }
-
-        public function consultarVentas (Request $request, Response $response): void {
-            $service = new InicioService();
-            $ventas = $service->consultarVentas();
-            $response->setResult($ventas);
-            $response->send();
-        }
-
-        public function consultarReservas (Request $request, Response $response): void {
-            $service = new InicioService();
-            $reservas = $service->consultarReservas();
-            $response->setResult($reservas);
-            $response->send();
-        }
-
-        public function consultarBajoStock (Request $request, Response $response): void {
-            $service = new InicioService();
-            $bajoStock = $service->consultarBajoStock();
-            $response->setResult($bajoStock);
             $response->send();
         }
 

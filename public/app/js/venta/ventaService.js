@@ -97,7 +97,7 @@ let ventaService = {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Error al obtener los proveedores");
+                throw new Error("Error al obtener las ventas (listPage)");
             }
             return response.json();
         })
@@ -129,9 +129,5 @@ let ventaService = {
         .catch(error => {
             console.error("Error en la solicitud:", error);
         });
-    },
-
-
-
-
+    }
 }

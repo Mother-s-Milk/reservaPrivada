@@ -14,41 +14,49 @@
 
         $c1 = [
             "id" => 0,
+            "descripcion" => "Variedades de vinos elaborados a partir de uvas tintas, ideales para acompañar carnes rojas y platos fuertes.",
             "nombre" => "Vinos Tintos"
         ];
 
         $c2 = [
             "id" => 0,
+            "descripcion" => "Vinos frescos y ligeros, producidos a partir de uvas blancas, perfectos para mariscos y comidas ligeras.",
             "nombre" => "Vinos Blancos"
         ];
 
         $c3 = [
             "id" => 0,
+            "descripcion" => "Vinos con burbujas, ideales para celebraciones y brindis especiales.",
             "nombre" => "Vinos Espumosos"
         ];
 
         $c4 = [
             "id" => 0,
+            "descripcion" => "Vinos de tonalidades rosadas, perfectos para acompañar ensaladas y platos ligeros.",
             "nombre" => "Vinos Rosados"
         ];
 
         $c5 = [
             "id" => 0,
+            "descripcion" => "Vinos dulces y de postre, ideales para acompañar postres y quesos.",
             "nombre" => "Vinos de Postre"
         ];
 
         $c6 = [
             "id" => 0,
+            "descripcion" => "Cervezas artesanales de diferentes estilos y sabores.",
             "nombre" => "Cervezas Artesanales"
         ];
 
         $c7 = [
             "id" => 0,
+            "descripcion" => "Destilados y licores de diferentes tipos y sabores.",
             "nombre" => "Destilados y Licores"
         ];
 
         $c8 = [
             "id" => 0,
+            "descripcion" => "Bebidas sin alcohol, refrescantes y deliciosas.",
             "nombre" => "Bebidas sin Alcohol"
         ];
 
