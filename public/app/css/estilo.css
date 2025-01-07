@@ -289,6 +289,18 @@ button {
     background-color: #1e7e34;
 }
 
+.btn-pdf {
+    background-color: #e4403a;
+    color: #fff;
+    padding: 0.5625rem 15px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.btn-pdf:hover {
+    background-color: #9e2110;
+}
+
 .btn-add {
     background-color: #007bff;
     color: #fff;

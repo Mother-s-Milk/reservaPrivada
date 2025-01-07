@@ -16,13 +16,13 @@
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">
-            <h1>Formulario de Ventas</h1>
+            <h1>Detalles de Ventas</h1>
         </header>
         <form id="venta-form" class="form one">
             <section>
                 <header>
                     <h2 class="gadget-titulo">
-                        Datos del pago
+                        Formato del pago
                     </h2>
                 </header>
                 <main class="one">
