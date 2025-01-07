@@ -4,7 +4,7 @@
 
     use app\core\controller\base\Controller;
     use app\core\controller\base\InterfaceController;
-
+    use app\libs\report\ReportGenerator;
     use app\core\service\BebidaService;
 
     use app\libs\request\Request;
@@ -133,6 +133,34 @@
         $response->setResult($result);
         $response->send();
     }
+
+    public function pdf(): void
+    {
+        $requestData = json_decode(file_get_contents("php://input"), true);
+        $bebidas = $requestData['bebidas'] ?? [];
+    
+        $headers = ['ID', 'Nombre', 'Descripción','Categoría','Precio','Stock','Marca','Proveedor'];
+        $rows = array_map(fn($bebida) => [$bebida['id'], $bebida['nombre'], $bebida['descripcion'],$bebida['categoria'],$bebida['precio'],$bebida['stock'],$bebida['marca'],$bebida['proveedor']], $bebidas);
+    
+        $reportGenerator = new ReportGenerator();
+        $reportGenerator->generatePDF('Lista de Bebidas', $headers, $rows, 'bebidas.pdf');
+    }
+
+    public function excel(): void
+    {
+        {
+            $requestData = json_decode(file_get_contents("php://input"), true);
+            $bebidas = $requestData['bebidas'] ?? [];
+    
+            $headers = ['ID', 'Nombre', 'Descripción','Categoría','Precio','Stock','Marca','Proveedor'];
+            $rows = array_map(fn($bebida) => [$bebida['id'], $bebida['nombre'], $bebida['descripcion'],$bebida['categoria'],$bebida['precio'],$bebida['stock'],$bebida['marca'],$bebida['proveedor']], $bebidas);
+    
+            $excelReportGenerator = new ReportGenerator();
+            $excelReportGenerator->generateExcel('Lista de Bebidas', $headers, $rows, 'bebidas.xlsx');
+        }
+    }
+
+
     }
 
 ?>

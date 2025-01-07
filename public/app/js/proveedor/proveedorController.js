@@ -275,6 +275,60 @@ let proveedorController = {
       pagination.appendChild(button);
     }
   },
+
+  pdf: () => {
+    // Obtener los datos de la tabla en el frontend
+    let table = document.getElementById("proveedores-body");
+    let rows = Array.from(table.rows);
+    let proveedores = rows.map(row => {
+        let cells = row.cells;
+        return {
+            id: cells[0].innerText,
+            nombre: cells[1].innerText,
+            telefono: cells[2].innerText,
+            email: cells[3].innerText,
+            localidad: cells[4].innerText,
+            direccion: cells[5].innerText
+        };
+    });
+
+    proveedorService
+        .pdf(proveedores) // Envía las categorías al servicio
+        .then((response) => {
+            window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+        })
+        .catch((error) => {
+            console.error("Error al generar el PDF", error);
+        });
+}
+,
+excel: () => {
+  // Obtener los datos de la tabla en el frontend
+  let table = document.getElementById("proveedores-body");
+  let rows = Array.from(table.rows);
+  let proveedores = rows.map(row => {
+      let cells = row.cells;
+      return {
+        id: cells[0].innerText,
+            nombre: cells[1].innerText,
+            telefono: cells[2].innerText,
+            email: cells[3].innerText,
+            localidad: cells[4].innerText,
+            direccion: cells[5].innerText
+      };
+  });
+
+  proveedorService
+      .excel(proveedores) // Envía las categorías al servicio
+      .then((response) => {
+          window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+      })
+      .catch((error) => {
+          console.error("Error al generar el PDF", error);
+      });
+}
+
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -311,4 +365,21 @@ document.addEventListener("DOMContentLoaded", () => {
       proveedorController.filter(1);
     };
   }
+
+  let btnPDF = document.getElementById("btn-pdf");
+
+  if (btnPDF != null) {
+    btnPDF.onclick = () => {
+      proveedorController.pdf(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+    };
+  }
+
+  let btnExcel = document.getElementById("btn-excel");
+  if(btnExcel != null) {
+      btnExcel.onclick = () => {
+          proveedorController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+      };
+  }
+
+
 });

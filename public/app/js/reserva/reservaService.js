@@ -159,4 +159,52 @@ let reservaService = {
             console.error("Error:", error);
         })
     },
+    pdf: (reservas) => {
+        return fetch(`${API_BASE_URL}pdf`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ reservas: reservas }) // Enviar los datos de la tabla
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error al obtener las categorías");
+                }
+                return response.blob(); // Captura el PDF como Blob
+            })
+            .then(blob => {
+                let url = window.URL.createObjectURL(blob); // Crear URL temporal para el PDF
+                return { url }; // Retorna el objeto con la URL
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+    }
+    ,
+    excel:(reservas)  => {
+        return fetch(`${API_BASE_URL}excel`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({ reservas: reservas }) // Enviar los datos de la tabla
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error al obtener las categorías");
+                }
+                return response.blob(); // Captura el PDF como Blob
+            })
+            .then(blob => {
+                let url = window.URL.createObjectURL(blob); // Crear URL temporal para el PDF
+                return { url }; // Retorna el objeto con la URL
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+            });
+
+    }
 }

@@ -327,8 +327,56 @@ const ventaController = {
       });
   },
   
+  pdf: () => {
+    // Obtener los datos de la tabla en el frontend
+    let table = document.getElementById("ventas-body");
+    let rows = Array.from(table.rows);
+    let ventas = rows.map(row => {
+        let cells = row.cells;
+        return {
+          id: cells[0].innerText,
+          fecha: cells[1].innerText,
+          hora: cells[2].innerText,
+          formaPago: cells[3].innerText,
+          total: cells[4].innerText
+        };
+    });
 
+    ventaService
+        .pdf(ventas) // Envía las categorías al servicio
+        .then((response) => {
+            window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+        })
+        .catch((error) => {
+            console.error("Error al generar el PDF", error);
+        });
+}
+,
+excel: () => {
+  // Obtener los datos de la tabla en el frontend
+  let table = document.getElementById("ventas-body");
+  let rows = Array.from(table.rows);
+  let ventas = rows.map(row => {
+      let cells = row.cells;
+      return {
+        id: cells[0].innerText,
+            fecha: cells[1].innerText,
+            hora: cells[2].innerText,
+            formaPago: cells[3].innerText,
+            total: cells[4].innerText
+      };
+  });
 
+  ventaService
+      .excel(ventas) // Envía las categorías al servicio
+      .then((response) => {
+          window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+      })
+      .catch((error) => {
+          console.error("Error al generar el PDF", error);
+      });
+}
+  ,
   renderFilter: (page) => {
     let ventasBody = document.getElementById("ventas-body");
 
@@ -410,18 +458,40 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let btnAgregarBebida = document.getElementById("btn-agregar-bebida-venta");
+  if(btnAgregarBebida != null) {
   btnAgregarBebida.onclick = () => {
     ventaController.agregarProducto();
+  }
   };
 
   let btnResetearVenta = document.getElementById("btn-venta-resetear");
+  if(btnResetearVenta != null) {
   btnResetearVenta.onclick = () => {
     ventaController.resetearVenta();
-  };
+  }}
+  ;
+
 
   let btnAltaVenta = document.getElementById("btn-venta-alta");
+  if(btnAltaVenta != null) {
   btnAltaVenta.onclick = () => {
     ventaController.save();
-  };
+  }};
+
+  let btnPDF = document.getElementById("btn-pdf");
+
+  if (btnPDF != null) {
+    btnPDF.onclick = () => {
+      ventaController.pdf(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+    };
+  }
+
+  let btnExcel = document.getElementById("btn-excel");
+  if(btnExcel != null) {
+      btnExcel.onclick = () => {
+          ventaController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+      };
+  }
+
 
 });
