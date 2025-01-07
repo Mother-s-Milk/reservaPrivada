@@ -818,11 +818,6 @@ body.dark-mode .tabla-lista tbody tr:hover {
     color: #fff;
 }
 
-<<<<<<< HEAD
-
-
-
-
 /* Pedido Container */
 .pedido-container {
     flex: 1;
@@ -954,44 +949,3 @@ body.dark-mode .tabla-lista tbody tr:hover {
 .detalle-item {
     margin-bottom: 7.5px;
 }
-=======
-/* Estilos para el botón de generación de archivo Excel */
-.btn-excel {
-    background-color: #1d6f42; /* Verde representativo de Excel */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-excel:hover {
-    background-color: #15532e;
-  }
-  
-  .btn-excel:active {
-    background-color: #104020;
-  }
-  
-  /* Estilos para el botón de generación de archivo PDF */
-  .btn-pdf {
-    background-color: #d32f2f; /* Rojo representativo de PDF */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-pdf:hover {
-    background-color: #b71c1c;
-  }
-  
-  .btn-pdf:active {
-    background-color: #8c1111;
-  }
->>>>>>> 30fd7f986d3cd15b80e8eb1b7d4221f6391d2641
