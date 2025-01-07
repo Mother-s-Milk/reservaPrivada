@@ -68,6 +68,13 @@
             $response->send();
         }
 
+        public function mostrarInicioVentas (Request $request, Response $response): void {
+            $service = new InicioService();
+            $ventasSemanales = $service->mostrarInicioVentas();
+            $response->setResult($ventasSemanales);
+            $response->send();
+        }
+
     }
 
 ?>

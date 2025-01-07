@@ -52,6 +52,12 @@
             return $dao->consultarVentasSemanales();
         }
 
+        public function mostrarInicioVentas():array{
+            $conn = Connection::get();
+            $dao = new VentaDAO($conn);
+            return $dao->mostrarInicioVentas();
+        }
+
     }
 
 ?>

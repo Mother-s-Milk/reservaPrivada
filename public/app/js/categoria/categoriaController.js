@@ -13,22 +13,30 @@ let categoriaController = {
     let categoriaForm = document.forms["categoria-form"];
 
     categoriaController.data.nombre = categoriaForm.categoriaNombre.value;
-    categoriaController.data.descripcion =
-      categoriaForm.categoriaDescripcion.value;
+    categoriaController.data.descripcion = categoriaForm.categoriaDescripcion.value;
 
-    //Validar datos
-    const validacionErrores = categoriaController.validacion(
-      categoriaController.data
-    );
+    // Validar datos
+    const validacionErrores = categoriaController.validacion(categoriaController.data);
 
     if (Object.keys(validacionErrores).length > 0) {
-      categoriaController.mostrarErrores(validacionErrores);
-
-      return;
+        categoriaController.mostrarErrores(validacionErrores);
+        return;
     }
 
-    categoriaService.save(categoriaController.data);
-  },
+    categoriaService.save(categoriaController.data)
+      .then(response => {
+        if (response.error) {
+          alert(`Error al guardar la categoría: ${response.error}`);
+        } else {
+          alert("Categoría guardada exitosamente.");
+        }
+      })
+      .catch(error => {
+        alert(`Error al guardar la categoría: ${error.message || "Error desconocido."}`);
+      });
+}
+
+,
   //Función para validar datos
   validacion: (data) => {
     const errores = {};
@@ -84,17 +92,20 @@ let categoriaController = {
       });
   },
   delete: (event) => {
-    if (confirm(`¿Estás seguro de eliminar la categoria con ID`)) {
+    if (confirm(`¿Estás seguro de eliminar la categoría?`)) {
       return categoriaService
         .delete(parseInt(event.target.getAttribute("data-id")))
         .then((data) => {
-          alert(data.message);
+          alert(data.message); //Mostrar mensaje del servidor
         })
         .catch((error) => {
-          alert("Ocurrió un error al eliminar la categoria.");
+          alert("Ocurrió un error al eliminar la categoría.");
         });
     }
-  },
+}
+
+
+,
   list: (page) => {
     let data = {
       page: page,
@@ -149,11 +160,17 @@ let categoriaController = {
 
       document.querySelectorAll(".btn-eliminar").forEach((button) => {
         button.addEventListener("click", (event) => {
-          categoriaController.delete(event).then(() => {
-            categoriaController.list(categoriaController.pagActual);
-          });
+            categoriaController.delete(event)  // Llamada correcta a delete
+                .then(() => {
+                    categoriaController.list(categoriaController.pagActual);
+                })
+                .catch(error => {
+                    console.error("Error al eliminar la categoría:", error);
+                    alert("No se pudo eliminar la categoría.");
+                });
         });
-      });
+    });
+    
     }
 
     let pagination = document.getElementById("pagination");

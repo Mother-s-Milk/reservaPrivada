@@ -58,7 +58,7 @@ let categoriaService = {
     },
     delete: (id) => {
         return fetch(`${API_BASE_URL}delete/${id}`, {
-            method: "DELETE",
+            method: "DELETE",  // O puedes usar DELETE si prefieres
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
@@ -66,9 +66,9 @@ let categoriaService = {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Error al eliminar la categoria: ${response.statusText}`);
+                throw new Error(`Error al eliminar la bebida: ${response.statusText}`);
             }
-            return response.json();
+            return response.json();  // Retorna lo que se necesita
         })
         .then(data => {
             console.log("Respuesta de la eliminación:", data);
@@ -77,7 +77,8 @@ let categoriaService = {
         .catch(error => {
             console.error("Error:", error);
         });
-    },
+    }
+,    
     list: () => {
         return fetch("categoria/list", {
             method: "GET",

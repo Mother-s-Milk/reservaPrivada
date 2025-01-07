@@ -22,38 +22,42 @@ const inicioController = {
       inicioController.mostrarVentas(inicioController.ventas);
     });
   },
-  mostrarVentas: (ventas) => {
+  mostrarVentas: () => {
     let ventasBody = document.getElementById('ventas-body');
 
-    if (ventas.length === 0) {
-      let nuevaFila = `
-        <tr>
-          <td colspan="5">No hay ventas de hoy</td>
-        </tr>
-      `;
-      ventasBody.innerHTML = nuevaFila;
-    }
-    else {
-      ventasBody.innerHTML = '';
-      let nuevaFila;
-      let contador = 1;
-      ventas.forEach(venta => {
-        nuevaFila = `
+    inicioService.mostrarInicioVentas().then((ventas) => {
+      if (!Array.isArray(ventas.result) || ventas.result.length === 0) {
+        let nuevaFila = `
           <tr>
-            <td>${contador}</td>
-            <td>${venta.fecha}</td>
-            <td>${venta.hora}</td>
-            <td>$${venta.total}</td>
-            <td>
-              <button type="button" class="btn-check" data-id="${venta.id}" onclick="window.location.href='venta/consultar/${venta.id}'" style="width: auto">Ver detalles</button>
-            </td>
+            <td colspan="5">No hay ventas recientes</td>
           </tr>
         `;
-        ventasBody.insertAdjacentHTML('beforeend', nuevaFila);
-        contador++;
-      });
-    }
+        ventasBody.innerHTML = nuevaFila;
+      } else {
+        ventasBody.innerHTML = '';
+        let nuevaFila;
+        let contador = 1;
+        ventas.result.forEach(venta => {
+          nuevaFila = `
+            <tr>
+              <td>${contador}</td>
+              <td>${venta.fecha}</td>
+              <td>${venta.hora}</td>
+              <td>$${venta.total}</td>
+              <td>
+                <button type="button" class="btn-check" data-id="${venta.id}" onclick="window.location.href='venta/consultar/${venta.id}'" style="width: auto">Ver detalles</button>
+              </td>
+            </tr>
+          `;
+          ventasBody.insertAdjacentHTML('beforeend', nuevaFila);
+          contador++;
+        });
+      }
+    }).catch(error => {
+      console.error("Error al mostrar las ventas: ", error);
+    });
   },
+
   consultarBajoStock: () => {
     inicioService.consultarBajoStock()
     .then(response => {
