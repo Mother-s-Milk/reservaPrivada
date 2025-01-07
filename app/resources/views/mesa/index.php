@@ -1,11 +1,11 @@
 <h1 class="breadcrumbs">Mesas</h1>
 
-<section class="container section">
+<!-- <section class="container section">-->
     <!-- <div class="header-actions gadget">
         <h2>Lista de Mesas</h2>
         <button type="button" class="btn-add" onclick="window.location.href='mesa/create'">Agregar Mesa</button>
     </div> -->
-    <div class="seccion-mesas">
+    <!-- <div class="seccion-mesas">
         <main class="mesas-container">
             <div class="mesa" data-id="1" data-estado="libre">Mesa 1</div>
             <div class="mesa" data-id="2" data-estado="libre">Mesa 2</div>
@@ -71,4 +71,27 @@
             <button>Cerrar mesa</button>
         </aside>
     </div>
-</section>
+</section> -->
+
+<main class="container section detalles">
+    <section class="pedido-container">
+      <h2>Detalles del Pedido</h2>
+      <div id="pedido-detalles">
+        <p>Selecciona una mesa para comenzar un pedido.</p>
+      </div>
+      <div class="pedido-resumen">
+        <h3>Resumen</h3>
+        <p>Total: $<span id="total-pedido">0.00</span></p>
+        <button id="cerrar-pedido">Cerrar Pedido</button>
+      </div>
+    </section>
+    <section class="productos-container">
+      <div class="productos-header">
+        <h2>Productos Disponibles</h2>
+        <input type="text" id="busqueda-productos" placeholder="Buscar productos...">
+      </div>
+      <div class="productos-grid">
+        <!-- Productos cargados dinámicamente -->
+      </div>
+    </section>
+  </main>

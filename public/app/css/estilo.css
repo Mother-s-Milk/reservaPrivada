@@ -817,3 +817,139 @@ body.dark-mode .tabla-lista tbody tr:hover {
     background-color: #666;
     color: #fff;
 }
+
+
+
+
+
+/* Pedido Container */
+.pedido-container {
+    flex: 1;
+    max-width: 40%;
+}
+  
+.pedido-container h2 {
+    margin-bottom: 15px;
+}
+  
+#pedido-detalles {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    min-height: 200px;
+    margin-bottom: 15px;
+    background-color: #eee;
+}
+  
+.pedido-resumen {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.pedido-resumen > h3 {
+    margin-bottom: 7.5px;
+}
+  
+#total-pedido {
+    font-weight: bold;
+    color: #000;
+    font-size: 18px;
+}
+  
+#cerrar-pedido {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 7.5px;
+}
+  
+#cerrar-pedido:hover {
+    background-color: #1e7e34;
+}
+  
+/* Productos Container */
+.productos-container {
+    flex: 2;
+}
+  
+.productos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+  
+#busqueda-productos {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 50%;
+}
+  
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+  
+.producto {
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 7.5px;
+    /*transition: transform 0.2s, box-shadow 0.2s;*/
+}
+  
+.producto img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+  
+.producto h3 {
+    font-size: 15px;
+    margin: 7.5px 0;
+}
+
+.producto p {
+    margin-bottom: 7.5px;
+}
+  
+.producto button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+  
+.producto button:hover {
+    background-color: #0056b3;
+}
+  
+/*.producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}*/
+
+.detalles {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.eliminar {
+    padding: 3.75px 7.5px;
+    background-color: red;
+    color: #fff;
+}
+
+.detalle-item {
+    margin-bottom: 7.5px;
+}

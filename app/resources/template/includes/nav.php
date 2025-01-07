@@ -9,7 +9,7 @@
                 <a href="" class="dropdown-btn">Bebidas<span class="arrow-link"><i class="fa-solid fa-caret-down"></i></span></a>
                 <ul class="dropdown-content">
                     <li><a href="bebida/create">Agregar bebida</a></li>
-                    <li><a href="bebida">Historial bebidas</a></li>
+                    <li><a href="bebida">Registro bebidas</a></li>
                     <li><a href="categoria">Categorías</a></li>
                 </ul>
             </li>
