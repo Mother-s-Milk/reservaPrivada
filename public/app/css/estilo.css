@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #F3F6FB;
+    background-color: #eee;
     color: #000;
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
@@ -30,7 +30,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #A9CDD4; /*Cambia de color al pasar el mouse*/
+    background-color: #6a9cb2; /*Cambia de color al pasar el mouse*/
 }
 
 ::-webkit-scrollbar-button {
@@ -58,7 +58,7 @@ button {
 }
 
 /****************************************************************************/
-/*Contenedor del contenido del body para que el footer este siempre al final*/
+/*Contenedor del contenido del body para que el footer esté siempre al final*/
 /****************************************************************************/
 #grid-body-container {
     display: grid;
@@ -112,36 +112,6 @@ button {
     max-width: calc(25%);
 }
 
-/******************************/
-/*Contenedor estilo componente*/
-/******************************/
-.gadget {
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 0.375rem; /*6px*/
-    padding: 15px;
-    background-color: #fff;
-}
-
-.gadget-titulo {
-    font-size: 30px;
-    margin-bottom: 9px;
-}
-
-.notificacion {
-    text-align: center;
-}
-
-.notificacion h2 {
-    color: #222;
-    font-size: 18px;
-    margin-bottom: 6px;
-}
-
-.notificacion p {
-    font-size: 18px;
-    font-weight: 400;
-}
-
 /*****/
 /*Nav*/
 /*****/
@@ -150,13 +120,16 @@ button {
     align-items: center;
     justify-content: space-between;
     background-color: #477A91;/*#477A91*/
-    box-shadow: 0px 0px 3px #A9CDD4;/*#A9CDD4*/
-    padding: 6px 2.8125rem; /*45px*/
+    box-shadow: 0px 0px 3px #000;/*#A9CDD4*/
+    padding: 7.5px 2.8125rem; /*45px*/
 }
 
 .nav-principal > div {
     display: flex;
     align-items: center;
+}
+
+.nav-principal > div:first-of-type {
     justify-content: left;
 }
 
@@ -166,6 +139,7 @@ button {
     font-size: 45px;
     font-weight: 500;
     margin-right: 45px;
+    text-shadow: 0px 0px 3px #000;
 }
 
 .nav-principal > div > ul > li {
@@ -178,35 +152,30 @@ button {
     margin-right: 0;
 }
 
-.dropdown-content > li > a {
-    border-radius: 9px;
-    border-radius: 0 0 9px 9px;
+.nav-principal > div > ul > li > a {
+    border-radius: 6px;
 }
 
-.nav-principal > div > ul > li > a {
-    border-radius: 9px;
+.dropdown-content > li > a {
+    border-radius: 0 0 6px 6px;
 }
 
 .nav-principal > div > ul > li > a,
 .dropdown-content > li > a {
     color: #fff;
     display: block;
-    padding: 9px;
+    padding: 7.5px;
     font-size: 15px;
     font-weight: 600;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
-    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 0px 3px rgba(0, 0, 0, 0.3);
 }
 
 .nav-principal > div > ul > li > a:hover,
-.nav-principal > div > ul > li > a.active {
-    background-color: #A9CDD4;
-}
-
+.nav-principal > div > ul > li > a.active,
 .dropdown-content > li > a:hover {
-    background-color: #A9CDD4;
-    color: #fff;
+    background-color: #6a9cb2;
 }
 
 .dropdown-content {
@@ -215,19 +184,19 @@ button {
     position: absolute;
     width: 180px;
     top: 50px;
-    border-radius: 0 0 9px 9px;
+    border-radius: 0 0 6px 6px;
 }
 
 .logout {
     width: auto;
     right: 45px;
-    margin-top: 14px;
+    margin-top: 15px;
     background-color: #477A91;
 }
 
 .arrow-link {
     display: inline-block;
-    margin-left: 12px;
+    margin-left: 7.5px;
 }
 
 /******************/
@@ -243,7 +212,7 @@ button {
 }
 
 .btn-user:hover {
-    color: #A9CDD4;
+    color: #000;
 }
 
 .btn-user:active {
@@ -262,47 +231,92 @@ button {
     color: #000;
 }
 
+/******************************/
+/*Contenedor estilo componente*/
+/******************************/
+.gadget {
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 0.375rem; /*6px*/
+    padding: 15px;
+    background-color: #fff;
+}
+
+.gadget-titulo {
+    font-size: 30px;
+    margin-bottom: 7.5px;
+}
+
+.notificacion {
+    text-align: center;
+}
+
+.notificacion h2 {
+    color: #222;
+    font-size: 18px;
+    margin-bottom: 7.5px;
+    font-weight: 600;
+}
+
+.notificacion p {
+    font-size: 18px;
+    font-weight: 400;
+}
+
 /****************************/
 /*Encabezados de componentes*/
 /****************************/
-.header-actions {
+.header-actions,
+.encabezado-index {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
 }
 
-.header-actions > h2 {
+.header-actions > h2,
+.encabezado-index > h2 {
     font-size: 1.875rem; /*30px*/
     font-weight: 600;
 }
 
-.btn-excel {
-    background-color: #28a745;
-    color: #fff;
-    padding: 0.5625rem 15px;
-    font-size: 15px;
+.encabezado-index > div > button {
+    padding: 7.5px;
+    font-size: 17px;
     font-weight: 500;
+    color: #fff;
+    margin-right: 3.75px;
 }
 
-.btn-excel:hover {
-    background-color: #1e7e34;
+.encabezado-index > div > button:active {
+    transform: scale(1.03);
+}
+
+.encabezado-index > div > button:last-child {
+    margin-right: 0;
 }
 
 .btn-add {
     background-color: #007bff;
-    color: #fff;
-    padding: 0.5625rem 15px;
-    font-size: 15px;
-    font-weight: 500;
 }
 
 .btn-add:hover {
     background-color: #0056b3;
 }
 
-.btn-add:active {
-    transform: scale(1.03);
+.btn-pdf {
+    background-color: red;
+}
+
+.btn-pdf:hover {
+    background-color: darkred;
+}
+
+.btn-excel {
+    background-color: #28a745;
+}
+
+.btn-excel:hover {
+    background-color: #1e7e34;
 }
 
 /*********************/
@@ -311,23 +325,21 @@ button {
 .tabla-lista {
     width: 100%;
     border-collapse: collapse;
-    color: #fff;
-    /*border-radius: 6px 6px 0 0;
-    overflow: hidden;*/
 }
 
 .tabla-lista thead {
     background-color: #6a9cb2;/*#477A91*/
+    color: #fff;
 }
 
 .tabla-lista th {
-    text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
+    text-shadow: 1px 0px 3px rgba(0, 0, 0, 0.5);
 }
 
 .tabla-lista th,
 .tabla-lista td {
-    border: 1px solid #A9CDD4;
-    padding: 9px;
+    border: 1px solid #ccc;
+    padding: 7.5px;
     text-align: center;
     font-size: 18px;
 }
@@ -337,14 +349,38 @@ button {
 }
 
 .tabla-lista tbody tr {
-    background-color: #FFFFFF;
-    color: #222;
+    background-color: #fff;
+    color: #000;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tabla-lista tbody tr:hover {
-    background-color: #121212;
+    background-color: #000;
     color: #fff;
+}
+
+.pagination {
+    margin-top: 15px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 7.5px;
+}
+
+.pagination button {
+    background-color: #333;
+    color: #fff;
+    padding: 7.5px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    min-width: 30px;
+}
+
+.pagination button:hover,
+.pagination button .active {
+    background-color: #666;
 }
 
 /*********/
@@ -355,7 +391,7 @@ button {
 .btn-check,
 .btn-actualizar {
     font-size: 15px;
-    padding: 9px;
+    padding: 7.5px;
     color: #fff;
 }
 
@@ -375,24 +411,17 @@ button {
     background-color: #CC0000;
 }
 
-.btn-eliminar:active {
-    transform: scale(1.01);
-}
-
 .btn-check {
-    /*background-color: #007bff;*/
-    background-color: #5AB3B0;
+    background-color: #6a9cb2;
 }
 
 .btn-check:hover {
-    /*background-color: #0056b3;*/
-    background-color: #499897;
+    background-color: #477A91;
 }
 
-.btn-check:active {
-    transform: scale(1.01);
-}
-
+/*********************************************************/
+/************************Desde aca************************/
+/*********************************************************/
 /*************/
 /*Formularios*/
 /*************/
@@ -579,25 +608,6 @@ button {
     font-size: 21px;
     text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.5);
 }
-
-.pagination {
-    margin-top: 15px;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 7.5px;
-}
-
-.pagination button {
-    background-color: #ccc;
-    color: #000;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
 
 /* Contenedor del interruptor */
 .boton-dark-mode {

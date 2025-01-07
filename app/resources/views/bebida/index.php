@@ -18,6 +18,14 @@
 <h1 class="breadcrumbs">Bebidas</h1>
 
 <section class="container section">
+    <div class="encabezado-index gadget">
+        <h2>Lista de Bebidas</h2>
+        <div>
+            <button type="button" class="btn-add" onclick="window.location.href='bebida/create'">Agregar Bebida</button>
+            <button type="button" class="btn-pdf" id="btn-pdf">PDF</button>
+            <button type="button" class="btn-excel" id="btn-excel">Excel</button>
+        </div>
+    </div>
     <div class="one">
         <aside class="gadget">
             <h2>Filtros</h2>
@@ -58,9 +66,6 @@
                 </div>
                 <button type="button" id="btn-filtrar" class="btn-form">Aplicar Filtros</button>
                 <button type="button" id="btn-borrar-filtrar" class="btn-reset">Borrar Filtros</button>
-                <button type="button" class="btn-add" onclick="window.location.href='bebida/create'">Agregar Bebida</button>
-                <button type="button" class="btn-pdf" id="btn-pdf">PDF</button>
-                <button type="button" class="btn-excel" id="btn-excel">Excel</button>
             </form>
         </aside>
         <main class="gadget">

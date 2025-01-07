@@ -5,7 +5,6 @@
     use app\core\controller\base\Controller;
 
     use app\core\service\InicioService;
-    use app\core\service\ProveedorService;
 
     use app\libs\request\Request;
     use app\libs\response\Response;
@@ -21,9 +20,9 @@
 
         public function index (): void {
             $this->view = "inicio/index.php";
-            $BC_actual="";
-            $BC_link_anterior=APP_FRONT."inicio/index";
-            $BC_anterior="Inicio";
+            $BC_actual = "";
+            $BC_link_anterior = APP_FRONT."inicio/index";
+            $BC_anterior = "Inicio";
             require_once APP_TEMPLATE . "template.php";
         }
 

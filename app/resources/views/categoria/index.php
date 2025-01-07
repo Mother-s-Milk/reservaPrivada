@@ -1,7 +1,7 @@
 <h1 class="breadcrumbs">Categorías</h1>
 
 <section class="container section">
-    <div class="header-actions gadget">
+    <div class="encabezado-index gadget">
         <h2>Lista de Categorías</h2>
         <div>
             <button type="button" class="btn-add" onclick="window.location.href='categoria/create'">Agregar Categoría</button>
