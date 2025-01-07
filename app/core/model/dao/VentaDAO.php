@@ -297,5 +297,19 @@ final class VentaDAO extends DAO implements InterfaceDAO
         ];
     }
     
+    public function mostrarInicioVentas():array{
+    $sql = "SELECT id, fecha, hora, formaPago, total 
+            FROM {$this->table}
+            ORDER BY fecha DESC, hora DESC
+            LIMIT 6";
 
+    // Ejecutar la consulta principal
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+    // Retornar solo los resultados
+    return $results;
+
+    }
 }
