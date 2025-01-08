@@ -1,20 +1,26 @@
 <h1 class="breadcrumbs">Mesas</h1>
 
-<!-- <section class="container section">-->
-    <!-- <div class="header-actions gadget">
+<section class="container section">
+    <div class="encabezado-index gadget">
         <h2>Lista de Mesas</h2>
-        <button type="button" class="btn-add" onclick="window.location.href='mesa/create'">Agregar Mesa</button>
-    </div> -->
-    <!-- <div class="seccion-mesas">
+        <div>
+            <button type="button" class="btn-add" onclick="window.location.href='mesa/create'">Agregar Mesa</button>
+        </div>
+    </div>
+    <div class="seccion-mesas">
         <main class="mesas-container">
-            <div class="mesa" data-id="1" data-estado="libre">Mesa 1</div>
-            <div class="mesa" data-id="2" data-estado="libre">Mesa 2</div>
-            <div class="mesa" data-id="3" data-estado="libre">Mesa 3</div>
-            <div class="mesa" data-id="4" data-estado="libre">Mesa 4</div>
-            <div class="mesa" data-id="5" data-estado="libre">Mesa 5</div>
-            <div class="mesa" data-id="6" data-estado="libre">Mesa 6</div>
+            <div class="mesa" data-id="1" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 1</div>
+            <div class="mesa" data-id="2" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 2</div>
+            <div class="mesa" data-id="3" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 3</div>
+            <div class="mesa" data-id="4" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 4</div>
+            <div class="mesa" data-id="5" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 5</div>
+            <div class="mesa" data-id="6" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 6</div>
+            <div class="mesa" data-id="7" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 7</div>
+            <div class="mesa" data-id="8" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 8</div>
+            <div class="mesa" data-id="9" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 9</div>
+            <div class="mesa" data-id="10" data-estado="libre" onclick="window.location.href='mesa/detallesMesa/1'">Mesa 10</div>
         </main>
-        <aside id="mesa-info" class="mesa-info">
+        <!--<aside id="mesa-info" class="mesa-info">
             <h2>
                 Detalles de mesa
             </h2>
@@ -73,7 +79,7 @@
     </div>
 </section> -->
 
-<main class="container section detalles">
+<!-- <main class="container section detalles">
     <section class="pedido-container">
       <h2>Detalles del Pedido</h2>
       <div id="pedido-detalles">
@@ -90,8 +96,8 @@
         <h2>Productos Disponibles</h2>
         <input type="text" id="busqueda-productos" placeholder="Buscar productos...">
       </div>
-      <div class="productos-grid">
+      <div class="productos-grid"> -->
         <!-- Productos cargados dinámicamente -->
-      </div>
+      <!-- </div>
     </section>
-  </main>
+  </main> -->

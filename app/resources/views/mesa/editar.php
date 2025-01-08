@@ -11,7 +11,7 @@ $categoria = $dao->load($id);
 
 ?>
 
-<!-- <h1 class="breadcrum">Categorias/Editar</h1> -->
+<h1 class="breadcrumbs">Mesas/Editar</h1>
 <section class="container section">
     <div class="gadget">
         <header class="titulo-formulario">

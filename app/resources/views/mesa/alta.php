@@ -1,4 +1,4 @@
-<h1 class="breadcrum">Mesas/Alta</h1>
+<h1 class="breadcrumbs">Mesas/Alta</h1>
 
 <section class="container section">
     <div class="gadget">

@@ -213,8 +213,8 @@ let reservaController = {
                     <td>${reserva.detalles}</td>
                     <td>${reserva.estado}</td>
                     <td>
-                        <button type="button" class="btn-confirmar btn-actualizar btn-form" data-id="${reserva.id}"><i class="fa-solid fa-check"></i></button>
-                        <button type="button" class="btn-cancelar btn-eliminar" data-id="${reserva.id}"><i class="fa-solid fa-x"></i></button>
+                        <button type="button" class="btn-confirmar" data-id="${reserva.id}"><i class="fa-solid fa-check"></i></button>
+                        <button type="button" class="btn-cancelar" data-id="${reserva.id}"><i class="fa-solid fa-x"></i></button>
                         <button type="button" class="btn-editar" data-id="${reserva.id}"><i class="fa-solid fa-pen-to-square"></i></button>
                     </td>
                 </tr>

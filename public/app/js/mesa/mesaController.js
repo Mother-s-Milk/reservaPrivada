@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       productoCard.classList.add("producto");
 
       productoCard.innerHTML = `
-        <img src="${producto.imagen}" alt="${producto.nombre}" style="max-height: 120px">
+        <img src="${producto.imagen}" alt="${producto.nombre}">
         <h3>${producto.nombre}</h3>
         <p>$${producto.precio}</p>
         <button data-id="${producto.id}">Agregar</button>

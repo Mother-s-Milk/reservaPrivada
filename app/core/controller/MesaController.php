@@ -27,6 +27,11 @@
             require_once APP_TEMPLATE . "template.php";
         }
 
+        public function detallesMesa (): void {
+            $this->view = "mesa/detallesMesa.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
         public function create (): void {
             $this->view = "mesa/alta.php";
             $BC_actual="Crear Mesa";
