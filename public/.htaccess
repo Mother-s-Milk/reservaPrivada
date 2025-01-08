@@ -2,7 +2,11 @@ Options -Indexes
 
 RewriteEngine On
 
-RewriteRule ^([a-zA-Z]+)$ index.php?controller=$1
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)$ index.php?controller=$1&action=$2
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z0-9]+)$ index.php?controller=$1&action=$2&id=$3
-RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ index.php?controller=$1&action=$2&id=$3&extra=$4
+# Excepción para las URLs de Mercado Pago
+RewriteRule ^venta/procesarPago$ index.php?controller=venta&action=procesarPago [L,QSA]
+
+# Reglas generales de reescritura
+RewriteRule ^([a-zA-Z]+)$ index.php?controller=$1 [L,QSA]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)$ index.php?controller=$1&action=$2 [L,QSA]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z0-9]+)$ index.php?controller=$1&action=$2&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)$ index.php?controller=$1&action=$2&id=$3&extra=$4 [L,QSA]

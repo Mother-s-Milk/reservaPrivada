@@ -110,9 +110,9 @@
         $response->send();
     }  
 
-    public function pdf(): void
+    public function pdf(Request $request, Response $response): void
     {
-        $requestData = json_decode(file_get_contents("php://input"), true);
+        $requestData = $request->getData();
         $proveedores = $requestData['proveedores'] ?? [];
     
         $headers = ['ID', 'Nombre', 'Teléfono','Email','Localidad','Dirección'];
@@ -122,10 +122,10 @@
         $reportGenerator->generatePDF('Lista de Proveedores', $headers, $rows, 'proveedores.pdf');
     }
 
-    public function excel(): void
+    public function excel(Request $request, Response $response): void
     {
         {
-            $requestData = json_decode(file_get_contents("php://input"), true);
+            $requestData = $request->getData();
             $proveedores = $requestData['proveedores'] ?? [];
     
             $headers = ['ID', 'Nombre', 'Teléfono','Email','Localidad','Dirección'];

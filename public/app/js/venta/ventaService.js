@@ -179,4 +179,26 @@ let ventaService = {
             });
 
     }
+    ,mercadopago: (data) => {
+        return fetch(`${API_BASE_URL}mercadopago`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la petición: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.error("Error al registrar la venta:", error);
+        });
+    },
 }

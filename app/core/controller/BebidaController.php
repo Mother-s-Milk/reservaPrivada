@@ -134,9 +134,9 @@
         $response->send();
     }
 
-    public function pdf(): void
+    public function pdf(Request $request, Response $response): void
     {
-        $requestData = json_decode(file_get_contents("php://input"), true);
+        $requestData = $request->getData();
         $bebidas = $requestData['bebidas'] ?? [];
     
         $headers = ['ID', 'Nombre', 'Descripción','Categoría','Precio','Stock','Marca','Proveedor'];
@@ -146,10 +146,10 @@
         $reportGenerator->generatePDF('Lista de Bebidas', $headers, $rows, 'bebidas.pdf');
     }
 
-    public function excel(): void
+    public function excel(Request $request, Response $response): void
     {
         {
-            $requestData = json_decode(file_get_contents("php://input"), true);
+            $requestData = $request->getData();
             $bebidas = $requestData['bebidas'] ?? [];
     
             $headers = ['ID', 'Nombre', 'Descripción','Categoría','Precio','Stock','Marca','Proveedor'];

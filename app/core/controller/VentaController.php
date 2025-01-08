@@ -8,7 +8,7 @@
     use app\core\service\VentaService;
 
     use app\core\service\BebidaService;
-
+    use app\libs\pay\mercadopago;
     use app\libs\request\Request;
     use app\libs\response\Response;
 
@@ -30,6 +30,23 @@
             $this->view = "venta/alta.php";
             require_once APP_TEMPLATE . "template.php";
         }
+
+        public function exito (): void {
+            $this->view = "venta/exito.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
+        public function fallo (): void {
+            $this->view = "venta/fallo.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
+        public function pendiente (): void {
+            $this->view = "venta/pendiente.php";
+            require_once APP_TEMPLATE . "template.php";
+        }
+
+
 
         public function save (Request $request, Response $response): void {
             try {
@@ -100,9 +117,9 @@
     }
 
 
-    public function pdf(): void
+    public function pdf(Request $request, Response $response): void
     {
-        $requestData = json_decode(file_get_contents("php://input"), true);
+        $requestData = $request->getData();
         $ventas = $requestData['ventas'] ?? [];
     
         $headers = ['ID', 'Fecha', 'Hora','Forma de Pago','Total'];
@@ -111,21 +128,76 @@
         $reportGenerator->generatePDF('Lista de Ventas', $headers, $rows, 'ventas.pdf');
     }
 
-    public function excel(): void
+    public function excel(Request $request, Response $response): void
     {
         {
-            $requestData = json_decode(file_get_contents("php://input"), true);
+            $requestData = $request->getData();
             $ventas = $requestData['ventas'] ?? [];
     
-        $headers = ['ID', 'Fecha', 'Hora','Forma de Pago','Total'];
-        $rows = array_map(fn($venta) => [$venta['id'], $venta['fecha'], $venta['hora'],$venta['formaPago'],$venta['total']], $ventas);
+            $headers = ['ID', 'Fecha', 'Hora','Forma de Pago','Total'];
+            $rows = array_map(fn($venta) => [$venta['id'], $venta['fecha'], $venta['hora'],$venta['formaPago'],$venta['total']], $ventas);
     
             $excelReportGenerator = new ReportGenerator();
             $excelReportGenerator->generateExcel('Lista de Ventas', $headers, $rows, 'ventas.xlsx');
         }
     }
 
+    public function mercadopago(Request $request, Response $response): void
+{
+    $requestData = $request->getData();
+    $ventaID = $requestData['id'] ?? null;
+    $precio = $requestData['precio'] ?? 0;
 
+    $service = new mercadopago();
+    $paymentUrl = $service->pagar($ventaID, $precio);  // Agregamos precio como parámetro
+
+    $response->setResult(['init_point' => $paymentUrl]);
+    $response->send();
+}
+
+public function procesarPago(Request $request, Response $response): void
+{
+    // Captura todos los datos de la solicitud desde la URL
+    $data = $request->getDataGET(); // Cambia esto para usar getDataGET()
+
+    // Captura los parámetros específicos
+    $status = $data['status'] ?? null;
+    $ventaID = $data['ventaID'] ?? null;
+    $collectionStatus = $data['collection_status'] ?? null; // Asegúrate de capturar este parámetro también
+
+    // Verifica si los parámetros requeridos están presentes
+    if ($status === null || $ventaID === null) {
+        $response->setResult([
+            'error' => $request->getDataGET(),
+            'message' => "Los parámetros 'status' y 'ventaID' son requeridos."
+        ]);
+        $response->send();
+        return; // Termina la ejecución si faltan parámetros
     }
 
-?>
+    // Lógica para manejar el estado del pago
+    switch ($collectionStatus) {
+        case 'approved':
+            $this->exito($ventaID);
+            break;
+        case 'pending':
+            $this->pendiente($ventaID);
+            break;
+        case 'rejected':
+            $this->fallo($ventaID);
+            break;
+        default:
+            $response->setResult(['error' => 'Estado de pago desconocido']);
+            $response->send();
+            return;
+    }
+
+    // Enviar respuesta adecuada
+    $response->setResult(['status' => $status, 'ventaID' => $ventaID]);
+    $response->send();
+}
+
+
+
+
+}

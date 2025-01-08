@@ -292,29 +292,37 @@ const ventaController = {
       fMax: document.getElementById("filtro-fecha-fin").value,
       medioPago: document.getElementById("filtro-medio-pago").value,
     };
-  
+
     // Validar rangos de precios
     if ((data.pMin && !data.pMax) || (!data.pMin && data.pMax)) {
-      alert("Debe ingresar ambos valores para el filtro de precios o dejar ambos campos vacíos");
+      alert(
+        "Debe ingresar ambos valores para el filtro de precios o dejar ambos campos vacíos"
+      );
       return;
     }
-  
-    if (data.pMin && data.pMax && parseFloat(data.pMin) > parseFloat(data.pMax)) {
+
+    if (
+      data.pMin &&
+      data.pMax &&
+      parseFloat(data.pMin) > parseFloat(data.pMax)
+    ) {
       alert("El precio mínimo no puede ser mayor al máximo");
       return;
     }
-  
+
     // Validar rangos de fechas
     if ((data.fMin && !data.fMax) || (!data.fMin && data.fMax)) {
-      alert("Debe ingresar ambas fechas para el filtro de fechas o dejar ambos campos vacíos");
+      alert(
+        "Debe ingresar ambas fechas para el filtro de fechas o dejar ambos campos vacíos"
+      );
       return;
     }
-  
+
     if (data.fMin && data.fMax && data.fMin > data.fMax) {
       alert("La fecha de inicio no puede ser mayor a la fecha de fin");
       return;
     }
-  
+
     // Enviar datos al servicio
     ventaService
       .filter(data)
@@ -326,57 +334,55 @@ const ventaController = {
         console.error("Error al cargar las ventas (controller)", error);
       });
   },
-  
+
   pdf: () => {
     // Obtener los datos de la tabla en el frontend
     let table = document.getElementById("ventas-body");
     let rows = Array.from(table.rows);
-    let ventas = rows.map(row => {
-        let cells = row.cells;
-        return {
-          id: cells[0].innerText,
-          fecha: cells[1].innerText,
-          hora: cells[2].innerText,
-          formaPago: cells[3].innerText,
-          total: cells[4].innerText
-        };
-    });
-
-    ventaService
-        .pdf(ventas) // Envía las categorías al servicio
-        .then((response) => {
-            window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
-        })
-        .catch((error) => {
-            console.error("Error al generar el PDF", error);
-        });
-}
-,
-excel: () => {
-  // Obtener los datos de la tabla en el frontend
-  let table = document.getElementById("ventas-body");
-  let rows = Array.from(table.rows);
-  let ventas = rows.map(row => {
+    let ventas = rows.map((row) => {
       let cells = row.cells;
       return {
         id: cells[0].innerText,
-            fecha: cells[1].innerText,
-            hora: cells[2].innerText,
-            formaPago: cells[3].innerText,
-            total: cells[4].innerText
+        fecha: cells[1].innerText,
+        hora: cells[2].innerText,
+        formaPago: cells[3].innerText,
+        total: cells[4].innerText,
       };
-  });
+    });
 
-  ventaService
-      .excel(ventas) // Envía las categorías al servicio
+    ventaService
+      .pdf(ventas) // Envía las categorías al servicio
       .then((response) => {
-          window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+        window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
       })
       .catch((error) => {
-          console.error("Error al generar el PDF", error);
+        console.error("Error al generar el PDF", error);
       });
-}
-  ,
+  },
+  excel: () => {
+    // Obtener los datos de la tabla en el frontend
+    let table = document.getElementById("ventas-body");
+    let rows = Array.from(table.rows);
+    let ventas = rows.map((row) => {
+      let cells = row.cells;
+      return {
+        id: cells[0].innerText,
+        fecha: cells[1].innerText,
+        hora: cells[2].innerText,
+        formaPago: cells[3].innerText,
+        total: cells[4].innerText,
+      };
+    });
+
+    ventaService
+      .excel(ventas) // Envía las categorías al servicio
+      .then((response) => {
+        window.open(response.url, "_blank"); // Abre el PDF en una nueva pestaña
+      })
+      .catch((error) => {
+        console.error("Error al generar el PDF", error);
+      });
+  },
   renderFilter: (page) => {
     let ventasBody = document.getElementById("ventas-body");
 
@@ -438,6 +444,23 @@ excel: () => {
       ventaController.mostrarDetallesVenta();
     }
   },
+
+  pay: (id) => {
+    const data = {
+      id:id,  // Reutiliza btnPay
+      precio: 1,
+    };
+
+    ventaService.mercadopago(data).then(response => {
+      if (response && response.result.init_point) {
+        window.open(response.result.init_point, '_blank');  // Abre la URL de pago en una nueva pestaña
+      } else {
+        console.error("Error al generar el enlace de pago.");
+      }
+    });
+  }
+
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -449,34 +472,32 @@ document.addEventListener("DOMContentLoaded", () => {
     btnResetearFiltros.onclick = () => {
       ventaController.list(1);
     };
-  
+
     let btnFiltros = document.getElementById("btn-filtrar");
     btnFiltros.onclick = () => {
       ventaController.Filter(1);
     };
-
   }
 
   let btnAgregarBebida = document.getElementById("btn-agregar-bebida-venta");
-  if(btnAgregarBebida != null) {
-  btnAgregarBebida.onclick = () => {
-    ventaController.agregarProducto();
+  if (btnAgregarBebida != null) {
+    btnAgregarBebida.onclick = () => {
+      ventaController.agregarProducto();
+    };
   }
-  };
 
   let btnResetearVenta = document.getElementById("btn-venta-resetear");
-  if(btnResetearVenta != null) {
-  btnResetearVenta.onclick = () => {
-    ventaController.resetearVenta();
-  }}
-  ;
-
-
+  if (btnResetearVenta != null) {
+    btnResetearVenta.onclick = () => {
+      ventaController.resetearVenta();
+    };
+  }
   let btnAltaVenta = document.getElementById("btn-venta-alta");
-  if(btnAltaVenta != null) {
-  btnAltaVenta.onclick = () => {
-    ventaController.save();
-  }};
+  if (btnAltaVenta != null) {
+    btnAltaVenta.onclick = () => {
+      ventaController.save();
+    };
+  }
 
   let btnPDF = document.getElementById("btn-pdf");
 
@@ -487,11 +508,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let btnExcel = document.getElementById("btn-excel");
-  if(btnExcel != null) {
-      btnExcel.onclick = () => {
-          ventaController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
-      };
+  if (btnExcel != null) {
+    btnExcel.onclick = () => {
+      ventaController.excel(); // Abre la URL del controlador en una nueva pestaña para descargar el PDF
+    };
   }
 
-
+  let btnPay = document.getElementById("btn-pay");
+  if (btnPay) {
+    btnPay.onclick = () => {
+      let id=btnPay.getAttribute("data-id")
+      ventaController.pay(id); // Asegúrate de que la función `pay` recibe `data`
+    };
+  }
 });

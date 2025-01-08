@@ -32,6 +32,11 @@
             return $this->data;
         }
 
+        public function getDataGET(): array {
+                return $_GET;  // Devuelve todos los parámetros que vienen en la URL
+        }
+        
+
         public function getRequestMethod (): string {
             return $_SERVER["REQUEST_METHOD"];
         }

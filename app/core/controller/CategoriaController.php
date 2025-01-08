@@ -118,9 +118,9 @@ final class CategoriaController extends Controller implements InterfaceControlle
         $response->send();
     }
 
-    public function pdf(): void
+    public function pdf(Request $request, Response $response): void
     {
-        $requestData = json_decode(file_get_contents("php://input"), true);
+        $requestData = $request->getData();
         $categorias = $requestData['categorias'] ?? [];
     
         $headers = ['ID', 'Nombre', 'Descripción'];
@@ -130,10 +130,10 @@ final class CategoriaController extends Controller implements InterfaceControlle
         $reportGenerator->generatePDF('Lista de Categorías', $headers, $rows, 'categorias.pdf');
     }
 
-    public function excel(): void
+    public function excel(Request $request, Response $response): void
     {
         {
-            $requestData = json_decode(file_get_contents("php://input"), true);
+            $requestData = $request->getData();
             $categorias = $requestData['categorias'] ?? [];
     
             $headers = ['ID', 'Nombre', 'Descripción'];

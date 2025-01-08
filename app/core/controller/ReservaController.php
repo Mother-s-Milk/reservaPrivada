@@ -153,9 +153,9 @@ final class ReservaController extends Controller implements InterfaceController
         $response->send();
     }
 
-    public function pdf(): void
+    public function pdf(Request $request, Response $response): void
     {
-        $requestData = json_decode(file_get_contents("php://input"), true);
+        $requestData = $request->getData();
         $reservas = $requestData['reservas'] ?? [];
     
         $headers = ['ID','Apellido', 'Nombre','Teléfono','Fecha','Hora','Personas','Detalles','Estado'];
@@ -166,10 +166,10 @@ final class ReservaController extends Controller implements InterfaceController
         $reportGenerator->generatePDF('Lista de Reservas', $headers, $rows, 'reservas.pdf');
     }
 
-    public function excel(): void
+    public function excel(Request $request, Response $response): void
     {
         {
-            $requestData = json_decode(file_get_contents("php://input"), true);
+            $requestData = $request->getData();
             $reservas = $requestData['reservas'] ?? [];
     
         $headers = ['ID','Apellido', 'Nombre','Teléfono','Fecha','Hora','Personas','Detalles','Estado'];

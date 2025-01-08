@@ -7,6 +7,8 @@
     define("APP_VIEWS", APP_URI . "resources/views/");
     define("APP_FRONT","http://localhost/reservaPrivada/public/");
 
+    define("APP_MP", 'APP_USR-5761056880988711-062116-19aee7ee4e9e19297d656b8e2d13c7b3-1869293592');
+
     CONST APP_DEFAULT_CONTROLLER = "inicio";
     CONST APP_DEFAULT_ACTION = "index";
 

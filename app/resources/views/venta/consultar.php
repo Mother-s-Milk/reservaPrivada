@@ -21,9 +21,12 @@
         <form id="venta-form" class="form one">
             <section>
                 <header>
+
                     <h2 class="gadget-titulo">
                         Formato del pago
                     </h2>
+                    <button type="button" id="btn-pay" data-id="<?=$venta->getId();?>" class="btn-excel"> Pagar(modo prueba)</button>
+
                 </header>
                 <main class="one">
                     <div>
